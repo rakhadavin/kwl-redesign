@@ -1,0 +1,66 @@
+stages:
+  - build
+  - deploy
+
+build:
+  image: docker:latest
+
+  only:
+    - dev
+
+  services:
+    - name: docker:latest
+      alias: docker
+
+  stage: build
+
+  timeout: 30m
+
+  before_script:
+    - echo "🔧 Configuring Docker..."
+    - echo "$IP_ADDRESS_REGISTRY $DOCKER_REGISTRY" >> /etc/hosts
+    - echo "$DOCKER_PASSWORD" | docker login -u $DOCKER_USERNAME --password-stdin $DOCKER_REGISTRY
+    - docker system prune -af
+    - cp "$ENV_FILE_FE" .env
+  script:
+    - echo "🚀 Building Docker image..."
+    - echo "Building Image $DOCKER_REGISTRY/$REGISTRY_PROJECT/$APP_NAME_FE:$DOCKER_TAG"
+    - docker build --network=host --no-cache -t $DOCKER_REGISTRY/$REGISTRY_PROJECT/$APP_NAME_FE:$DOCKER_TAG -f Dockerfile .
+    - echo "🔗 Pushing Docker image to registry..."
+    - docker push $DOCKER_REGISTRY/$REGISTRY_PROJECT/$APP_NAME_FE:$DOCKER_TAG
+
+deploy:
+  image: alpine:latest
+
+  only:
+    - dev
+
+  services:
+    - name: alpine:latest
+      alias: alpine
+
+  stage: deploy
+
+  timeout: 30m
+
+  before_script:
+    - echo "🔧 Configuring Docker..."
+    - apk update --no-cache && apk add --no-cache curl gettext
+    - curl -LO $KUBECTL_URL
+    - chmod +x ./kubectl && mv ./kubectl /usr/local/bin/kubectl
+    - mkdir -p .kube
+    - touch .kube/config
+    - touch .env
+    - cp "$KUBE_CONFIG" .kube/config
+    - cp "$ENV_FILE_FE" .env
+
+  script:
+    - echo "🚀 Deploying to Kubernetes..."
+    - kubectl --kubeconfig .kube/config delete deployment --ignore-not-found $APP_NAME_FE -n itfasilkom 
+    - kubectl --kubeconfig .kube/config delete secret --ignore-not-found $APP_NAME_FE -n itfasilkom
+    - kubectl --kubeconfig .kube/config create secret generic $APP_NAME_FE --from-env-file .env --dry-run=client -o yaml | kubectl --kubeconfig .kube/config apply -n itfasilkom -f -
+    - which envsubst
+    - envsubst < "deployment-$APP_NAME_FE.yaml" | kubectl --kubeconfig .kube/config apply -n itfasilkom -f -
+
+  dependencies:
+    - build

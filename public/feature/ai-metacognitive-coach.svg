@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#fef3c7"/>
+
+  <!-- Gradient definitions -->
+  <defs>
+    <linearGradient id="gradCoach1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gradCoach2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="gradBrain">
+      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#fbbf24;stop-opacity:0.1" />
+    </radialGradient>
+  </defs>
+
+  <!-- Main container -->
+  <rect x="100" y="50" width="600" height="500" rx="20" fill="white" stroke="#fcd34d" stroke-width="3"/>
+
+  <!-- Header -->
+  <rect x="100" y="50" width="600" height="80" rx="20" fill="url(#gradCoach1)"/>
+  <text x="400" y="100" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white" text-anchor="middle">AI Metacognitive Coach</text>
+
+  <!-- Brain illustration (center) -->
+  <circle cx="400" cy="220" r="80" fill="url(#gradBrain)" stroke="#f59e0b" stroke-width="3"/>
+  <path d="M 400 160 Q 450 180 460 220 Q 450 260 400 280 Q 350 260 340 220 Q 350 180 400 160"
+        fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <circle cx="380" cy="210" r="8" fill="#f59e0b"/>
+  <circle cx="420" cy="210" r="8" fill="#f59e0b"/>
+  <path d="M 380 235 Q 400 245 420 235" stroke="#f59e0b" stroke-width="3" fill="none"/>
+
+  <!-- Thought bubbles - Learning Strategies -->
+  <ellipse cx="250" cy="180" rx="70" ry="50" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" opacity="0.9"/>
+  <text x="250" y="175" font-family="Arial, sans-serif" font-size="11" fill="#1e40af" text-anchor="middle" font-weight="bold">Strategi</text>
+  <text x="250" y="190" font-family="Arial, sans-serif" font-size="11" fill="#1e40af" text-anchor="middle" font-weight="bold">Belajar</text>
+  <text x="250" y="205" font-family="Arial, sans-serif" font-size="9" fill="#1e40af" text-anchor="middle">Visual/Verbal</text>
+
+  <ellipse cx="550" cy="180" rx="70" ry="50" fill="#fce7f3" stroke="#ec4899" stroke-width="2" opacity="0.9"/>
+  <text x="550" y="175" font-family="Arial, sans-serif" font-size="11" fill="#9f1239" text-anchor="middle" font-weight="bold">Pola</text>
+  <text x="550" y="190" font-family="Arial, sans-serif" font-size="11" fill="#9f1239" text-anchor="middle" font-weight="bold">Pikir</text>
+  <text x="550" y="205" font-family="Arial, sans-serif" font-size="9" fill="#9f1239" text-anchor="middle">Analitis</text>
+
+  <!-- Reflection cards -->
+  <rect x="150" y="320" width="220" height="90" rx="12" fill="#f0fdf4" stroke="#10b981" stroke-width="2"/>
+  <text x="160" y="340" font-family="Arial, sans-serif" font-size="12" fill="#047857" font-weight="bold">💭 Pertanyaan Reflektif:</text>
+  <text x="160" y="360" font-family="Arial, sans-serif" font-size="10" fill="#047857">"Bagaimana cara kamu</text>
+  <text x="160" y="375" font-family="Arial, sans-serif" font-size="10" fill="#047857">mengorganisir informasi</text>
+  <text x="160" y="390" font-family="Arial, sans-serif" font-size="10" fill="#047857">yang baru dipelajari?"</text>
+
+  <rect x="430" y="320" width="220" height="90" rx="12" fill="#ede9fe" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="440" y="340" font-family="Arial, sans-serif" font-size="12" fill="#6b21a8" font-weight="bold">📊 Analisis Personal:</text>
+  <text x="440" y="360" font-family="Arial, sans-serif" font-size="10" fill="#6b21a8">"Kamu cenderung belajar</text>
+  <text x="440" y="375" font-family="Arial, sans-serif" font-size="10" fill="#6b21a8">lebih baik di pagi hari</text>
+  <text x="440" y="390" font-family="Arial, sans-serif" font-size="10" fill="#6b21a8">dengan metode visual"</text>
+
+  <!-- Recommendation box -->
+  <rect x="150" y="440" width="500" height="80" rx="12" fill="#fff7ed" stroke="#fb923c" stroke-width="2"/>
+  <text x="165" y="460" font-family="Arial, sans-serif" font-size="13" fill="#c2410c" font-weight="bold">✨ Rekomendasi AI:</text>
+  <text x="165" y="480" font-family="Arial, sans-serif" font-size="11" fill="#c2410c">1. Gunakan mind mapping untuk mengorganisir konsep</text>
+  <text x="165" y="497" font-family="Arial, sans-serif" font-size="11" fill="#c2410c">2. Buat jadwal belajar di pagi hari (07:00-09:00)</text>
+  <text x="165" y="514" font-family="Arial, sans-serif" font-size="11" fill="#c2410c">3. Praktikkan refleksi setelah setiap sesi pembelajaran</text>
+
+  <!-- Connecting lines -->
+  <line x1="320" y1="200" x2="360" y2="200" stroke="#f59e0b" stroke-width="2" stroke-dasharray="5,5"/>
+  <line x1="440" y1="200" x2="480" y2="200" stroke="#f59e0b" stroke-width="2" stroke-dasharray="5,5"/>
+
+  <!-- Progress indicator -->
+  <rect x="550" y="460" width="80" height="50" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+  <text x="590" y="478" font-family="Arial, sans-serif" font-size="11" fill="#15803d" text-anchor="middle" font-weight="bold">Progress</text>
+  <text x="590" y="495" font-family="Arial, sans-serif" font-size="18" fill="#15803d" text-anchor="middle" font-weight="bold">85%</text>
+</svg>

@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#fef2f2"/>
+
+  <!-- Gradient definitions -->
+  <defs>
+    <linearGradient id="gradDetect1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ef4444;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#dc2626;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gradDetect2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gradDetect3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Main Dashboard Container -->
+  <rect x="80" y="60" width="640" height="480" rx="20" fill="white" stroke="#fca5a5" stroke-width="3"/>
+
+  <!-- Header -->
+  <rect x="80" y="60" width="640" height="70" rx="20" fill="url(#gradDetect1)"/>
+  <text x="400" y="105" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="white" text-anchor="middle">AI Misconception Detector</text>
+
+  <!-- Student answer section -->
+  <rect x="110" y="160" width="300" height="130" rx="12" fill="#fee2e2" stroke="#ef4444" stroke-width="2"/>
+  <text x="120" y="180" font-family="Arial, sans-serif" font-size="13" fill="#991b1b" font-weight="bold">📝 Jawaban Mahasiswa:</text>
+  <text x="120" y="202" font-family="Arial, sans-serif" font-size="11" fill="#7f1d1d">"KWL adalah metode untuk</text>
+  <text x="120" y="218" font-family="Arial, sans-serif" font-size="11" fill="#7f1d1d">menghafal materi sebelum ujian"</text>
+
+  <!-- Warning indicator -->
+  <rect x="120" y="235" width="280" height="40" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="135" y="250" font-family="Arial, sans-serif" font-size="11" fill="#92400e" font-weight="bold">⚠️ Miskonsepsi Terdeteksi!</text>
+  <text x="135" y="266" font-family="Arial, sans-serif" font-size="9" fill="#92400e">Confidence: 92%</text>
+
+  <!-- AI Analysis Section -->
+  <rect x="430" y="160" width="280" height="130" rx="12" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="440" y="180" font-family="Arial, sans-serif" font-size="13" fill="#1e40af" font-weight="bold">🤖 Analisis AI:</text>
+  <text x="440" y="202" font-family="Arial, sans-serif" font-size="10" fill="#1e3a8a">Kesalahan konsep:</text>
+  <text x="440" y="217" font-family="Arial, sans-serif" font-size="10" fill="#1e3a8a">KWL bukan untuk menghafal,</text>
+  <text x="440" y="232" font-family="Arial, sans-serif" font-size="10" fill="#1e3a8a">tapi untuk refleksi dan</text>
+  <text x="440" y="247" font-family="Arial, sans-serif" font-size="10" fill="#1e3a8a">pembelajaran aktif</text>
+
+  <circle cx="700" cy="175" r="8" fill="#ef4444">
+    <animate attributeName="opacity" values="1;0.3;1" dur="1.5s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Corrective Feedback Section -->
+  <rect x="110" y="310" width="600" height="110" rx="12" fill="#f0fdf4" stroke="#10b981" stroke-width="2"/>
+  <text x="120" y="330" font-family="Arial, sans-serif" font-size="13" fill="#047857" font-weight="bold">✅ Feedback Korektif:</text>
+  <text x="120" y="352" font-family="Arial, sans-serif" font-size="11" fill="#065f46">KWL (Know-Want-Learned) adalah metode pembelajaran aktif yang membantu</text>
+  <text x="120" y="369" font-family="Arial, sans-serif" font-size="11" fill="#065f46">mahasiswa untuk:</text>
+  <text x="130" y="386" font-family="Arial, sans-serif" font-size="10" fill="#065f46">• Mengidentifikasi pengetahuan awal (Know)</text>
+  <text x="130" y="401" font-family="Arial, sans-serif" font-size="10" fill="#065f46">• Merumuskan pertanyaan eksplorasi (Want to Know)</text>
+  <text x="130" y="416" font-family="Arial, sans-serif" font-size="10" fill="#065f46">• Merefleksikan pembelajaran (Learned)</text>
+
+  <!-- Remedial Recommendation -->
+  <rect x="110" y="440" width="280" height="80" rx="10" fill="#fff7ed" stroke="#fb923c" stroke-width="2"/>
+  <text x="120" y="460" font-family="Arial, sans-serif" font-size="12" fill="#c2410c" font-weight="bold">📚 Rekomendasi Remedial:</text>
+  <text x="120" y="478" font-family="Arial, sans-serif" font-size="10" fill="#9a3412">1. Video: Pengenalan Metode KWL</text>
+  <text x="120" y="493" font-family="Arial, sans-serif" font-size="10" fill="#9a3412">2. Quiz: Pemahaman KWL</text>
+  <text x="120" y="508" font-family="Arial, sans-serif" font-size="10" fill="#9a3412">3. Studi Kasus Penerapan</text>
+
+  <!-- Class Statistics -->
+  <rect x="410" y="440" width="300" height="80" rx="10" fill="#ede9fe" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="420" y="460" font-family="Arial, sans-serif" font-size="12" fill="#6b21a8" font-weight="bold">📊 Statistik Kelas:</text>
+  <text x="420" y="478" font-family="Arial, sans-serif" font-size="10" fill="#5b21b6">Miskonsepsi serupa: 12 mahasiswa</text>
+  <text x="420" y="493" font-family="Arial, sans-serif" font-size="10" fill="#5b21b6">Tingkat pemahaman rata-rata: 65%</text>
+  <text x="420" y="508" font-family="Arial, sans-serif" font-size="10" fill="#5b21b6">Rekomendasi: Review kelas</text>
+
+  <!-- Detection icons -->
+  <circle cx="240" cy="245" r="3" fill="#ef4444">
+    <animate attributeName="r" values="3;5;3" dur="1s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="255" cy="245" r="3" fill="#ef4444">
+    <animate attributeName="r" values="3;5;3" dur="1s" begin="0.3s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="270" cy="245" r="3" fill="#ef4444">
+    <animate attributeName="r" values="3;5;3" dur="1s" begin="0.6s" repeatCount="indefinite"/>
+  </circle>
+</svg>

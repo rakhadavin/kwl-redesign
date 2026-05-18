@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#f8fafc"/>
+
+  <!-- Gradient definitions -->
+  <defs>
+    <linearGradient id="gradDash1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4f46e5;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gradDash2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gradDash3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Dashboard Container -->
+  <rect x="60" y="40" width="680" height="520" rx="20" fill="white" stroke="#e2e8f0" stroke-width="3"/>
+
+  <!-- Header Bar -->
+  <rect x="60" y="40" width="680" height="60" rx="20" fill="url(#gradDash1)"/>
+  <text x="400" y="80" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">📊 Learning Analytics Dashboard</text>
+
+  <!-- KPI Cards -->
+  <rect x="90" y="120" width="150" height="90" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="165" y="145" font-family="Arial, sans-serif" font-size="12" fill="#1e40af" text-anchor="middle" font-weight="bold">Engagement Rate</text>
+  <text x="165" y="175" font-family="Arial, sans-serif" font-size="28" fill="#1e3a8a" text-anchor="middle" font-weight="bold">87%</text>
+  <path d="M 155 190 L 160 185 L 165 195 L 170 188 L 175 190" stroke="#10b981" stroke-width="2" fill="none"/>
+
+  <rect x="260" y="120" width="150" height="90" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="335" y="145" font-family="Arial, sans-serif" font-size="12" fill="#92400e" text-anchor="middle" font-weight="bold">Avg. Comprehension</text>
+  <text x="335" y="175" font-family="Arial, sans-serif" font-size="28" fill="#78350f" text-anchor="middle" font-weight="bold">78%</text>
+  <circle cx="320" cy="195" r="3" fill="#f59e0b"/>
+  <circle cx="335" cy="190" r="3" fill="#f59e0b"/>
+  <circle cx="350" cy="193" r="3" fill="#f59e0b"/>
+
+  <rect x="430" y="120" width="150" height="90" rx="10" fill="#f0fdf4" stroke="#10b981" stroke-width="2"/>
+  <text x="505" y="145" font-family="Arial, sans-serif" font-size="12" fill="#047857" text-anchor="middle" font-weight="bold">Active Students</text>
+  <text x="505" y="175" font-family="Arial, sans-serif" font-size="28" fill="#065f46" text-anchor="middle" font-weight="bold">42/45</text>
+  <text x="505" y="195" font-family="Arial, sans-serif" font-size="10" fill="#047857" text-anchor="middle">93% online</text>
+
+  <rect x="600" y="120" width="120" height="90" rx="10" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+  <text x="660" y="145" font-family="Arial, sans-serif" font-size="12" fill="#9f1239" text-anchor="middle" font-weight="bold">At Risk</text>
+  <text x="660" y="175" font-family="Arial, sans-serif" font-size="28" fill="#831843" text-anchor="middle" font-weight="bold">3</text>
+  <text x="660" y="195" font-family="Arial, sans-serif" font-size="10" fill="#9f1239" text-anchor="middle">⚠️ Need help</text>
+
+  <!-- Heatmap Section -->
+  <rect x="90" y="230" width="320" height="180" rx="12" fill="#fafafa" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="100" y="250" font-family="Arial, sans-serif" font-size="13" fill="#334155" font-weight="bold">🔥 Concept Heatmap</text>
+
+  <!-- Heatmap grid -->
+  <rect x="100" y="260" width="50" height="30" rx="4" fill="#dcfce7"/>
+  <text x="125" y="280" font-family="Arial, sans-serif" font-size="10" fill="#065f46" text-anchor="middle">KWL</text>
+
+  <rect x="160" y="260" width="50" height="30" rx="4" fill="#fef3c7"/>
+  <text x="185" y="280" font-family="Arial, sans-serif" font-size="10" fill="#78350f" text-anchor="middle">Quiz</text>
+
+  <rect x="220" y="260" width="50" height="30" rx="4" fill="#fee2e2"/>
+  <text x="245" y="280" font-family="Arial, sans-serif" font-size="10" fill="#7f1d1d" text-anchor="middle">Essay</text>
+
+  <rect x="280" y="260" width="50" height="30" rx="4" fill="#dcfce7"/>
+  <text x="305" y="280" font-family="Arial, sans-serif" font-size="10" fill="#065f46" text-anchor="middle">Disk</text>
+
+  <rect x="100" y="300" width="50" height="30" rx="4" fill="#fef3c7"/>
+  <text x="125" y="320" font-family="Arial, sans-serif" font-size="10" fill="#78350f" text-anchor="middle">M1</text>
+
+  <rect x="160" y="300" width="50" height="30" rx="4" fill="#dcfce7"/>
+  <text x="185" y="320" font-family="Arial, sans-serif" font-size="10" fill="#065f46" text-anchor="middle">M2</text>
+
+  <rect x="220" y="300" width="50" height="30" rx="4" fill="#fef3c7"/>
+  <text x="245" y="320" font-family="Arial, sans-serif" font-size="10" fill="#78350f" text-anchor="middle">M3</text>
+
+  <rect x="280" y="300" width="50" height="30" rx="4" fill="#fee2e2"/>
+  <text x="305" y="320" font-family="Arial, sans-serif" font-size="10" fill="#7f1d1d" text-anchor="middle">M4</text>
+
+  <!-- Legend -->
+  <rect x="100" y="350" width="60" height="12" rx="3" fill="#dcfce7"/>
+  <text x="170" y="360" font-family="Arial, sans-serif" font-size="9" fill="#334155">Good</text>
+
+  <rect x="210" y="350" width="60" height="12" rx="3" fill="#fef3c7"/>
+  <text x="280" y="360" font-family="Arial, sans-serif" font-size="9" fill="#334155">Medium</text>
+
+  <rect x="100" y="370" width="60" height="12" rx="3" fill="#fee2e2"/>
+  <text x="170" y="380" font-family="Arial, sans-serif" font-size="9" fill="#334155">Need Attention</text>
+
+  <!-- Cognitive-Affective-Behavioral Chart -->
+  <rect x="430" y="230" width="290" height="180" rx="12" fill="#fafafa" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="440" y="250" font-family="Arial, sans-serif" font-size="13" fill="#334155" font-weight="bold">🧠 Cognitive-Affective-Behavioral</text>
+
+  <!-- Radar chart visualization -->
+  <polygon points="575,290 615,315 595,355 555,355 535,315" fill="#dbeafe" opacity="0.5" stroke="#3b82f6" stroke-width="2"/>
+  <circle cx="575" cy="290" r="4" fill="#3b82f6"/>
+  <circle cx="615" cy="315" r="4" fill="#10b981"/>
+  <circle cx="595" cy="355" r="4" fill="#f59e0b"/>
+  <circle cx="555" cy="355" r="4" fill="#8b5cf6"/>
+  <circle cx="535" cy="315" r="4" fill="#ec4899"/>
+
+  <text x="575" y="280" font-family="Arial, sans-serif" font-size="8" fill="#334155" text-anchor="middle">Cognitive</text>
+  <text x="625" y="320" font-family="Arial, sans-serif" font-size="8" fill="#334155">Affective</text>
+  <text x="600" y="370" font-family="Arial, sans-serif" font-size="8" fill="#334155">Behavioral</text>
+
+  <!-- Real-time Insights -->
+  <rect x="90" y="430" width="630" height="110" rx="12" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+  <text x="100" y="455" font-family="Arial, sans-serif" font-size="14" fill="#1e40af" font-weight="bold">💡 Real-time Insights & Interventions</text>
+
+  <rect x="100" y="470" width="300" height="60" rx="8" fill="white" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="110" y="488" font-family="Arial, sans-serif" font-size="11" fill="#dc2626" font-weight="bold">⚠️ Alert: Topic "Data Structures"</text>
+  <text x="110" y="505" font-family="Arial, sans-serif" font-size="10" fill="#64748b">8 students showing misunderstanding</text>
+  <text x="110" y="520" font-family="Arial, sans-serif" font-size="10" fill="#6366f1" font-weight="bold">→ Recommend: Micro-lecture session</text>
+
+  <rect x="420" y="470" width="290" height="60" rx="8" fill="white" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="430" y="488" font-family="Arial, sans-serif" font-size="11" fill="#10b981" font-weight="bold">✓ Success: Quiz completion +15%</text>
+  <text x="430" y="505" font-family="Arial, sans-serif" font-size="10" fill="#64748b">Students responding well to gamification</text>
+  <text x="430" y="520" font-family="Arial, sans-serif" font-size="10" fill="#6366f1" font-weight="bold">→ Continue current strategy</text>
+
+  <!-- Decorative elements -->
+  <circle cx="730" cy="250" r="8" fill="#fbbf24" opacity="0.4">
+    <animate attributeName="r" values="8;10;8" dur="2s" repeatCount="indefinite"/>
+  </circle>
+</svg>

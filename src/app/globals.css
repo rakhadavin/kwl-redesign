@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+} */
+
+body {
+  color: rgb(var(--foreground-rgb));
+  /* padding: 1rem; */
+  /* background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    ) */
+    /* rgb(var(--background-start-rgb)); */
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Custom animations for student cards */
+@keyframes bubble-pop {
+  0% { transform: scale(0.8) rotate(-5deg); opacity: 0.7; }
+  50% { transform: scale(1.1) rotate(2deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+@keyframes fade-out {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(0.8); opacity: 0; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(34, 197, 94, 0.5); }
+  50% { box-shadow: 0 0 20px rgba(34, 197, 94, 0.8), 0 0 30px rgba(34, 197, 94, 0.5); }
+}
+
+.bubble-enter {
+  animation: bubble-pop 0.6s ease-out;
+}
+
+.bubble-leave {
+  animation: fade-out 0.4s ease-in forwards;
+}
+
+.new-student-glow {
+  animation: pulse-glow 2s ease-in-out;
+}
+
+.error {
+  color: red;
+  font-size:x-small;
+  margin-top: 0.25rem;
+}
+
+#width-btn-2 {
+  width: 100%;
+  margin-bottom: 1rem;
+  background-color: transparent;
+  border: 2px solid var(--dark-accent); /* var(--dark-accent) color */
+  color: var(--dark-accent); /* var(--dark-accent) color */
+  font-weight: bold;
+  font-size: 12px; /* Text size */
+  padding: 8px 12px; /* Vertical and horizontal padding */
+  border-radius: 12px; /* Rounded corners */
+  transition: background-color 0.3s, color 0.3s; /* Transition effect */
+}
+
+#width-btn-2:hover {
+  background-color: var(--dark-accent); /* var(--dark-accent) color on hover */
+  color: #ffffff; /* White color on hover */
+}

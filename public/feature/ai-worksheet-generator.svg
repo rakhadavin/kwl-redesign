@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#fffbeb"/>
+
+  <!-- Gradient definitions -->
+  <defs>
+    <linearGradient id="gradWork1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gradWork2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#eab308;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ca8a04;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Main Container -->
+  <rect x="100" y="50" width="600" height="500" rx="20" fill="white" stroke="#fde68a" stroke-width="3"/>
+
+  <!-- Header -->
+  <rect x="100" y="50" width="600" height="60" rx="20" fill="url(#gradWork1)"/>
+  <text x="400" y="90" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">📝 AI Worksheet Generator</text>
+
+  <!-- Worksheet Preview -->
+  <rect x="130" y="130" width="270" height="380" rx="12" fill="#fefce8" stroke="#eab308" stroke-width="2"/>
+
+  <!-- Worksheet header -->
+  <text x="265" y="155" font-family="Arial, sans-serif" font-size="14" fill="#78350f" text-anchor="middle" font-weight="bold">KWL Exploration Worksheet</text>
+  <line x1="150" y1="163" x2="380" y2="163" stroke="#eab308" stroke-width="1"/>
+
+  <!-- Section 1 - KNOW -->
+  <rect x="145" y="175" width="240" height="80" rx="6" fill="#dcfce7" stroke="#10b981" stroke-width="1"/>
+  <text x="155" y="192" font-family="Arial, sans-serif" font-size="11" fill="#065f46" font-weight="bold">📗 KNOW Section</text>
+  <text x="155" y="208" font-family="Arial, sans-serif" font-size="9" fill="#047857">What do you already know about</text>
+  <text x="155" y="220" font-family="Arial, sans-serif" font-size="9" fill="#047857">this topic?</text>
+  <!-- Input lines -->
+  <line x1="155" y1="230" x2="375" y2="230" stroke="#cbd5e1" stroke-width="1"/>
+  <line x1="155" y1="242" x2="375" y2="242" stroke="#cbd5e1" stroke-width="1"/>
+
+  <!-- Section 2 - WANT -->
+  <rect x="145" y="265" width="240" height="80" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+  <text x="155" y="282" font-family="Arial, sans-serif" font-size="11" fill="#92400e" font-weight="bold">💡 WANT TO KNOW Section</text>
+  <text x="155" y="298" font-family="Arial, sans-serif" font-size="9" fill="#92400e">What questions do you have?</text>
+  <!-- Input lines -->
+  <line x1="155" y1="308" x2="375" y2="308" stroke="#cbd5e1" stroke-width="1"/>
+  <line x1="155" y1="320" x2="375" y2="320" stroke="#cbd5e1" stroke-width="1"/>
+  <line x1="155" y1="332" x2="375" y2="332" stroke="#cbd5e1" stroke-width="1"/>
+
+  <!-- Section 3 - HOTS -->
+  <rect x="145" y="355" width="240" height="70" rx="6" fill="#dbeafe" stroke="#3b82f6" stroke-width="1"/>
+  <text x="155" y="372" font-family="Arial, sans-serif" font-size="11" fill="#1e40af" font-weight="bold">🎯 HOTS Challenge</text>
+  <text x="155" y="388" font-family="Arial, sans-serif" font-size="9" fill="#1e3a8a">How would you apply this in</text>
+  <text x="155" y="400" font-family="Arial, sans-serif" font-size="9" fill="#1e3a8a">real-world scenarios?</text>
+  <!-- Input lines -->
+  <line x1="155" y1="410" x2="375" y2="410" stroke="#cbd5e1" stroke-width="1"/>
+
+  <!-- Reflection badge -->
+  <rect x="145" y="435" width="100" height="30" rx="6" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1"/>
+  <text x="195" y="455" font-family="Arial, sans-serif" font-size="9" fill="#6b21a8" text-anchor="middle" font-weight="bold">📊 Reflective</text>
+
+  <rect x="255" y="435" width="130" height="30" rx="6" fill="#fce7f3" stroke="#ec4899" stroke-width="1"/>
+  <text x="320" y="455" font-family="Arial, sans-serif" font-size="9" fill="#9f1239" text-anchor="middle" font-weight="bold">✓ Print-ready</text>
+
+  <!-- Generation Panel -->
+  <rect x="420" y="130" width="260" height="380" rx="12" fill="#f0fdf4" stroke="#10b981" stroke-width="2"/>
+  <text x="430" y="155" font-family="Arial, sans-serif" font-size="14" fill="#047857" font-weight="bold">⚙️ Worksheet Settings</text>
+
+  <!-- Type selector -->
+  <rect x="435" y="170" width="230" height="90" rx="8" fill="white" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="445" y="188" font-family="Arial, sans-serif" font-size="11" fill="#475569" font-weight="bold">Worksheet Type:</text>
+
+  <rect x="445" y="195" width="100" height="25" rx="5" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="495" y="212" font-family="Arial, sans-serif" font-size="10" fill="#92400e" text-anchor="middle" font-weight="bold">✓ Exploration</text>
+
+  <rect x="555" y="195" width="100" height="25" rx="5" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1"/>
+  <text x="605" y="212" font-family="Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">HOTS</text>
+
+  <rect x="445" y="228" width="100" height="25" rx="5" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1"/>
+  <text x="495" y="245" font-family="Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">Case Study</text>
+
+  <rect x="555" y="228" width="100" height="25" rx="5" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1"/>
+  <text x="605" y="245" font-family="Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">Reflection</text>
+
+  <!-- Options -->
+  <rect x="435" y="275" width="230" height="100" rx="8" fill="white" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="445" y="293" font-family="Arial, sans-serif" font-size="11" fill="#475569" font-weight="bold">Options:</text>
+
+  <circle cx="450" cy="308" r="5" fill="#10b981"/>
+  <text x="462" y="313" font-family="Arial, sans-serif" font-size="10" fill="#374151">Include KWL sections</text>
+
+  <circle cx="450" cy="328" r="5" fill="#10b981"/>
+  <text x="462" y="333" font-family="Arial, sans-serif" font-size="10" fill="#374151">Add visual elements</text>
+
+  <circle cx="450" cy="348" r="5" fill="#10b981"/>
+  <text x="462" y="353" font-family="Arial, sans-serif" font-size="10" fill="#374151">Personalize content</text>
+
+  <circle cx="450" cy="368" r="5" fill="#e5e7eb" stroke="#9ca3af" stroke-width="1"/>
+  <text x="462" y="373" font-family="Arial, sans-serif" font-size="10" fill="#9ca3af">Include answer key</text>
+
+  <!-- Features -->
+  <rect x="435" y="390" width="230" height="60" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="1"/>
+  <text x="445" y="408" font-family="Arial, sans-serif" font-size="10" fill="#1e40af" font-weight="bold">✨ Auto-generated:</text>
+  <text x="455" y="425" font-family="Arial, sans-serif" font-size="9" fill="#1e3a8a">• Aligned with student interests</text>
+  <text x="455" y="440" font-family="Arial, sans-serif" font-size="9" fill="#1e3a8a">• Personal & adaptive questions</text>
+
+  <!-- Generate button -->
+  <rect x="435" y="460" width="230" height="40" rx="10" fill="url(#gradWork2)"/>
+  <text x="550" y="485" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle" font-weight="bold">🚀 Generate Worksheet</text>
+
+  <!-- Decorative -->
+  <path d="M 695 140 L 700 145 L 695 150" stroke="#f59e0b" stroke-width="2" fill="none" opacity="0.6">
+    <animateTransform attributeName="transform" type="rotate" from="0 697 145" to="360 697 145" dur="4s" repeatCount="indefinite"/>
+  </path>
+</svg>

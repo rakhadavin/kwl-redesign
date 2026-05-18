@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#f0f9ff"/>
+
+  <!-- Gradient definitions -->
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6366f1;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Main document background -->
+  <rect x="150" y="100" width="500" height="400" rx="15" fill="white" stroke="#e5e7eb" stroke-width="2"/>
+
+  <!-- Document header -->
+  <rect x="150" y="100" width="500" height="60" rx="15" fill="url(#grad1)"/>
+  <text x="400" y="140" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">AI Question Bank</text>
+
+  <!-- Question items -->
+  <!-- Question 1 - Multiple Choice -->
+  <circle cx="180" cy="210" r="8" fill="#10b981"/>
+  <rect x="200" y="195" width="420" height="30" rx="5" fill="#dbeafe" stroke="#3b82f6" stroke-width="1"/>
+  <text x="210" y="215" font-family="Arial, sans-serif" font-size="14" fill="#1e40af">Multiple Choice: Apa definisi KWL?</text>
+
+  <!-- Question 2 - Essay -->
+  <circle cx="180" cy="270" r="8" fill="#f59e0b"/>
+  <rect x="200" y="255" width="420" height="30" rx="5" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+  <text x="210" y="275" font-family="Arial, sans-serif" font-size="14" fill="#92400e">Essay: Jelaskan penerapan metode KWL</text>
+
+  <!-- Question 3 - True/False -->
+  <circle cx="180" cy="330" r="8" fill="#8b5cf6"/>
+  <rect x="200" y="315" width="420" height="30" rx="5" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1"/>
+  <text x="210" y="335" font-family="Arial, sans-serif" font-size="14" fill="#5b21b6">True/False: KWL meningkatkan refleksi</text>
+
+  <!-- Question 4 - Bloom -->
+  <circle cx="180" cy="390" r="8" fill="#ec4899"/>
+  <rect x="200" y="375" width="420" height="30" rx="5" fill="#fce7f3" stroke="#ec4899" stroke-width="1"/>
+  <text x="210" y="395" font-family="Arial, sans-serif" font-size="14" fill="#9f1239">Bloom: Analisis strategi pembelajaran</text>
+
+  <!-- AI Sparkles -->
+  <path d="M 680 120 L 690 140 L 710 150 L 690 160 L 680 180 L 670 160 L 650 150 L 670 140 Z" fill="#fbbf24" opacity="0.8">
+    <animateTransform attributeName="transform" type="rotate" from="0 680 150" to="360 680 150" dur="4s" repeatCount="indefinite"/>
+  </path>
+
+  <path d="M 720 200 L 725 210 L 735 215 L 725 220 L 720 230 L 715 220 L 705 215 L 715 210 Z" fill="#fbbf24" opacity="0.6">
+    <animateTransform attributeName="transform" type="rotate" from="0 720 215" to="360 720 215" dur="3s" repeatCount="indefinite"/>
+  </path>
+
+  <!-- AI Brain Icon -->
+  <circle cx="400" cy="460" r="25" fill="url(#grad2)" opacity="0.9"/>
+  <text x="400" y="470" font-family="Arial, sans-serif" font-size="28" fill="white" text-anchor="middle">🤖</text>
+
+  <!-- Stats indicators -->
+  <rect x="180" y="440" width="100" height="40" rx="8" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+  <text x="230" y="455" font-family="Arial, sans-serif" font-size="12" fill="#047857" text-anchor="middle" font-weight="bold">CPMK</text>
+  <text x="230" y="472" font-family="Arial, sans-serif" font-size="10" fill="#047857" text-anchor="middle">Aligned</text>
+
+  <rect x="520" y="440" width="100" height="40" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="570" y="455" font-family="Arial, sans-serif" font-size="12" fill="#92400e" text-anchor="middle" font-weight="bold">Quality</text>
+  <text x="570" y="472" font-family="Arial, sans-serif" font-size="10" fill="#92400e" text-anchor="middle">Checked</text>
+</svg>
