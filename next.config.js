@@ -18,7 +18,7 @@
 
 /** @type {import('next').NextConfig} */
 module.exports = {
-  output: 'standalone',
+  // output: 'standalone',
 
   typescript: {
     ignoreBuildErrors: true,
@@ -29,6 +29,6 @@ module.exports = {
   },
 
   images: {
-    domains: ['localhost'],
+    domains: ["localhost"],
   },
-}
+};
