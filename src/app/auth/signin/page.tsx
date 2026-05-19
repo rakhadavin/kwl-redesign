@@ -1,10 +1,11 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { Eye, EyeOff } from "lucide-react";
 import Spinner from "@/app/components/spinner/spinner";
 
 type FormValues = {
@@ -15,6 +16,7 @@ type FormValues = {
 export default function LoginPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     if (session?.error === "RefreshAccessTokenError") {
@@ -108,7 +110,7 @@ export default function LoginPage() {
                     type="text"
                     id="username"
                     name="username"
-                    placeholder="ex: mahasiswa@gmail.com"
+                    placeholder="ex: johnDoe"
                     aria-label="Enter your username"
                     required
                     className="w-full h-10 px-3 text-sm rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
@@ -120,16 +122,27 @@ export default function LoginPage() {
                   <label htmlFor="password" className="text-sm font-semibold text-gray-800">
                     Password
                   </label>
-                  <input
-                    {...register("password")}
-                    type="password"
-                    id="password"
-                    name="password"
-                    placeholder="Enter new password"
-                    aria-label="Enter your password"
-                    required
-                    className="w-full h-10 px-3 text-sm rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
-                  />
+
+                  <div className="relative">
+                    <input
+                      {...register("password")}
+                      type={showPassword ? "text" : "password"}
+                      id="password"
+                      name="password"
+                      placeholder="Enter your password"
+                      aria-label="Enter your password"
+                      required
+                      className="w-full h-10 px-3 pr-10 text-sm rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword((prev) => !prev)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                      aria-label={showPassword ? "Hide password" : "Show password"}
+                    >
+                      {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                    </button>
+                  </div>
 
                   {/* Lupa Password link — right aligned */}
                   <div className="flex justify-end mt-1">
