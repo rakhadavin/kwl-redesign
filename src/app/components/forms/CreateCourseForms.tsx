@@ -31,9 +31,10 @@ const CreateCourseForms = () => {
     mutate(
       { body: data },
       {
-        onSuccess: () => {
+        onSuccess: (response: any) => {
           queryClient.invalidateQueries({ queryKey: ["lecturer courses"] });
-          handleNext();
+          successCreateCourse.open(response?.id);
+          createCourseForms.close();
         },
       }
     );

@@ -7,6 +7,7 @@ import AllCourseContainer from "../components/card/AllCourseContainer";
 import { useSession } from "next-auth/react";
 import DeleteCourseConfirmation from "../components/message/DeleteCourseConfirmation";
 import SuccessDeleteCourse from "../components/message/SuccessDeleteCourse";
+import SuccessCreateCourse from "../components/message/SuccessCreateCourse";
 import ConsentModal from "../components/consent-modal/ConsentModal";
 import useCreateCourseForms from "../hooks/useCreateCourseForms";
 import { useState } from "react";
@@ -87,6 +88,7 @@ export default function MyCoursesPage() {
       <CreateCourseForms />
       <CreateCourse2Forms />
       <DeleteCourseConfirmation />
+      <SuccessCreateCourse />
     </main>
   );
 }

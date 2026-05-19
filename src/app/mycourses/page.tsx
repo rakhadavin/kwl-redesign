@@ -13,6 +13,7 @@ import MyCourseContainer from "../components/card/MyCourseContainer";
 import UnenrolConfirmation from "@/app/components/message/UnenrolConfirmation";
 import SuccessUnenrolCourse from "@/app/components/message/SuccessUnenrolCourse";
 import DeleteCourseConfirmation from "@/app/components/message/DeleteCourseConfirmation";
+import SuccessCreateCourse from "@/app/components/message/SuccessCreateCourse";
 
 
 export default function MyCoursesPage() {
@@ -76,6 +77,7 @@ export default function MyCoursesPage() {
       <CreateCourseForms />
       <CreateCourse2Forms />
       <DeleteCourseConfirmation />
+      <SuccessCreateCourse />
       <UnenrolConfirmation />
       <SuccessUnenrolCourse />
     </main>
