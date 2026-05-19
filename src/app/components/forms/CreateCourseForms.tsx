@@ -5,6 +5,7 @@ import { usePostAuth } from "@/app/lib/api/useAuth";
 import useCreateCourseForms from "@/app/hooks/useCreateCourseForms";
 import Modal from "../modals/Modal";
 import useSuccessCreateCourse from "@/app/hooks/useSuccessCreateCourse";
+import { useQueryClient } from "@tanstack/react-query";
 
 type FormValues = {
   short_name: string;
@@ -18,6 +19,7 @@ type FormValues = {
 const CreateCourseForms = () => {
   const createCourseForms = useCreateCourseForms();
   const successCreateCourse = useSuccessCreateCourse();
+  const queryClient = useQueryClient();
 
   const form = useForm<FormValues>();
   const { register, control, handleSubmit, formState } = form;
@@ -30,6 +32,7 @@ const CreateCourseForms = () => {
       { body: data },
       {
         onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: ["lecturer courses"] });
           handleNext();
         },
       }

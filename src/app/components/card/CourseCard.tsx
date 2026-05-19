@@ -7,6 +7,7 @@ import useDeleteCourseConfirmation from "@/app/hooks/useDeleteCourseConfirmation
 import useSuccessDeleteCourse from "@/app/hooks/useSuccessDeleteCourse";
 import useUnenrolConfirmation from "@/app/hooks/useUnenrolConfirmation";
 import useSuccessUnenrolCourse from "@/app/hooks/useSuccessUnenrolCourse";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface CourseCardProps {
   id: number;
@@ -29,15 +30,20 @@ const CourseCard: React.FC<CourseCardProps> = ({
   const unenrolConfirmation = useUnenrolConfirmation();
   const successUnenrolCourse = useSuccessUnenrolCourse();
 
+  const queryClient = useQueryClient();
   const { mutate: mutateCourse } = useDeleteAuth(`/api/course/${id}`, "lecturer");
   const unenroll_mutate = useUnenroll("/api/course/enroll-student", "unenroll");
 
   const handleDeleteCourse = () => {
-    mutateCourse({
-      onSuccess: () => {},
-      onError: () => {},
-    });
-    successDeleteCourse.open();
+    mutateCourse(
+      {},
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: ["lecturer courses"] });
+          successDeleteCourse.open();
+        },
+      }
+    );
   };
 
   const handleUnenroll = () => {
@@ -73,17 +79,18 @@ const CourseCard: React.FC<CourseCardProps> = ({
             </span>
             <span className="text-black text-xs font-normal">{courseLong}</span>
           </div>
-          {!disabled && (
+          {
+            !disabled && (
             <>
               <button className="absolute top-2 right-2 w-5 h-5">
                 <svg
-                  onClick={(e) => {
+                    onClick={(e) => {
                     e.stopPropagation();
                     e.preventDefault();
                     deleteCourseConfirmation.open(id, () => handleDeleteCourse());
                   }}
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"

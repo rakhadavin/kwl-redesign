@@ -12,6 +12,7 @@ import { useParams, useRouter } from "next/navigation";
 import MyCourseContainer from "../components/card/MyCourseContainer";
 import UnenrolConfirmation from "@/app/components/message/UnenrolConfirmation";
 import SuccessUnenrolCourse from "@/app/components/message/SuccessUnenrolCourse";
+import DeleteCourseConfirmation from "@/app/components/message/DeleteCourseConfirmation";
 
 
 export default function MyCoursesPage() {
@@ -74,6 +75,7 @@ export default function MyCoursesPage() {
       <MyCourseContainer data={data} />
       <CreateCourseForms />
       <CreateCourse2Forms />
+      <DeleteCourseConfirmation />
       <UnenrolConfirmation />
       <SuccessUnenrolCourse />
     </main>
