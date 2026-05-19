@@ -73,9 +73,14 @@ export default function MyCoursesPage() {
 
       <Link href={`/courses/${params.id_course}/participants`}>
         <div className="flex justify-center my-4">
-          <div className="flex justify-center items-center px-2 py-2 bg-white rounded-2xl shadow border-2 border-dark-accent w-[400px] hover:shadow-md transition cursor-pointer">
-            {/* <img src="/participant_button/btn1.png" width="40" /> */}
-            <span className="text-dark-accent text-center font-bold text-lg">Daftar Mahasiswa</span>
+          <div className="flex flex-col align-middle items-center">
+
+            <p className="text-gray-400 font-light mb-2 ">Berikan Feedback Mahasiswa </p>
+
+            <div className="flex justify-center items-center px-2 py-2 bg-white rounded-2xl shadow border-2 border-dark-accent w-[400px] hover:shadow-md transition cursor-pointer">
+              {/* <img src="/participant_button/btn1.png" width="40" /> */}
+              <span className="text-dark-accent text-center font-bold text-lg">Daftar Mahasiswa</span>
+            </div>
           </div>
         </div>
       </Link>

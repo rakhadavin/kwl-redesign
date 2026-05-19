@@ -28,7 +28,6 @@ interface TopicDetailsContainerProps {
 const TopicDetailsContainer = ({ topicId }: TopicDetailsContainerProps) => {
   const pathname = usePathname();
   const courseId = pathname.split("/")[2];
-
   const editPGKnowForms = useEditPGKnowForms();
   const editEssayKnowForms = useEditEssayKnowForms();
   const editCheckboxWTKForms = useEditCheckboxWTKForms();
