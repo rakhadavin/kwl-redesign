@@ -21,9 +21,11 @@ interface FeedbackModalProps {
 function FeedbackModal({ participant, onClose }: FeedbackModalProps) {
   const { data: session } = useSession();
   const params = useParams();
+  const [selectedTopic, setSelectedTopic] = useState<any>(null);
   const [submitted, setSubmitted] = useState(false);
-  const { mutate, isPending } = usePostAuth("/api/course/feedback", "send-feedback");
 
+  const { data: topics } = useGetAuth(`/api/course/topic/${params.id_course}/all`, "course-topics");
+  const { mutate, isPending } = usePostAuth("/api/course/feedback", "send-feedback");
   const {
     register,
     handleSubmit,
@@ -34,25 +36,26 @@ function FeedbackModal({ participant, onClose }: FeedbackModalProps) {
     mutate(
       {
         body: {
-          topic: params.id_topic ?? null,
+          topic: selectedTopic["id"],
           feedback: data.feedback,
           lecturer: session?.userinfo?.role_pk,
           student: participant["id"],
         },
       },
-      {
-        onSuccess: () => setSubmitted(true),
-      }
+      { onSuccess: () => setSubmitted(true) }
     );
   };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-md mx-4 p-6">
+
+        {/* Step 3 — success */}
         {submitted ? (
           <div className="flex flex-col items-center gap-4 py-4 text-center">
             <p className="text-sm font-semibold text-gray-700">
-              Feedback berhasil dikirim ke <span className="text-blue-900">{participant["user"]["nama_lengkap"]}</span>!
+              Feedback berhasil dikirim ke{" "}
+              <span className="text-blue-900">{participant["user"]["nama_lengkap"]}</span>!
             </p>
             <button
               onClick={onClose}
@@ -61,9 +64,50 @@ function FeedbackModal({ participant, onClose }: FeedbackModalProps) {
               Tutup
             </button>
           </div>
+
+          /* Step 1 — pick topic */
+        ) : !selectedTopic ? (
+          <>
+            <h2 className="text-sm font-bold text-gray-800 mb-1">Pilih Topik</h2>
+
+            <ul className="flex flex-col gap-2 max-h-64 overflow-y-auto">
+              {topics?.topics?.map((topic: any) => (
+                <li key={topic["id"]}>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedTopic(topic)}
+                    className="w-full text-left px-4 py-3 text-sm border border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-colors"
+                  >
+                    {topic["name"]}
+                  </button>
+                </li>
+              ))}
+            </ul>
+            <div className="flex justify-end mt-4">
+              <button
+                type="button"
+                onClick={onClose}
+                className="px-4 py-2 text-xs font-bold text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                Batal
+              </button>
+            </div>
+          </>
+
+          /* Step 2 — write feedback */
         ) : (
           <>
+                <button
+                  type="button"
+                  onClick={() => setSelectedTopic(null)}
+                  className="text-xs text-blue-900 hover:underline mb-3 flex items-center gap-1"
+                >
+                  ← Ganti topik
+                </button>
             <h2 className="text-sm font-bold text-gray-800 mb-1">Kirim Feedback</h2>
+                <p className="text-xs text-gray-500 mb-1">
+                  Topik: <span className="font-semibold text-gray-700">{selectedTopic["name"]}</span>
+                </p>
             <p className="text-xs text-gray-500 mb-4">
               kepada: <span className="font-semibold text-gray-700">{participant["user"]["nama_lengkap"]}</span>
             </p>
