@@ -96,14 +96,6 @@ const CourseCard: React.FC<CourseCardProps> = ({
                   />
                 </svg>
               </button>
-              <div className="absolute bottom-2 right-2">
-                <button
-                  onClick={handleUnenrolButton}
-                  className="w-24 h-7 bg-transparent border-2 border-main hover:bg-main hover:text-white text-main font-bold text-xs rounded-xl"
-                >
-                  Unenrol
-                </button>
-              </div>
             </>
           )}
         </div>
