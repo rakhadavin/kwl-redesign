@@ -1,5 +1,11 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+import { useUnenroll } from "@/app/lib/peserta/useCourses";
+import useUnenrolConfirmation from "@/app/hooks/useUnenrolConfirmation";
+import useSuccessUnenrolCourse from "@/app/hooks/useSuccessUnenrolCourse";
 
 interface CourseCardProps {
   id: number;
@@ -14,6 +20,29 @@ const PesertaMyCourseCard: React.FC<CourseCardProps> = ({
   courseLong,
   courseShort,
 }) => {
+  const { data: session } = useSession();
+  const unenrolConfirmation = useUnenrolConfirmation();
+  const successUnenrolCourse = useSuccessUnenrolCourse();
+  const unenroll_mutate = useUnenroll("/api/course/enroll-student", "unenroll");
+
+  const handleUnenroll = () => {
+    unenroll_mutate.mutate(
+      {
+        body: {
+          course_id: id,
+          student_id: session?.userinfo?.role_pk,
+        },
+      },
+      { onSuccess: () => successUnenrolCourse.open() }
+    );
+  };
+
+  const handleUnenrolButton = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    unenrolConfirmation.open(handleUnenroll);
+  };
+
   return (
     <Link href={`/peserta/courses/${id}`}>
       <div className="pb-5 flex items-center justify-center">
@@ -29,6 +58,14 @@ const PesertaMyCourseCard: React.FC<CourseCardProps> = ({
               <span className="text-black text-xs font-normal">
                 {courseLong}
               </span>
+            </div>
+            <div className="absolute bottom-2 right-2">
+              <button
+                onClick={handleUnenrolButton}
+                className="w-24 h-7 bg-transparent border-2 border-[#FF9B52] hover:bg-[#FF8227] hover:text-white text-[#FF9B52] font-bold text-xs rounded-xl"
+              >
+                Unenrol
+              </button>
             </div>
           </div>
         </div>

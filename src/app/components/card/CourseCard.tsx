@@ -1,8 +1,12 @@
 import React from "react";
 import Link from "next/link";
 import { useDeleteAuth } from "@/app/lib/api/useAuth";
+import { useUnenroll } from "@/app/lib/peserta/useCourses";
+import { useSession } from "next-auth/react";
 import useDeleteCourseConfirmation from "@/app/hooks/useDeleteCourseConfirmation";
 import useSuccessDeleteCourse from "@/app/hooks/useSuccessDeleteCourse";
+import useUnenrolConfirmation from "@/app/hooks/useUnenrolConfirmation";
+import useSuccessUnenrolCourse from "@/app/hooks/useSuccessUnenrolCourse";
 
 interface CourseCardProps {
   id: number;
@@ -19,13 +23,14 @@ const CourseCard: React.FC<CourseCardProps> = ({
   courseShort,
   disabled = false,
 }) => {
+  const { data: session } = useSession();
   const deleteCourseConfirmation = useDeleteCourseConfirmation();
   const successDeleteCourse = useSuccessDeleteCourse();
+  const unenrolConfirmation = useUnenrolConfirmation();
+  const successUnenrolCourse = useSuccessUnenrolCourse();
 
-  const { mutate: mutateCourse } = useDeleteAuth(
-    `/api/course/${id}`,
-    "lecturer",
-  );
+  const { mutate: mutateCourse } = useDeleteAuth(`/api/course/${id}`, "lecturer");
+  const unenroll_mutate = useUnenroll("/api/course/enroll-student", "unenroll");
 
   const handleDeleteCourse = () => {
     mutateCourse({
@@ -33,6 +38,24 @@ const CourseCard: React.FC<CourseCardProps> = ({
       onError: () => {},
     });
     successDeleteCourse.open();
+  };
+
+  const handleUnenroll = () => {
+    unenroll_mutate.mutate(
+      {
+        body: {
+          course_id: id,
+          student_id: session?.userinfo?.role_pk,
+        },
+      },
+      { onSuccess: () => successUnenrolCourse.open() }
+    );
+  };
+
+  const handleUnenrolButton = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    unenrolConfirmation.open(handleUnenroll);
   };
 
   const cardContent = (
@@ -50,8 +73,8 @@ const CourseCard: React.FC<CourseCardProps> = ({
             </span>
             <span className="text-black text-xs font-normal">{courseLong}</span>
           </div>
-          {
-            !disabled && (
+          {!disabled && (
+            <>
               <button className="absolute top-2 right-2 w-5 h-5">
                 <svg
                   onClick={(e) => {
@@ -73,8 +96,16 @@ const CourseCard: React.FC<CourseCardProps> = ({
                   />
                 </svg>
               </button>
-            )
-          }
+              <div className="absolute bottom-2 right-2">
+                <button
+                  onClick={handleUnenrolButton}
+                  className="w-24 h-7 bg-transparent border-2 border-main hover:bg-main hover:text-white text-main font-bold text-xs rounded-xl"
+                >
+                  Unenrol
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

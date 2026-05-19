@@ -10,6 +10,8 @@ import { useGetAuth } from "@/app/lib/api/useAuth";
 
 import { useParams, useRouter } from "next/navigation";
 import MyCourseContainer from "../components/card/MyCourseContainer";
+import UnenrolConfirmation from "@/app/components/message/UnenrolConfirmation";
+import SuccessUnenrolCourse from "@/app/components/message/SuccessUnenrolCourse";
 
 
 export default function MyCoursesPage() {
@@ -41,6 +43,7 @@ export default function MyCoursesPage() {
             My Courses
           </h1>
           {/* 
+          
           <Link href={`/faq`}>
             <div className="text-center">
               <div className="m-2 shadow inline-flex bg-white rounded-l shadow">
@@ -55,7 +58,9 @@ export default function MyCoursesPage() {
                 <img src="/faq_button/faq_button.png" width="150" />
               </div>
             </div>
-          </Link> */}
+          </Link>
+
+          */}
 
           <h2 className="py-5 text-black font-bold text-xl text-center">
             Courses
@@ -69,6 +74,8 @@ export default function MyCoursesPage() {
       <MyCourseContainer data={data} />
       <CreateCourseForms />
       <CreateCourse2Forms />
+      <UnenrolConfirmation />
+      <SuccessUnenrolCourse />
     </main>
   );
 }

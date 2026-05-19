@@ -3,6 +3,8 @@
 import { useGetAuth } from "@/app/lib/api/useAuth";
 import { useRouter, useParams } from "next/navigation";
 import PesertaCourseContainer from "@/app/components/card/PesertaCourseContainer";
+import UnenrolConfirmation from "@/app/components/message/UnenrolConfirmation";
+import SuccessUnenrolCourse from "@/app/components/message/SuccessUnenrolCourse";
 
 export default function MyCoursesPage() {
   const params = useParams();
@@ -38,10 +40,12 @@ export default function MyCoursesPage() {
         </div>
       </div>
 
-      <PesertaCourseContainer 
-        data={data || []} 
-        isLoading={status === "pending"} 
+      <PesertaCourseContainer
+        data={data || []}
+        isLoading={status === "pending"}
       />
+      <UnenrolConfirmation />
+      <SuccessUnenrolCourse />
     </main>
   );
 }

@@ -4,14 +4,37 @@ import PesertaTopicContainer from "@/app/components/card/PesertaTopicContainer";
 import {
   useGetObjects,
   useGetObjectsWithStudent,
+  useUnenroll,
 } from "@/app/lib/peserta/useCourses";
 import { useParams, useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import useUnenrolConfirmation from "@/app/hooks/useUnenrolConfirmation";
+import useSuccessUnenrolCourse from "@/app/hooks/useSuccessUnenrolCourse";
+import UnenrolConfirmation from "@/app/components/message/UnenrolConfirmation";
+import SuccessUnenrolCourse from "@/app/components/message/SuccessUnenrolCourse";
 
 import Image from "next/image";
 
 export default function MyCoursesPage() {
   const router = useRouter();
   const id = useParams().id_course;
+  const { data: session } = useSession();
+  const unenrolConfirmation = useUnenrolConfirmation();
+  const successUnenrolCourse = useSuccessUnenrolCourse();
+  const unenroll_mutate = useUnenroll("/api/course/enroll-student", "unenroll");
+
+  const handleUnenroll = () => {
+    unenroll_mutate.mutate(
+      {
+        body: {
+          course_id: id,
+          student_id: session?.userinfo?.role_pk,
+        },
+      },
+      { onSuccess: () => successUnenrolCourse.open() }
+    );
+  };
+
   const information = useGetObjects(`/api/course/${id}`, "course");
   const { data } = useGetObjectsWithStudent(
     `/api/course/kwl-status/${id}/`,
@@ -71,6 +94,7 @@ export default function MyCoursesPage() {
 
   return (
     <main className="py-5 text-center bg-[url('/bg1.png')] bg-cover min-h-screen">
+
       {/* Image as background */}
       {/* <Image
         src="/background.png"
@@ -96,7 +120,18 @@ export default function MyCoursesPage() {
       </svg>
 
       <div className="flex items-center justify-center mt-8">
+
         <div className="overflow-y-auto scrollbar-none h-[80vh]  w-[90%] md:w-[80%] lg:w-[40%] relative bg-white rounded-lg shadow p-8">
+          <div className=" flex items-center justify-end  " >
+            <button
+              onClick={() => unenrolConfirmation.open(handleUnenroll)}
+              className="mt-3 w-32 h-8 bg-transparent border-2 border-[#FF9B52] hover:bg-[#FF8227] hover:text-white text-[#FF9B52] font-bold text-xs rounded-xl transition-color "
+            >
+              Unenrol
+            </button>
+          </div>
+
+
           <h1 className="py-5 text-main font-bold text-lg text-center">
             {information?.data?.full_name}
           </h1>
@@ -115,6 +150,8 @@ export default function MyCoursesPage() {
               accessory="/wide_button/feedback_accessory.png"
               url={`/peserta/courses/${id}/feedback`}
             />
+
+
           </div>
 
           <h2 className="py-5 text-black font-bold text-xl text-center">
@@ -132,6 +169,8 @@ export default function MyCoursesPage() {
           </div>
         </div>
       </div>
+      <UnenrolConfirmation />
+      <SuccessUnenrolCourse />
     </main>
   );
 }
