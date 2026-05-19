@@ -114,6 +114,12 @@ const NavbarRedesign = () => {
               </Link>
 
               <Link
+                href="/courses"
+                className="text-dark-accent font-bold text-xs hover:opacity-70 transition"
+              >
+                All Courses
+              </Link>
+              <Link
                 href="/mycourses"
                 className="text-dark-accent font-bold text-xs hover:opacity-70 transition"
               >
