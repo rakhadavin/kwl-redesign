@@ -111,7 +111,7 @@ const EssayContent: React.FC<EssayContentProps> = ({
             className="mb-10 w-32 h-7 h-[30px] rounded rounded-md bg-dark-accent border-2 border-dark-accent hover:bg-transparent hover:text-dark-accent hover:border-dark-accent text-white font-bold text-xs py-2 px-2"
             onClick={handleSubmit(handleBack)}
           >
-            sebelumnya
+            Kembali
           </button>
           <button
             type="submit"

@@ -231,7 +231,7 @@ const LobbyRoom = ({
                       d="M15 19l-7-7 7-7"
                     />
                   </svg>
-                  <span className="hidden sm:inline">Sebelumnya</span>
+                  <span className="hidden sm:inline">Kembali</span>
                 </button>
 
                 <div className="flex flex-col sm:flex-row items-center gap-1 md:gap-2">
