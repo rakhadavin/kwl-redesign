@@ -5,7 +5,6 @@ import useDeleteCourseConfirmation from "@/app/hooks/useDeleteCourseConfirmation
 
 const DeleteCourseConfirmation = () => {
   const deleteCourseConfirmation = useDeleteCourseConfirmation();
-  console.log(deleteCourseConfirmation, "deleteCourseConfirmation");
   return (
     <div>
       <MessageModal
