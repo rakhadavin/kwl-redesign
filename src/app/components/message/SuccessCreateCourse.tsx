@@ -25,7 +25,7 @@ const SuccessCreateCourse = () => {
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-sm mx-4 p-6 flex flex-col items-center gap-4">
         <div className="text-center">
           <p className="text-sm font-bold text-gray-800">Course berhasil dibuat!</p>
-          <p className="text-xs text-gray-500 mt-1">Apakah Anda ingin melihat detailnya ?</p>
+          <p className="text-xs text-gray-500 mt-1">Apakah Anda ingin melihat detailnya?</p>
         </div>
         <div className="flex gap-3 w-full">
           <button

@@ -52,7 +52,7 @@ const TopicDetailsContainer = ({ topicId }: TopicDetailsContainerProps) => {
 
   const topic = topicId
     ? data?.topics?.find((t: any) => t.id === topicId)
-    : undefined;
+    : data?.topics?.[0];
 
   const id = topic?.id ?? 0;
   const knowId = topic?.know?.[0]?.id ?? 0;
