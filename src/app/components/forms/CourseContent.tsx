@@ -57,7 +57,7 @@ const CourseContent = () => {
     router.back();
   };
 
-  const { mutate, isSuccess } = usePutAuth(
+  const { mutate, isPending } = usePutAuth(
     `/api/course/${params.id_course}`,
     "edit course"
   );
@@ -258,10 +258,22 @@ const CourseContent = () => {
         <div className="flex flex-col gap-2">
           <button
             type="button"
-            className="w-full bg-transparent border-2 border-dark-accent hover:bg-dark-accent hover:text-white text-dark-accent font-bold text-xs py-2 px-2 rounded-xl"
+            disabled={isPending}
+            className={`w-full border-2 font-bold text-xs py-2 px-2 rounded-xl transition-colors flex items-center justify-center gap-1 ${isPending
+              ? "bg-gray-300 border-gray-300 text-gray-500 cursor-not-allowed"
+              : "bg-transparent border-dark-accent hover:bg-dark-accent hover:text-white text-dark-accent"
+              }`}
             onClick={handleSubmit(onSubmit)}
           >
-            simpan
+            {isPending ? (
+              <>
+                <svg className="animate-spin w-3 h-3 shrink-0" viewBox="0 0 24 24" fill="none">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                </svg>
+                Loading...
+              </>
+            ) : "simpan"}
           </button>
           <button
             type="button"
