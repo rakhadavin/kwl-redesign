@@ -54,7 +54,7 @@ const CreateCourseForms = () => {
       <form>
         <div className="mb-4">
           <label htmlFor="short_name" className="text-xs font-bold">
-            Nama Singkat Course
+            Nama Singkat Course <span className="text-red-500">*</span>
           </label>
           <input
             id="short_name"
@@ -76,7 +76,7 @@ const CreateCourseForms = () => {
 
         <div className="mb-4">
           <label htmlFor="full_name" className="text-xs font-bold">
-            Nama Panjang Course
+            Nama Panjang Course <span className="text-red-500">*</span>
           </label>
           <input
             id="full_name"
@@ -98,7 +98,7 @@ const CreateCourseForms = () => {
 
         <div className="mb-4">
           <label htmlFor="color_theme" className="text-xs font-bold">
-            Tema Warna
+            Tema Warna <span className="text-red-500">*</span>
           </label>
           <div className="flex mt-2">
             <div className="flex items-center me-2">
@@ -194,7 +194,7 @@ const CreateCourseForms = () => {
 
         <div className="mb-4">
           <label htmlFor="institusi" className="text-xs font-bold">
-            Institusi
+            Institusi <span className="text-gray-400 font-normal">(Opsional)</span>
           </label>
           <input
             id="institusi"
@@ -206,7 +206,7 @@ const CreateCourseForms = () => {
 
         <div className="mb-4">
           <label htmlFor="prodi" className="text-xs font-bold">
-            Program Studi
+            Program Studi <span className="text-gray-400 font-normal">(Opsional)</span>
           </label>
           <input
             id="prodi"
@@ -220,7 +220,7 @@ const CreateCourseForms = () => {
           className="mb-1 w-full bg-transparent border-2 border-dark-accent hover:bg-dark-accent hover:text-white text-dark-accent font-bold text-xs py-2 px-2 rounded-xl"
           onClick={handleSubmit(onSubmit)}
         >
-          selanjutnya
+          Simpan
         </button>
       </form>
       <DevTool control={control} />
