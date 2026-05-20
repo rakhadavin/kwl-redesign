@@ -25,7 +25,7 @@ const CreateCourseForms = () => {
   const { register, control, handleSubmit, formState } = form;
   const { errors } = formState;
 
-  const { mutate, isSuccess } = usePostAuth("/api/course/", "lecturer");
+  const { mutate, isPending } = usePostAuth("/api/course/", "lecturer");
 
   const onSubmit = (data: FormValues) => {
     mutate(
@@ -217,10 +217,15 @@ const CreateCourseForms = () => {
         </div>
 
         <button
-          className="mb-1 w-full bg-transparent border-2 border-dark-accent hover:bg-dark-accent hover:text-white text-dark-accent font-bold text-xs py-2 px-2 rounded-xl"
+          className={`mb-1 w-full border-2 font-bold text-xs py-2 px-2 rounded-xl transition-colors ${
+            isPending
+              ? "bg-gray-300 border-gray-300 text-gray-500 cursor-not-allowed"
+              : "bg-transparent border-dark-accent hover:bg-dark-accent hover:text-white text-dark-accent"
+          }`}
           onClick={handleSubmit(onSubmit)}
+          disabled={isPending}
         >
-          Simpan
+          {isPending ? "Loading..." : "Simpan"}
         </button>
       </form>
       <DevTool control={control} />
