@@ -34,7 +34,7 @@ export default function MyCoursesPage() {
       {
         onSuccess: () => {
           successUnenrolCourse.open();
-          setTimeout(() => window.location.reload(), 1500);
+          setTimeout(() => router.push("/peserta/mycourses"), 1500);
         },
       }
     );
