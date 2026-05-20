@@ -1,11 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import { useGetAuth, usePutAuth } from "@/app/lib/api/useAuth";
-import { usePathname } from "next/navigation";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import Modal from "../modals/Modal";
 
 import useCreateCourseForms from "@/app/hooks/useCreateCourseForms";
 import useCreateCourse2Forms from "@/app/hooks/useCreateCourse2Forms";
@@ -22,21 +22,40 @@ const CourseContent = () => {
   const createCourseForms = useCreateCourseForms();
   const createCourse2Forms = useCreateCourse2Forms();
   const successEditCourse = useSuccessEditCourse();
+  const router = useRouter();
+  const [showCancelModal, setShowCancelModal] = useState(false);
 
   const params = useParams();
 
   const { data } = useGetAuth(`/api/course/${params.id_course}`, "course name");
 
-  const form = useForm<FormValues>({
-    defaultValues: {
-      full_name: data && data["full_name"],
-      short_name: data && data["short_name"],
-      color_theme: data && data["color_theme"],
-      enrollment_key: data && data["enrollment_key"],
-    },
-  });
-  const { register, control, handleSubmit, formState } = form;
-  const { errors } = formState;
+  const form = useForm<FormValues>();
+  const { register, control, handleSubmit, formState, reset } = form;
+  const { errors, isDirty } = formState;
+
+  useEffect(() => {
+    if (data) {
+      reset({
+        full_name: data["full_name"] || "",
+        short_name: data["short_name"] || "",
+        color_theme: data["color_theme"] || "",
+        enrollment_key: data["enrollment_key"] || "",
+      });
+    }
+  }, [data, reset]);
+
+  const handleCancel = () => {
+    if (isDirty) {
+      setShowCancelModal(true);
+    } else {
+      router.back();
+    }
+  };
+
+  const handleConfirmCancel = () => {
+    setShowCancelModal(false);
+    router.back();
+  };
 
   const { mutate, isSuccess } = usePutAuth(
     `/api/course/${params.id_course}`,
@@ -206,17 +225,60 @@ const CourseContent = () => {
           <p className="error">{errors.enrollment_key?.message}</p>
         </div>
 
-        <button
-          className="mb-1 w-full bg-transparent border-2 border-dark-accent hover:bg-dark-accent hover:text-white text-dark-accent font-bold text-xs py-2 px-2 rounded-xl"
-          onClick={handleSubmit(onSubmit)}
-        >
-          simpan
-        </button>
+        <div className="flex flex-col gap-2">
+          <button
+            type="button"
+            className="w-full bg-transparent border-2 border-dark-accent hover:bg-dark-accent hover:text-white text-dark-accent font-bold text-xs py-2 px-2 rounded-xl"
+            onClick={handleSubmit(onSubmit)}
+          >
+            simpan
+          </button>
+          <button
+            type="button"
+            className="w-full bg-transparent border-2 border-gray-400 hover:bg-gray-400 hover:text-white text-gray-400 font-bold text-xs py-2 px-2 rounded-xl"
+            onClick={handleCancel}
+          >
+            batal
+          </button>
+        </div>
       </form>
       <DevTool control={control} />
     </div>
   );
-  return <div>{content}</div>;
+
+  const cancelModalContent = (
+    <div className="flex flex-col items-center gap-4 py-2">
+      <p className="text-center text-sm text-gray-700">
+        Ada perubahan yang belum disimpan. Yakin ingin keluar?
+      </p>
+      <div className="flex gap-3 w-full">
+        <button
+          onClick={() => setShowCancelModal(false)}
+          className="flex-1 border-2 border-dark-accent text-dark-accent font-bold text-xs py-2 rounded-xl hover:bg-dark-accent hover:text-white transition-colors"
+        >
+          Tetap Edit
+        </button>
+        <button
+          onClick={handleConfirmCancel}
+          className="flex-1 border-2 border-red-400 bg-red-400 text-white font-bold text-xs py-2 rounded-xl hover:brightness-90 transition-colors"
+        >
+          Buang Perubahan
+        </button>
+      </div>
+    </div>
+  );
+
+  return (
+    <div>
+      {content}
+      <Modal
+        label="Konfirmasi Batal"
+        content={cancelModalContent}
+        isOpen={showCancelModal}
+        close={() => setShowCancelModal(false)}
+      />
+    </div>
+  );
 };
 
 export default CourseContent;

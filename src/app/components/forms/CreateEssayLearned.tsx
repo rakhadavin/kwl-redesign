@@ -35,7 +35,7 @@ const CreateEssayLearnedForms = () => {
   const { register, control, handleSubmit, formState } = form;
   const { errors } = formState;
 
-  const { mutate, isSuccess } = usePostAuth("/api/learned/essay", "lecturer");
+  const { mutate, isPending } = usePostAuth("/api/learned/essay", "lecturer");
 
   const onSubmit = (data: FormValues) => {
     const postData = {
@@ -97,17 +97,33 @@ const CreateEssayLearnedForms = () => {
 
         <div className="btn-group flex flex-col">
           <button
-            className="mb-1 w-full bg-dark-accent border-2 hover:bg-white hover:text-dark-accent hover:border-dark-accent text-white font-bold text-xs py-2 px-2 rounded-xl"
+            type="button"
+            disabled={isPending}
+            className="mb-1 w-full bg-dark-accent border-2 hover:bg-white hover:text-dark-accent hover:border-dark-accent text-white font-bold text-xs py-2 px-2 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={handleSubmit(handleBack)}
           >
             Kembali
           </button>
 
           <button
-            className="mb-1 w-full bg-transparent border-2 border-dark-accent hover:bg-dark-accent hover:text-white text-dark-accent font-bold text-xs py-2 px-2 rounded-xl"
+            type="button"
+            disabled={isPending}
+            className={`mb-1 w-full border-2 font-bold text-xs py-2 px-2 rounded-xl transition-colors flex items-center justify-center gap-1 ${
+              isPending
+                ? "bg-gray-300 border-gray-300 text-gray-500 cursor-not-allowed"
+                : "bg-transparent border-dark-accent hover:bg-dark-accent hover:text-white text-dark-accent"
+            }`}
             onClick={handleSubmit(onSubmit)}
           >
-            simpan
+            {isPending ? (
+              <>
+                <svg className="animate-spin w-3 h-3 shrink-0" viewBox="0 0 24 24" fill="none">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                </svg>
+                Loading...
+              </>
+            ) : "simpan"}
           </button>
         </div>
       </form>
