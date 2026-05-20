@@ -27,7 +27,7 @@ const CourseContent = () => {
 
   const params = useParams();
 
-  const { data } = useGetAuth(`/api/course/${params.id_course}`, "course name");
+  const { data, isLoading } = useGetAuth(`/api/course/${params.id_course}`, "course name");
 
   const form = useForm<FormValues>();
   const { register, control, handleSubmit, formState, reset } = form;
@@ -86,6 +86,36 @@ const CourseContent = () => {
     value: item,
     label: item["user"]["nama_lengkap"],
   }));
+
+  if (isLoading) {
+    return (
+      <div className="animate-pulse space-y-4 py-2">
+        <div className="h-3 w-40 bg-gray-200 rounded" />
+        <div className="space-y-2">
+          <div className="h-3 w-32 bg-gray-200 rounded" />
+          <div className="h-8 bg-gray-200 rounded" />
+        </div>
+        <div className="space-y-2">
+          <div className="h-3 w-32 bg-gray-200 rounded" />
+          <div className="h-8 bg-gray-200 rounded" />
+        </div>
+        <div className="space-y-2">
+          <div className="h-3 w-24 bg-gray-200 rounded" />
+          <div className="flex gap-3">
+            {[...Array(5)].map((_, i) => (
+              <div key={i} className="w-5 h-5 bg-gray-200 rounded-full" />
+            ))}
+          </div>
+        </div>
+        <div className="space-y-2">
+          <div className="h-3 w-36 bg-gray-200 rounded" />
+          <div className="h-8 bg-gray-200 rounded" />
+        </div>
+        <div className="h-8 bg-gray-200 rounded-xl" />
+        <div className="h-8 bg-gray-200 rounded-xl" />
+      </div>
+    );
+  }
 
   const content = (
     <div>
