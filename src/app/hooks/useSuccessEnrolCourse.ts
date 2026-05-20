@@ -1,5 +1,16 @@
-import { toast } from "sonner";
+import { create } from "zustand";
 
-const useSuccessEnrolCourse = () => ({ open: () => toast.success("Enrolment berhasil. Selamat belajar!") });
+interface SuccessEnrolCourseStore {
+  isOpen: boolean;
+  courseId?: number;
+  open: (courseId: number) => void;
+  close: () => void;
+}
+
+const useSuccessEnrolCourse = create<SuccessEnrolCourseStore>((set) => ({
+  isOpen: false,
+  open: (courseId) => set({ isOpen: true, courseId }),
+  close: () => set({ isOpen: false }),
+}));
 
 export default useSuccessEnrolCourse;

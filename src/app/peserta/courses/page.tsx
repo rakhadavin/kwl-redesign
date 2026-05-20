@@ -14,6 +14,7 @@ import router from "next/router";
 import EnrolConfirmation from "@/app/components/message/EnrolConfirmation";
 import UnenrolConfirmation from "@/app/components/message/UnenrolConfirmation";
 import EnrolKeyConfirmation from "@/app/components/message/EnrolKeyConfirmation";
+import SuccessEnrolCourse from "@/app/components/message/SuccessEnrolCourse";
 
 export default function MyCoursesPage() {
   const router = useRouter();
@@ -58,6 +59,7 @@ export default function MyCoursesPage() {
       <EnrolConfirmation />
       <EnrolKeyConfirmation />
       <UnenrolConfirmation />
+      <SuccessEnrolCourse />
     </main>
   );
 }

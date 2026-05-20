@@ -70,9 +70,9 @@ const EnrolKeyConfirmation = () => {
   };
 
   const handleNext = () => {
-    successEnrolCourse.open();
     enrolKeyConfirmation.close();
     setServerError("");
+    successEnrolCourse.open(enrolKeyConfirmation.courseId!);
   };
 
   const handleClose = () => {

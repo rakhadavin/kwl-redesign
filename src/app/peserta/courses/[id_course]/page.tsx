@@ -31,7 +31,12 @@ export default function MyCoursesPage() {
           student_id: session?.userinfo?.role_pk,
         },
       },
-      { onSuccess: () => successUnenrolCourse.open() }
+      {
+        onSuccess: () => {
+          successUnenrolCourse.open();
+          setTimeout(() => window.location.reload(), 1500);
+        },
+      }
     );
   };
 
@@ -125,9 +130,22 @@ export default function MyCoursesPage() {
           <div className=" flex items-center justify-end  " >
             <button
               onClick={() => unenrolConfirmation.open(handleUnenroll)}
-              className="mt-3 w-32 h-8 bg-transparent border-2 border-[#FF9B52] hover:bg-[#FF8227] hover:text-white text-[#FF9B52] font-bold text-xs rounded-xl transition-color "
+              disabled={unenroll_mutate.isPending}
+              className={`mt-3 w-32 h-8 border-2 font-bold text-xs rounded-xl transition-colors flex items-center justify-center gap-1 ${
+                unenroll_mutate.isPending
+                  ? "bg-gray-100 border-gray-300 text-gray-400 cursor-not-allowed"
+                  : "bg-transparent border-[#FF9B52] hover:bg-[#FF8227] hover:text-white text-[#FF9B52]"
+              }`}
             >
-              Unenrol
+              {unenroll_mutate.isPending ? (
+                <>
+                  <svg className="animate-spin w-3 h-3 shrink-0" viewBox="0 0 24 24" fill="none">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                  </svg>
+                  Loading
+                </>
+              ) : "Unenrol"}
             </button>
           </div>
 

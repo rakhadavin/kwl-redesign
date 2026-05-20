@@ -68,7 +68,7 @@ const PesertaCourseCard: React.FC<PesertaCourseCardProps> = ({
       { body: body },
       {
         onSuccess: () => {
-          successEnrolCourse.open();
+          successEnrolCourse.open(id);
         },
         onError(error: any) {
         },
@@ -94,6 +94,7 @@ const PesertaCourseCard: React.FC<PesertaCourseCardProps> = ({
       {
         onSuccess: () => {
           successUnenrolCourse.open();
+          setTimeout(() => window.location.reload(), 1500);
         },
         onError(error: any) {
         },
@@ -124,18 +125,44 @@ const PesertaCourseCard: React.FC<PesertaCourseCardProps> = ({
             <div className="absolute bottom-1 right-3">
               <button
                 onClick={handleUnenrolButton}
-                className="mb-2 w-28 h-8 bg-transparent border-2 border-main hover:bg-main hover:text-white hover:border-main text-main font-bold text-xs py-2 px-2 rounded-xl"
+                disabled={unenroll_mutate.isPending}
+                className={`mb-2 w-28 h-8 border-2 font-bold text-xs py-2 px-2 rounded-xl transition-colors flex items-center justify-center gap-1 ${
+                  unenroll_mutate.isPending
+                    ? "bg-gray-100 border-gray-300 text-gray-400 cursor-not-allowed"
+                    : "bg-transparent border-main hover:bg-main hover:text-white hover:border-main text-main"
+                }`}
               >
-                unenrol
+                {unenroll_mutate.isPending ? (
+                  <>
+                    <svg className="animate-spin w-3 h-3 shrink-0" viewBox="0 0 24 24" fill="none">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                    </svg>
+                    Loading
+                  </>
+                ) : "unenrol"}
               </button>
             </div>
           ) : (
             <div className="absolute bottom-1 right-3">
               <button
                 onClick={handleEnrolButton}
-                className="mb-2 w-28 h-8 bg-main border-2 border-white hover:bg-white hover:text-main hover:border-main text-white font-bold text-xs py-2 px-2 rounded-xl"
+                disabled={enroll_mutate.isPending}
+                className={`mb-2 w-28 h-8 border-2 font-bold text-xs py-2 px-2 rounded-xl transition-colors flex items-center justify-center gap-1 ${
+                  enroll_mutate.isPending
+                    ? "bg-gray-100 border-gray-300 text-gray-400 cursor-not-allowed"
+                    : "bg-main border-white hover:bg-white hover:text-main hover:border-main text-white"
+                }`}
               >
-                enrol
+                {enroll_mutate.isPending ? (
+                  <>
+                    <svg className="animate-spin w-3 h-3 shrink-0" viewBox="0 0 24 24" fill="none">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                    </svg>
+                    Loading
+                  </>
+                ) : "enrol"}
               </button>
             </div>
           )}
