@@ -24,11 +24,15 @@ export default function LoginPage() {
     }
   }, [session]);
 
-  if (!session?.userinfo?.role && status === "authenticated") {
-    router.push("/auth/transition");
-  } else if (session?.userinfo?.role) {
-    router.push("/home");
-  }
+  useEffect(() => {
+    if (status === "authenticated") {
+      if (!session?.userinfo?.role) {
+        router.push("/auth/transition");
+      } else {
+        router.push("/home");
+      }
+    }
+  }, [status, session, router]);
 
   const {
     register,

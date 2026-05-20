@@ -92,7 +92,7 @@ const Navbar = () => {
                       </Link>
                       <Link href="/mycourses">
                         <p className="text-center text-dark-accent font-bold text-xs hover:bg-gray-200 transition cursor-pointer rounded-xl">
-                          home
+                          My Courses
                         </p>
                       </Link>
                       <Link href="/profile/lecturer">
