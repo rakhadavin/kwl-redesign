@@ -30,13 +30,13 @@ const SuccessCreateCourse = () => {
         <div className="flex gap-3 w-full">
           <button
             onClick={handleAllCourses}
-            className="flex-1 h-9 border-2 border-main text-main font-bold text-xs rounded-xl hover:bg-main hover:text-white transition-colors"
+            className="flex-1 h-9 border-2 border-main text-main font-bold text-xs rounded-xl hover:bg-main/10 hover:text-main transition-colors"
           >
             Tidak, tetap disini
           </button>
           <button
             onClick={handleViewCourse}
-            className="flex-1 h-9 bg-main text-white font-bold text-xs rounded-xl hover:brightness-90 transition-colors"
+            className="flex-1 h-9 bg-[#40A964] text-white font-bold text-xs rounded-xl hover:brightness-90 transition-colors"
           >
             Lihat Detail Course
           </button>

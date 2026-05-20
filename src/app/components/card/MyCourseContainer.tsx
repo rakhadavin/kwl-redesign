@@ -1,7 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import CourseCard from "./CourseCard";
+import Pagination from "../ui/Pagination";
+
+const ITEMS_PER_PAGE = 6;
 
 function EmptyState() {
   return (
@@ -22,21 +25,40 @@ function EmptyState() {
 }
 
 const MyCourseContainer = ({ data }: any) => {
+  const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => { setCurrentPage(1); }, [data]);
+
   if (!data || data.length === 0) {
     return <EmptyState />;
   }
 
+  const totalPages = Math.ceil(data.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const currentData = data.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
   return (
-    <div>
-      {data.map((course: any) => (
-        <CourseCard
-          key={course["id"]}
-          id={course["id"]}
-          courseLong={course["full_name"]}
-          courseShort={course["short_name"]}
-          color={course["color_theme"]}
-        />
-      ))}
+    <div className="flex flex-col gap-4">
+      <div className="grid gap-4">
+        {currentData.map((course: any) => (
+          <CourseCard
+            key={course["id"]}
+            id={course["id"]}
+            courseLong={course["full_name"]}
+            courseShort={course["short_name"]}
+            color={course["color_theme"]}
+          />
+        ))}
+      </div>
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+        showInfo={true}
+        totalItems={data.length}
+        itemsPerPage={ITEMS_PER_PAGE}
+      />
     </div>
   );
 };

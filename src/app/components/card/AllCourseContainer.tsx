@@ -66,14 +66,18 @@ const AllCourseContainer: React.FC<AllCourseContainerProps> = ({
   const itemsPerPage = 6;
 
   const filteredData = useMemo(() => {
-    if (!searchTerm || !data) return data || [];
-    return data.filter((course) => {
-      const fullName = course["full_name"]?.toLowerCase() || "";
-      const shortName = course["short_name"]?.toLowerCase() || "";
-      const description = course["description"]?.toLowerCase() || "";
-      const search = searchTerm.toLowerCase();
-      return fullName.includes(search) || shortName.includes(search) || description.includes(search);
-    });
+    const base = !searchTerm || !data
+      ? data || []
+      : data.filter((course) => {
+        const fullName = course["full_name"]?.toLowerCase() || "";
+        const shortName = course["short_name"]?.toLowerCase() || "";
+        const description = course["description"]?.toLowerCase() || "";
+        const search = searchTerm.toLowerCase();
+        return fullName.includes(search) || shortName.includes(search) || description.includes(search);
+      });
+    return [...base].sort(
+      (a, b) => new Date(b.created).getTime() - new Date(a.created).getTime()
+    );
   }, [data, searchTerm]);
 
   const totalPages = Math.ceil((filteredData?.length || 0) / itemsPerPage);

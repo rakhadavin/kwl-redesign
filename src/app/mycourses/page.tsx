@@ -1,30 +1,47 @@
 "use client";
 
-import Link from "next/link";
-import AddCourseButton from "@/app/components/button/AddCourseButton";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import SearchBar from "../components/button/SearchBar";
 import CreateCourseForms from "@/app/components/forms/CreateCourseForms";
 import CreateCourse2Forms from "@/app/components/forms/CreateCourse2Forms";
-// import CourseCard from "../../components/card/CourseCard";
 import { useGetAuth } from "@/app/lib/api/useAuth";
-
-import { useParams, useRouter } from "next/navigation";
 import MyCourseContainer from "../components/card/MyCourseContainer";
 import UnenrolConfirmation from "@/app/components/message/UnenrolConfirmation";
 import SuccessUnenrolCourse from "@/app/components/message/SuccessUnenrolCourse";
 import DeleteCourseConfirmation from "@/app/components/message/DeleteCourseConfirmation";
 import SuccessCreateCourse from "@/app/components/message/SuccessCreateCourse";
-
+import useCreateCourseForms from "@/app/hooks/useCreateCourseForms";
 
 export default function MyCoursesPage() {
-  const params = useParams();
   const router = useRouter();
+  const { data: session } = useSession();
+  const [searchQuery, setSearchQuery] = useState("");
+  const createCourseForms = useCreateCourseForms();
 
   const { data } = useGetAuth("/api/course/lecturer", "lecturer courses");
 
+  const isDosen = session?.userinfo?.role === "lecturer";
+  console.log("My Courses Data:", data);
+  const filteredData = data
+    ?.filter((course: any) => {
+      const q = searchQuery.toLowerCase();
+
+      return (
+        course.full_name?.toLowerCase().includes(q) ||
+        course.short_name?.toLowerCase().includes(q)
+      );
+    })
+    .sort((a: any, b: any) => {
+      const dateA = a.created ? new Date(a.created).getTime() : 0;
+      const dateB = b.created ? new Date(b.created).getTime() : 0;
+
+      return dateB - dateA; // newest first
+    });
   return (
-    <main className="p-5">
-      <div className="flex items-start">
+    <main className="p-5 flex flex-col items-center">
+      <div className="flex items-start w-full ">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -44,36 +61,24 @@ export default function MyCoursesPage() {
           <h1 className="py-5 text-main font-bold text-2xl text-center">
             My Courses
           </h1>
-          {/* 
-          
-          <Link href={`/faq`}>
-            <div className="text-center">
-              <div className="m-2 shadow inline-flex bg-white rounded-l shadow">
-                <div className="text-start">
-                  <p className="w-[90%] md:w-[80%] lg:w-[400px] font-bold px-10">
-                    Frequently Asked Question
-                  </p>
-                  <p className="w-[90%] md:w-[80%] lg:w-[400px] text-sm px-10">
-                    Akses informasi tentang aplikasi K-Owl!
-                  </p>
-                </div>
-                <img src="/faq_button/faq_button.png" width="150" />
-              </div>
-            </div>
-          </Link>
-
-          */}
-
-          <h2 className="py-5 text-black font-bold text-xl text-center">
-            Courses
-          </h2>
         </div>
       </div>
 
-      <AddCourseButton add="course" />
+      <div className="flex items-center gap-3 mb-6">
+        <div className="flex-1">
+          <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+        </div>
+        {isDosen && (
+          <button
+            onClick={() => createCourseForms.open()}
+            className="flex items-center gap-2 bg-main text-white font-bold text-sm py-2.5 px-4 rounded-lg hover:opacity-80 transition-opacity whitespace-nowrap"
+          >
+            <span className="text-lg leading-none">+</span> Add Course
+          </button>
+        )}
+      </div>
 
-      {/* <CourseCard color="kowl-orange" /> */}
-      <MyCourseContainer data={data} />
+      <MyCourseContainer data={filteredData} />
       <CreateCourseForms />
       <CreateCourse2Forms />
       <DeleteCourseConfirmation />
