@@ -255,13 +255,21 @@ const CourseContent = () => {
           <p className="error">{errors.enrollment_key?.message}</p>
         </div>
 
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-row gap-2">
+          <button
+            type="button"
+            className="w-full bg-transparent border-2 border-red-400 hover:bg-red-400 hover:text-white text-red-400 font-bold text-xs py-2 px-2 rounded-xl"
+            onClick={handleCancel}
+          >
+            batal
+          </button>
+
           <button
             type="button"
             disabled={isPending}
-            className={`w-full border-2 font-bold text-xs py-2 px-2 rounded-xl transition-colors flex items-center justify-center gap-1 ${isPending
+            className={`w-full border-2 flex-3 font-bold text-xs py-2 px-2 rounded-xl transition-colors flex items-center justify-center gap-1 ${isPending
               ? "bg-gray-300 border-gray-300 text-gray-500 cursor-not-allowed"
-              : "bg-transparent border-dark-accent hover:bg-dark-accent hover:text-white text-dark-accent"
+              : "bg-transparent border-[#338750] hover:bg-[#338750] hover:text-white text-[#338750]"
               }`}
             onClick={handleSubmit(onSubmit)}
           >
@@ -275,13 +283,7 @@ const CourseContent = () => {
               </>
             ) : "simpan"}
           </button>
-          <button
-            type="button"
-            className="w-full bg-transparent border-2 border-gray-400 hover:bg-gray-400 hover:text-white text-gray-400 font-bold text-xs py-2 px-2 rounded-xl"
-            onClick={handleCancel}
-          >
-            batal
-          </button>
+
         </div>
       </form>
       <DevTool control={control} />
