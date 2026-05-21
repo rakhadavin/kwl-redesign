@@ -19,7 +19,7 @@ export default function LearnedPageQuiz() {
   const id_topic = params.id_topic;
   const quizProgress = useQuizProgress();
 
-  const { data } = useGetObjects(`/api/learned/quiz/${id_topic}`, "know");
+  const { data, isLoading } = useGetObjects(`/api/learned/quiz/${id_topic}`, "know");
 
   // bottleneck potential
   const course = useGetObjects(`/api/course/${id_course}`, "course");
@@ -27,7 +27,7 @@ export default function LearnedPageQuiz() {
 
   const [currentNum, setCurrentNum] = useState(1);
 
-  const maxNum = data?.questions.length;
+  const maxNum = data?.questions?.length;
   const numList = generateList(maxNum);
 
   function generateList(length: number) {
@@ -101,6 +101,20 @@ export default function LearnedPageQuiz() {
       setBackOpen(true);
     }
   };
+
+  if (isLoading || !data) {
+    return (
+      <main className="py-5 text-center bg-[url('/bg1.png')] bg-cover min-h-screen flex items-center justify-center">
+        <div className="flex flex-col items-center gap-3">
+          <svg className="animate-spin w-6 h-6 text-white" viewBox="0 0 24 24" fill="none">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+          </svg>
+          <p className="text-white text-sm">Memuat soal...</p>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="py-5 text-center bg-[url('/bg1.png')] bg-scroll bg-cover min-h-screen">
