@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"d:\\\\SKRIPSI\\\\DEVELOPMENT\\\\Frontend\\\\kwl-frontend\\\\src\\\\app\\\\peserta\\\\courses\\\\[id_course]\\\\[id_topic]\\\\\" -Recurse -Include \"*.tsx\", \"*.ts\", \"*.jsx\", \"*.js\" | Select-Object -ExpandProperty FullName)"
+    ]
+  }
+}

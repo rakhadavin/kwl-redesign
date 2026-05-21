@@ -49,7 +49,7 @@ const ReflectionCard: React.FC<ReflectionCardProps> = ({
   const { register, control, handleSubmit, formState } = form;
   const { errors } = formState;
 
-  const { mutate, isSuccess } = usePostAuth(
+  const { mutate, isPending } = usePostAuth(
     `/api/${code}/essay/answer`,
     "answer"
   );
@@ -144,9 +144,20 @@ const ReflectionCard: React.FC<ReflectionCardProps> = ({
           {nextPage && (
             <button
               onClick={handleSubmit(onSubmit)}
-              className="text-sm text-white font-bold w-[120px] py-2 px-6 mt-4 ml-8 shadow text-center bg-green-500 rounded"
+              disabled={isPending}
+              className={`text-sm text-white font-bold w-[120px] py-2 px-6 mt-4 ml-8 shadow text-center rounded flex items-center justify-center gap-1 mx-auto ${
+                isPending ? "bg-green-300 cursor-not-allowed" : "bg-green-500"
+              }`}
             >
-              kirim
+              {isPending ? (
+                <>
+                  <svg className="animate-spin w-3 h-3 shrink-0" viewBox="0 0 24 24" fill="none">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                  </svg>
+                  Loading...
+                </>
+              ) : "kirim"}
             </button>
           )}
         </form>
