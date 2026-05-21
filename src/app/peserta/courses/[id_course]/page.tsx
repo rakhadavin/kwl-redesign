@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import WideButton from "@/app/components/button/peserta/WIdeButton";
 import PesertaTopicContainer from "@/app/components/card/PesertaTopicContainer";
 import {
@@ -54,6 +54,12 @@ export default function MyCoursesPage() {
 
   const information = useGetObjects(`/api/course/${id}`, "course");
   const { data } = useGetObjectsWithStudent(`/api/course/kwl-status/${id}/`, "topic");
+
+  useEffect(() => {
+    if (data && data.length > 0 && !selectedTopic) {
+      setSelectedTopic(data[0]);
+    }
+  }, [data, selectedTopic]);
 
   return (
     <main className="py-5 text-center bg-[url('/bg1.png')] bg-cover min-h-screen">
@@ -114,7 +120,7 @@ export default function MyCoursesPage() {
 
           <h2 className="py-5 text-black font-bold text-xl text-center">Courses</h2>
 
-          <div className="py-2 mx-2 flex flex-row items-start justify-evenly gap-4 border border-black " >
+          <div className="py-2 mx-2 flex flex-row items-start justify-evenly gap-4 " >
             <PesertaTopicContainer
               data={data || []}
               isLoading={!data}

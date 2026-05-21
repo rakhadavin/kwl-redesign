@@ -77,7 +77,7 @@ const KWLQuestionTopic: React.FC<KWLQuestionTopicProps> = ({ topic }) => {
     topic.topic_data.learned === undefined
   ) {
     return (
-      <div className="rounded-lg px-7 py-4 h-full w-full bg-gray-100 flex flex-col items-center justify-center min-h-[300px] gap-3">
+      <div className="rounded-lg px-7 py-4 h-full w-full bg-blue-50 border-2 border-blue-300 flex flex-col items-center justify-center min-h-[300px] gap-3">
         <svg className="animate-spin w-6 h-6 text-main" viewBox="0 0 24 24" fill="none">
           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
@@ -112,7 +112,7 @@ const KWLQuestionTopic: React.FC<KWLQuestionTopicProps> = ({ topic }) => {
   const learnedBadge = learned ? (learned.type === "reflection" ? "Essay"    : "Quiz")     : "Belum ada";
 
   return (
-    <div className="rounded-lg px-7 py-4 h-full w-full bg-gray-100 flex flex-col gap-4">
+    <div className="rounded-lg px-7 py-4 h-full w-full bg-blue-50 border-2 border-blue-300 flex flex-col gap-4">
       <div>
         <h1 className="text-main font-bold uppercase text-xl">Pertanyaan Topic</h1>
         <p className="text-gray-400 text-sm">
