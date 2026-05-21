@@ -3,6 +3,7 @@
 import React from 'react';
 import { Archive, Pencil, Trash2 } from "lucide-react";
 import { usePathname } from 'next/navigation';
+import { useQueryClient } from '@tanstack/react-query';
 import { useGetAuth, useDeleteAuth, usePatchAuth } from '@/app/lib/api/useAuth';
 import TopicKWLCard from './TopicKWLCard';
 import useEditPGKnowForms from "@/app/hooks/useEditPGknowForms";
@@ -91,18 +92,34 @@ const TopicDetailsContainer = ({ topicId }: TopicDetailsContainerProps) => {
     else editPGLearnedForms.open(id, learnedId);
   };
 
-  const { mutate: mutateTopic } = useDeleteAuth(`/api/course/topic/${id}`, "lecturer");
-  const { mutate: mutatePatch } = usePatchAuth(`/api/course/topic/${id}`, "lecturer");
+  const queryClient = useQueryClient();
+
+  const { mutate: mutateTopic, isPending: isDeletingTopic } = useDeleteAuth(`/api/course/topic/${id}`, "lecturer");
+  const { mutate: mutatePatch, isPending: isArchivingTopic } = usePatchAuth(`/api/course/topic/${id}`, "lecturer");
 
   const handleDeleteTopic = () => {
-    mutateTopic({ onSuccess: () => { }, onError: () => { } });
-    successDeleteTopic.open();
+    mutateTopic(
+      {},
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: ["list topic"] });
+          successDeleteTopic.open();
+        },
+        onError: () => {},
+      },
+    );
   };
 
   const onSubmitArchived = () => {
     mutatePatch(
       { body: { is_archived: !topic?.is_archived } },
-      { onSuccess: () => { successArchiveTopic.open(!topic?.is_archived); archiveTopicConfirmation.close(); } },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: ["list topic"] });
+          successArchiveTopic.open(!topic?.is_archived);
+          archiveTopicConfirmation.close();
+        },
+      },
     );
   };
 
@@ -145,8 +162,17 @@ const TopicDetailsContainer = ({ topicId }: TopicDetailsContainerProps) => {
         <div className='flex md:flex-row  w-full gap-2  items-center justify-center  '>
           <button
             onClick={() => archiveTopicConfirmation.open(id, topic.is_archived, onSubmitArchived)}
-            className=' flex-row md:w-full w-max bg-[#F4F4F4] hover:bg-[#17A200]/20 text-gray-700 font-bold py-2 px-4 rounded-md flex items-center gap-2 border border-[#17A200] text-[#17A200] md:text-sm text-xs md:whitespace-nowrap justify-center '>
-            <Archive className='text-[#17A200] text-sm h-5 w-5' /> <p className='md:flex  text-[#17A200] '>{topic.is_archived ? "Unarchive Topic" : "Archive Topic"}</p>
+            disabled={isArchivingTopic}
+            className=' flex-row md:w-full w-max bg-[#F4F4F4] hover:bg-[#17A200]/20 text-gray-700 font-bold py-2 px-4 rounded-md flex items-center gap-2 border border-[#17A200] text-[#17A200] md:text-sm text-xs md:whitespace-nowrap justify-center disabled:opacity-50 disabled:cursor-not-allowed '>
+            {isArchivingTopic ? (
+              <svg className="animate-spin w-4 h-4 shrink-0 text-[#17A200]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+              </svg>
+            ) : (
+              <Archive className='text-[#17A200] text-sm h-5 w-5' />
+            )}
+            <p className='md:flex text-[#17A200]'>{isArchivingTopic ? "Loading..." : (topic.is_archived ? "Unarchive Topic" : "Archive Topic")}</p>
           </button>
 
           <button
@@ -157,8 +183,17 @@ const TopicDetailsContainer = ({ topicId }: TopicDetailsContainerProps) => {
 
           <button
             onClick={() => deleteTopicConfirmation.open(id, handleDeleteTopic)}
-            className=' flex-row md:w-full w-max bg-[#F4F4F4] hover:bg-[#C62828]/20 text-gray-700 font-bold py-2 px-4 rounded-md flex items-center gap-2 border border-[#C62828] text-[#C62828] md:text-sm text-xs md:whitespace-nowrap justify-center '>
-            <Trash2 className='text-[#C62828] text-sm h-5 w-5' /> <p className='md:flex text-[#C62828]  '>Delete Topic</p>
+            disabled={isDeletingTopic}
+            className=' flex-row md:w-full w-max bg-[#F4F4F4] hover:bg-[#C62828]/20 text-gray-700 font-bold py-2 px-4 rounded-md flex items-center gap-2 border border-[#C62828] text-[#C62828] md:text-sm text-xs md:whitespace-nowrap justify-center disabled:opacity-50 disabled:cursor-not-allowed '>
+            {isDeletingTopic ? (
+              <svg className="animate-spin w-4 h-4 shrink-0 text-[#C62828]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+              </svg>
+            ) : (
+              <Trash2 className='text-[#C62828] text-sm h-5 w-5' />
+            )}
+            <p className='md:flex text-[#C62828]'>{isDeletingTopic ? "Loading..." : "Delete Topic"}</p>
           </button>
         </div>
       </div>

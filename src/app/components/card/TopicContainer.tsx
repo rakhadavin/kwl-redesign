@@ -257,21 +257,22 @@ const TopicContainer: React.FC<TopicContainerProps> = ({
         itemsPerPage={itemsPerPage}
       />
 
-      {data.total_archived_topics !== 0 && (
-        <div className="flex justify-center mt-6">
-          <Link
-            href={`${pathname}/archive`}
-            className="flex items-center gap-1.5 text-gray-800 hover:text-gray-600 transition-colors"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M20 2H4c-1.1 0-2 .9-2 2v3.01c0 .72.43 1.34 1 1.72V20c0 1.1 1.1 2 2 2h14c.9 0 2-.9 2-2V8.72c.57-.38 1-.99 1-1.72V4c0-1.1-.9-2-2-2zm-5 12H9v-2h6v2zm5-7H4V4h16v3z"/>
-            </svg>
-            <span className="text-base font-semibold underline underline-offset-2">
-              Lihat Arsip Topik
+      <div className="flex justify-center mt-6">
+        <Link
+          href={`${pathname}/archive`}
+          className="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 hover:text-gray-900 transition-colors shadow-sm"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20 2H4c-1.1 0-2 .9-2 2v3.01c0 .72.43 1.34 1 1.72V20c0 1.1 1.1 2 2 2h14c.9 0 2-.9 2-2V8.72c.57-.38 1-.99 1-1.72V4c0-1.1-.9-2-2-2zm-5 12H9v-2h6v2zm5-7H4V4h16v3z"/>
+          </svg>
+          <span className="text-sm font-semibold">See Archived Topics</span>
+          {data.total_archived_topics > 0 && (
+            <span className="ml-1 inline-flex items-center justify-center px-2 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-700">
+              {data.total_archived_topics}
             </span>
-          </Link>
-        </div>
-      )}
+          )}
+        </Link>
+      </div>
     </div>
   );
 };

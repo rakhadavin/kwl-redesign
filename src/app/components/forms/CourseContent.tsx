@@ -9,7 +9,6 @@ import Modal from "../modals/Modal";
 
 import useCreateCourseForms from "@/app/hooks/useCreateCourseForms";
 import useCreateCourse2Forms from "@/app/hooks/useCreateCourse2Forms";
-import useSuccessEditCourse from "@/app/hooks/useSuccessEditCourse";
 
 type FormValues = {
   short_name: string;
@@ -21,9 +20,9 @@ type FormValues = {
 const CourseContent = () => {
   const createCourseForms = useCreateCourseForms();
   const createCourse2Forms = useCreateCourse2Forms();
-  const successEditCourse = useSuccessEditCourse();
   const router = useRouter();
   const [showCancelModal, setShowCancelModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const params = useParams();
 
@@ -74,7 +73,7 @@ const CourseContent = () => {
   };
 
   const handleNext = () => {
-    successEditCourse.open();
+    setShowSuccessModal(true);
   };
 
   const { data: list_lecture } = useGetAuth(
@@ -290,6 +289,32 @@ const CourseContent = () => {
     </div>
   );
 
+  const successModalContent = (
+    <div className="flex flex-col items-center gap-4 py-2">
+      <div className="flex items-center justify-center w-12 h-12 rounded-full bg-green-100">
+        <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+      <p className="text-center text-sm font-semibold text-gray-800">Course berhasil disimpan!</p>
+      <p className="text-center text-xs text-gray-500">Apa yang ingin kamu lakukan selanjutnya?</p>
+      <div className="flex gap-3 w-full">
+        <button
+          onClick={() => setShowSuccessModal(false)}
+          className="flex-1 border-2 border-[#338750] text-[#338750] font-bold text-xs py-2 rounded-xl hover:bg-[#338750] hover:text-white transition-colors"
+        >
+          Lanjutkan Perubahan
+        </button>
+        <button
+          onClick={() => router.push(`/courses/${params.id_course}`)}
+          className="flex-1 border-2 border-blue-900 bg-blue-900 text-white font-bold text-xs py-2 rounded-xl hover:brightness-90 transition-colors"
+        >
+          Kembali ke Course
+        </button>
+      </div>
+    </div>
+  );
+
   const cancelModalContent = (
     <div className="flex flex-col items-center gap-4 py-2">
       <p className="text-center text-sm text-gray-700">
@@ -297,16 +322,16 @@ const CourseContent = () => {
       </p>
       <div className="flex gap-3 w-full">
         <button
-          onClick={() => setShowCancelModal(false)}
-          className="flex-1 border-2 border-dark-accent text-dark-accent font-bold text-xs py-2 rounded-xl hover:bg-dark-accent hover:text-white transition-colors"
-        >
-          Tetap Edit
-        </button>
-        <button
           onClick={handleConfirmCancel}
           className="flex-1 border-2 border-red-400 bg-red-400 text-white font-bold text-xs py-2 rounded-xl hover:brightness-90 transition-colors"
         >
           Buang Perubahan
+        </button>
+        <button
+          onClick={() => setShowCancelModal(false)}
+          className="flex-1 border-2 border-dark-accent text-dark-accent font-bold text-xs py-2 rounded-xl hover:bg-dark-accent hover:text-white transition-colors"
+        >
+          Tetap Edit
         </button>
       </div>
     </div>
@@ -315,6 +340,12 @@ const CourseContent = () => {
   return (
     <div>
       {content}
+      <Modal
+        label="Perubahan Tersimpan"
+        content={successModalContent}
+        isOpen={showSuccessModal}
+        close={() => setShowSuccessModal(false)}
+      />
       <Modal
         label="Konfirmasi Batal"
         content={cancelModalContent}
