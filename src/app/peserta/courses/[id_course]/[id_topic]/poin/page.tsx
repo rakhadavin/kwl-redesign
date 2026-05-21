@@ -1,6 +1,7 @@
 "use client";
 
 import { useGetAuthByStudentIdAndCourseId } from "@/app/lib/peserta/useCourses";
+import { useGetAuth } from "@/app/lib/api/useAuth";
 import Link from "next/link";
 import { useParams, usePathname, useRouter } from "next/navigation";
 
@@ -15,7 +16,10 @@ export default function CalculatePoin() {
     "poin"
   );
 
-  console.log(pathname)
+  const { data: topicData } = useGetAuth(`/api/course/topic/${id_topic}`, "topic");
+  const knowType = topicData?.["know"]?.[0]?.["type"];
+  const wtkType = topicData?.["wtk"]?.[0]?.["type"];
+  const learnedType = topicData?.["learned"]?.[0]?.["type"];
 
 
   return (
@@ -42,32 +46,58 @@ export default function CalculatePoin() {
             Mari hitung total poinmu
           </h2>
 
-          <div className="my-4 flex flex-col">
-            <div className="py-2 inline-flex text-left items-center shadow rounded-lg">
-              <img src="/know.png" width="54" />
-              <div className="px-4">
-                <h1 className="text-lg font-extrabold">Know</h1>
-                <h2 id="poin-know">{data?.know_score}</h2>
+          <div className="my-4 flex flex-col gap-2">
+            <div className="py-2 px-4 inline-flex text-left items-center justify-between shadow rounded-lg gap-6">
+              <div className="inline-flex items-center">
+                <img src="/know.png" width="54" />
+                <div className="px-4">
+                  <h1 className="text-lg font-extrabold">Know</h1>
+                  <h2 id="poin-know">{data?.know_score}</h2>
+                </div>
               </div>
+              {knowType && (
+                <Link href={`${pathname}/analisis/detail_submisi/know/${knowType}`}>
+                  <span className="text-xs text-dark-accent font-semibold underline hover:opacity-70">
+                    Analisis Submisi
+                  </span>
+                </Link>
+              )}
             </div>
 
-            <div className="py-2 inline-flex text-left items-center shadow rounded-lg">
-              <img src="/wtk.png" width="54" />
-              <div className="px-4">
-                <h1 className="text-lg font-extrabold">Want to Know</h1>
-                <h2 id="poin-wtk">{data?.wtk_score}</h2>
+            <div className="py-2 px-4 inline-flex text-left items-center justify-between shadow rounded-lg gap-6">
+              <div className="inline-flex items-center">
+                <img src="/wtk.png" width="54" />
+                <div className="px-4">
+                  <h1 className="text-lg font-extrabold">Want to Know</h1>
+                  <h2 id="poin-wtk">{data?.wtk_score}</h2>
+                </div>
               </div>
+              {wtkType && (
+                <Link href={`${pathname}/analisis/detail_submisi/wtk/${wtkType}`}>
+                  <span className="text-xs text-dark-accent font-semibold underline hover:opacity-70">
+                    Analisis Submisi
+                  </span>
+                </Link>
+              )}
             </div>
 
-            <div className="py-2 inline-flex text-left items-center shadow rounded-lg">
-              <img src="/learned.png" width="54" />
-              <div className="px-4">
-                <h1 className="text-lg font-extrabold">Learned</h1>
-                <h2 id="poin-learned">{data?.learned_score}</h2>
+            <div className="py-2 px-4 inline-flex text-left items-center justify-between shadow rounded-lg gap-6">
+              <div className="inline-flex items-center">
+                <img src="/learned.png" width="54" />
+                <div className="px-4">
+                  <h1 className="text-lg font-extrabold">Learned</h1>
+                  <h2 id="poin-learned">{data?.learned_score}</h2>
+                </div>
               </div>
+              {learnedType && (
+                <Link href={`${pathname}/analisis/detail_submisi/learned/${learnedType}`}>
+                  <span className="text-xs text-dark-accent font-semibold underline hover:opacity-70">
+                    Analisis Submisi
+                  </span>
+                </Link>
+              )}
             </div>
           </div>
-
 
           <button className="w-[160px] p-1 mt-4 shadow text-center bg-green-500 rounded">
             <a
@@ -77,23 +107,6 @@ export default function CalculatePoin() {
               back to course
             </a>
           </button>
-
-  
-          
-        </div>
-
-        <div>
-        <Link href={`${pathname}/analisis/detail_submisi`}>
-              <div className="text-right">
-                <div className="m-2 shadow inline-flex bg-white rounded-l shadow">
-                  <img src="/submission_button/orange.png" width="50" />
-                  <button className="w-64 h-12 px-3.5 ps-10 text-dark-accent font-bold shadow">
-                    Analisis Submisi
-                  </button>
-                  <img src="/submission_button/kowl-orange.png" width="50" />
-                </div>
-              </div>
-            </Link>
         </div>
 
       </div>
