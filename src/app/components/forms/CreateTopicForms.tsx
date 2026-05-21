@@ -121,11 +121,12 @@ const form = useForm<FormValues>({
       <p className="text-main font-semibold font-sm py-2">
         Deskripsikan Topic Anda
       </p>
+      <p className="text-xs text-gray-400 mb-3"><span className="text-red-500">*</span> Wajib diisi</p>
 
       <form onSubmit={createTopicForms.create ? handleSubmit(onSubmit) : handleSubmit(updateTopic)}>
         <div className="mb-4">
           <label htmlFor="name" className="text-xs font-bold">
-            Nama Topic
+            Nama Topic <span className="text-red-500">*</span>
           </label>
           <input
             id="name"
@@ -140,7 +141,7 @@ const form = useForm<FormValues>({
 
         <div className="mb-4">
           <label htmlFor="description" className="text-xs font-bold">
-            Deskripsi Topic
+            Deskripsi Topic <span className="text-red-500">*</span>
           </label>
           <textarea
             id="description"
@@ -158,7 +159,7 @@ const form = useForm<FormValues>({
 
         <div className="mb-4">
           <label htmlFor="description" className="text-xs font-bold">
-            Learning Objective 
+            Learning Objective <span className="text-red-500">*</span>
           </label>
           <textarea
             id="learning_objective"
@@ -221,9 +222,10 @@ const form = useForm<FormValues>({
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 {/* Start Time Input */}
                 <div className="space-y-2">
-                  <label htmlFor="open_time" className="text-xs font-bold text-blue-700 flex items-center">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
+                  <label htmlFor="open_time" className="text-xs font-bold text-blue-700 flex items-center gap-1.5">
+                    <div className="w-2 h-2 bg-blue-500 rounded-full shrink-0"></div>
                     Waktu Mulai Topic
+                    <span className="text-gray-400 font-normal">(Opsional)</span>
                   </label>
                   <input
                     id="open_time"
@@ -268,9 +270,10 @@ const form = useForm<FormValues>({
                 </div>
 
                 <div className="space-y-2">
-                  <label htmlFor="close_time" className="text-xs font-bold text-green-700 flex items-center">
-                    <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                  <label htmlFor="close_time" className="text-xs font-bold text-green-700 flex items-center gap-1.5">
+                    <div className="w-2 h-2 bg-green-500 rounded-full shrink-0"></div>
                     Waktu Berakhir Topic
+                    <span className="text-gray-400 font-normal">(Opsional)</span>
                   </label>
                   <input
                     id="close_time"
