@@ -7,7 +7,6 @@ import { usePostAuth } from "@/app/lib/api/useAuth";
 
 import useCreatePGKnowForms from "@/app/hooks/useCreatePGKnow";
 import useSuccessCreateKnow from "@/app/hooks/useSuccessCreateKnow";
-import useChooseKnowType from "@/app/hooks/useChooseKnowType";
 
 type Soal = {
   question: string;
@@ -29,8 +28,7 @@ const EMPTY_SOAL: Soal = {
 const CreatePGKnowForms = () => {
   const createPGKnowForms = useCreatePGKnowForms();
   const successCreateKnow = useSuccessCreateKnow();
-  const chooseKnowType    = useChooseKnowType();
-  const [currentIdx, setCurrentIdx]   = useState(0);
+  const [currentIdx, setCurrentIdx] = useState(0);
 
   const form = useForm<FormValues>({ defaultValues: { soal: [{ ...EMPTY_SOAL }] } });
   const { register, control, handleSubmit, formState: { errors } } = form;
@@ -38,15 +36,10 @@ const CreatePGKnowForms = () => {
 
   const { mutate, isPending } = usePostAuth("/api/know/quiz", "lecturer");
 
-  const handleBack = () => {
-    createPGKnowForms.close();
-    chooseKnowType.open(createPGKnowForms.topicId);
-  };
-
   const onSubmit = (data: FormValues) => {
     mutate(
       { body: { questions: data.soal, type: "quiz", topic: createPGKnowForms.topicId } },
-      { onSuccess: () => { successCreateKnow.open(); createPGKnowForms.close(); } }
+      { onSuccess: () => { successCreateKnow.open(); createPGKnowForms.close(); setTimeout(() => window.location.reload(), 1500); } }
     );
   };
 
@@ -149,10 +142,19 @@ const CreatePGKnowForms = () => {
             {errors?.soal?.[i]?.correct_option && <p className="text-xs text-red-500 mt-1">{errors.soal[i]?.correct_option?.message}</p>}
           </div>
 
-          <div>
+          <div className="p-3 rounded-lg border" style={{ backgroundColor: 'rgba(255, 130, 39, 0.3)', borderColor: '#FF8227' }}>
             <label className="block text-xs font-semibold text-gray-600 mb-1">Poin</label>
+            <p className="text-xs text-gray-600 mb-1">Masukkan nilai poin antara 0 - 100</p>
             <input
-              {...register(`soal.${i}.score`, { required: "Poin harus diisi", pattern: { value: /^[0-9]*$/, message: "Poin harus berupa angka" } })}
+              {...register(`soal.${i}.score`, {
+                required: "Poin harus diisi",
+                pattern: { value: /^[0-9]*$/, message: "Poin harus berupa angka" },
+                validate: (value) => {
+                  const num = Number(value);
+                  if (isNaN(num) || num < 0 || num > 100) return "Poin harus antara 0 - 100";
+                  return true;
+                },
+              })}
               type="text"
               placeholder="0"
               className="w-full px-3 py-2.5 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -164,13 +166,6 @@ const CreatePGKnowForms = () => {
 
       {/* ── Footer buttons ── */}
       <div className="flex justify-end gap-3 pt-2">
-        <button
-          type="button"
-          onClick={handleBack}
-          className="px-5 py-2 text-sm font-semibold rounded-lg border border-red-400 text-red-500 hover:bg-red-50 transition-colors"
-        >
-          Batal
-        </button>
         <button
           type="submit"
           disabled={isPending}

@@ -19,7 +19,7 @@ import CourseDetailButton from "@/app/components/button/CourseDetailButton";
 import useCreateTopicForms from "@/app/hooks/useCreateTopicForms";
 
 import { useParams } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import EditEssayKnowForms from "@/app/components/forms/EditEssayKnowForms";
 import DeleteTopicConfirmation from "@/app/components/message/DeleteTopicConfirmation";
@@ -43,7 +43,19 @@ export default function MyCoursesPage() {
   const { data, error } = useGetAuth(`/api/course/${params.id_course}`, "course name");
   const createTopicForms = useCreateTopicForms();
   const [selectedTopicId, setSelectedTopicId] = useState<number | undefined>(undefined);
-  
+
+  useEffect(() => {
+    const saved = sessionStorage.getItem(`selectedTopicId_${params.id_course}`);
+    if (saved) setSelectedTopicId(Number(saved));
+  }, [params.id_course]);
+
+  const handleSelectTopic = (id: number | undefined) => {
+    setSelectedTopicId(id);
+    const key = `selectedTopicId_${params.id_course}`;
+    if (id !== undefined) sessionStorage.setItem(key, String(id));
+    else sessionStorage.removeItem(key);
+  };
+
   return (
     <main className="py-5">
       <div className="flex  flex-col  w-full align-middle justify-center items-center gap-2 pb-5">
@@ -94,7 +106,7 @@ export default function MyCoursesPage() {
           showAddButton={true}
           onAddTopic={() => createTopicForms.open()}
           selectedTopicId={selectedTopicId}
-          onSelectTopic={setSelectedTopicId}
+          onSelectTopic={handleSelectTopic}
         />
         {/* Detail Topic Container */}
         <TopicDetailsContainer topicId={selectedTopicId} />

@@ -9,7 +9,6 @@ import { usePostAuth } from "@/app/lib/api/useAuth";
 
 import useCreateEssayKnowForms from "@/app/hooks/useCreateEssayKnowForms";
 import useSuccessCreateKnow from "@/app/hooks/useSuccessCreateKnow";
-import useChooseKnowType from "@/app/hooks/useChooseKnowType";
 
 type FormValues = {
   question: string;
@@ -19,16 +18,11 @@ type FormValues = {
 const CreateEssayKnowForms = () => {
   const createEssayKnowForms = useCreateEssayKnowForms();
   const successCreateKnow = useSuccessCreateKnow();
-  const chooseKnowType = useChooseKnowType();
-
-  const handleBack = () => {
-    createEssayKnowForms.close();
-    chooseKnowType.open(createEssayKnowForms.topicId);
-  };
 
   const handleNext = () => {
     successCreateKnow.open();
     createEssayKnowForms.close();
+    setTimeout(() => window.location.reload(), 1500);
   };
 
   const form = useForm<FormValues>();
@@ -77,10 +71,11 @@ const CreateEssayKnowForms = () => {
           <p className="error">{errors.question?.message}</p>
         </div>
 
-        <div className="mb-4">
+        <div className="mb-4 p-3 rounded-lg border" style={{ backgroundColor: 'rgba(255, 130, 39, 0.3)', borderColor: '#FF8227' }}>
           <label htmlFor="score" className="text-xs font-bold">
             Poin
           </label>
+          <p className="text-xs text-gray-600 mb-1">Masukkan nilai poin antara 0 - 100</p>
           <input
             id="score"
             {...register("score", {
@@ -89,6 +84,11 @@ const CreateEssayKnowForms = () => {
                 value: /^[0-9]*$/,
                 message: "poin harus berupa angka",
               },
+              validate: (value) => {
+                const num = Number(value);
+                if (isNaN(num) || num < 0 || num > 100) return "Poin harus antara 0 - 100";
+                return true;
+              },
             })}
             type="text"
             className="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-sm "
@@ -96,15 +96,6 @@ const CreateEssayKnowForms = () => {
           <p className="error">{errors.score?.message}</p>
         </div>
         <div className="btn-group flex gap-2">
-          <button
-            type="button"
-            disabled={isPending}
-            className="w-full bg-transparent border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white font-bold text-xs py-2 px-2 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed"
-            onClick={handleSubmit(handleBack)}
-          >
-            Kembali
-          </button>
-
           <button
             type="button"
             disabled={isPending}

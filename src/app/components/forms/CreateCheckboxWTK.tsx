@@ -8,9 +8,6 @@ import { usePostAuth } from "@/app/lib/api/useAuth";
 import WidthButton from "../button/WidthButton";
 
 import useCreateCheckboxWTKForms from "@/app/hooks/useCreateCheckboxWTK";
-import ChooseWTKType from "../quiz/ChooseWTKType";
-import usePreReadingMaterialForms from "@/app/hooks/usePreReadingMaterialForms";
-import useChooseWTKType from "@/app/hooks/useChooseWTKType";
 
 type FormValues = {
   question: string;
@@ -23,8 +20,6 @@ type FormValues = {
 
 const CreateCheckboxWTKForms = () => {
   const createCheckboxWTKForms = useCreateCheckboxWTKForms();
-  const chooseWTKType = useChooseWTKType();
-  const preReadingMaterialForms = usePreReadingMaterialForms();
 
   const form = useForm<FormValues>({
     defaultValues: {
@@ -61,14 +56,9 @@ const CreateCheckboxWTKForms = () => {
     );
   };
 
-  const handleBack = () => {
-    createCheckboxWTKForms.close();
-    chooseWTKType.open(createCheckboxWTKForms.topicId);
-  };
-
   const handleNext = () => {
-    preReadingMaterialForms.open(createCheckboxWTKForms.topicId); // Buka modal sukses
     createCheckboxWTKForms.close();
+    window.location.reload();
   };
 
   const content = (
@@ -155,10 +145,11 @@ const CreateCheckboxWTKForms = () => {
           </div>
         </div>
 
-        <div className="mb-4">
+        <div className="mb-4 p-3 rounded-lg border" style={{ backgroundColor: 'rgba(255, 130, 39, 0.3)', borderColor: '#FF8227' }}>
           <label htmlFor="score" className="text-xs font-bold">
             Poin
           </label>
+          <p className="text-xs text-gray-600 mb-1">Masukkan nilai poin antara 0 - 100</p>
           <input
             id="score"
             {...register("score", {
@@ -166,6 +157,11 @@ const CreateCheckboxWTKForms = () => {
               pattern: {
                 value: /^[0-9]*$/,
                 message: "poin harus berupa angka",
+              },
+              validate: (value) => {
+                const num = Number(value);
+                if (isNaN(num) || num < 0 || num > 100) return "Poin harus antara 0 - 100";
+                return true;
               },
             })}
             type="text"
@@ -175,15 +171,6 @@ const CreateCheckboxWTKForms = () => {
         </div>
 
         <div className="btn-group flex gap-2">
-          <button
-            type="button"
-            disabled={isPending}
-            className="w-full bg-transparent border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white font-bold text-xs py-2 px-2 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed"
-            onClick={handleSubmit(handleBack)}
-          >
-            Kembali
-          </button>
-
           <button
             type="button"
             disabled={isPending}

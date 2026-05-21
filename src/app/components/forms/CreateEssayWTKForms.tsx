@@ -7,10 +7,6 @@ import Modal from "../modals/Modal";
 import { usePostAuth } from "@/app/lib/api/useAuth";
 
 import useCreateEssayWTKForms from "@/app/hooks/useCreateEssayWTKForms";
-import useSuccessCreateWTK from "@/app/hooks/useSuccessCreateWTK";
-import useChooseWTKType from "@/app/hooks/useChooseWTKType";
-import usePreReadingMaterialForms from "@/app/hooks/usePreReadingMaterialForms";
-import PreReadingMaterialForms from "./PreReadingMaterialForms";
 
 type FormValues = {
   question: string;
@@ -19,18 +15,10 @@ type FormValues = {
 
 const CreateEssayWTKForms = () => {
   const createEssayWTKForms = useCreateEssayWTKForms();
-  const successCreateWTK = useSuccessCreateWTK();
-  const chooseWTKType = useChooseWTKType();
-  const preReadingMaterialForms = usePreReadingMaterialForms();
-
-  const handleBack = () => {
-    createEssayWTKForms.close();
-    chooseWTKType.open(createEssayWTKForms.topicId);
-  };
 
   const handleNext = () => {
-    preReadingMaterialForms.open(createEssayWTKForms.topicId);
     createEssayWTKForms.close();
+    window.location.reload();
   };
 
   const form = useForm<FormValues>();
@@ -78,10 +66,11 @@ const CreateEssayWTKForms = () => {
           <p className="error">{errors.question?.message}</p>
         </div>
 
-        <div className="mb-4">
+        <div className="mb-4 p-3 rounded-lg border" style={{ backgroundColor: 'rgba(255, 130, 39, 0.3)', borderColor: '#FF8227' }}>
           <label htmlFor="score" className="text-xs font-bold">
             Poin
           </label>
+          <p className="text-xs text-gray-600 mb-1">Masukkan nilai poin antara 0 - 100</p>
           <input
             id="score"
             {...register("score", {
@@ -90,6 +79,11 @@ const CreateEssayWTKForms = () => {
                 value: /^[0-9]*$/,
                 message: "poin harus berupa angka",
               },
+              validate: (value) => {
+                const num = Number(value);
+                if (isNaN(num) || num < 0 || num > 100) return "Poin harus antara 0 - 100";
+                return true;
+              },
             })}
             type="text"
             className="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-sm "
@@ -97,15 +91,6 @@ const CreateEssayWTKForms = () => {
           <p className="error">{errors.score?.message}</p>
         </div>
         <div className="btn-group flex gap-2">
-          <button
-            type="button"
-            disabled={isPending}
-            className="w-full bg-transparent border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white font-bold text-xs py-2 px-2 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed"
-            onClick={handleSubmit(handleBack)}
-          >
-            Kembali
-          </button>
-
           <button
             type="button"
             disabled={isPending}

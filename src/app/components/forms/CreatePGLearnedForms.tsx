@@ -7,7 +7,6 @@ import { usePostAuth } from "@/app/lib/api/useAuth";
 
 import useCreatePGLearnedForms from "@/app/hooks/useCreatePGLearned";
 import useSuccessCreateLearned from "@/app/hooks/useSuccessCreateLearned";
-import useChooseLearnedType from "@/app/hooks/useChooseLearnedType";
 
 type Soal = {
   question: string;
@@ -29,7 +28,6 @@ const EMPTY_SOAL: Soal = {
 const CreatePGLearnedForms = () => {
   const createPGLearnedForms = useCreatePGLearnedForms();
   const successCreateLearned = useSuccessCreateLearned();
-  const chooseLearnedType    = useChooseLearnedType();
   const [currentIdx, setCurrentIdx] = useState(0);
 
   const form = useForm<FormValues>({ defaultValues: { soal: [{ ...EMPTY_SOAL }] } });
@@ -38,15 +36,10 @@ const CreatePGLearnedForms = () => {
 
   const { mutate, isPending } = usePostAuth("/api/learned/quiz", "lecturer");
 
-  const handleBack = () => {
-    createPGLearnedForms.close();
-    chooseLearnedType.open(createPGLearnedForms.topicId);
-  };
-
   const onSubmit = (data: FormValues) => {
     mutate(
       { body: { questions: data.soal, type: "quiz", topic: createPGLearnedForms.topicId } },
-      { onSuccess: () => { successCreateLearned.open(); createPGLearnedForms.close(); } }
+      { onSuccess: () => { successCreateLearned.open(); createPGLearnedForms.close(); setTimeout(() => window.location.reload(), 1500); } }
     );
   };
 
@@ -149,10 +142,19 @@ const CreatePGLearnedForms = () => {
             {errors?.soal?.[i]?.correct_option && <p className="text-xs text-red-500 mt-1">{errors.soal[i]?.correct_option?.message}</p>}
           </div>
 
-          <div>
+          <div className="p-3 rounded-lg border" style={{ backgroundColor: 'rgba(255, 130, 39, 0.3)', borderColor: '#FF8227' }}>
             <label className="block text-xs font-semibold text-gray-600 mb-1">Poin</label>
+            <p className="text-xs text-gray-600 mb-1">Masukkan nilai poin antara 0 - 100</p>
             <input
-              {...register(`soal.${i}.score`, { required: "Poin harus diisi", pattern: { value: /^[0-9]*$/, message: "Poin harus berupa angka" } })}
+              {...register(`soal.${i}.score`, {
+                required: "Poin harus diisi",
+                pattern: { value: /^[0-9]*$/, message: "Poin harus berupa angka" },
+                validate: (value) => {
+                  const num = Number(value);
+                  if (isNaN(num) || num < 0 || num > 100) return "Poin harus antara 0 - 100";
+                  return true;
+                },
+              })}
               type="text"
               placeholder="0"
               className="w-full px-3 py-2.5 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -164,13 +166,6 @@ const CreatePGLearnedForms = () => {
 
       {/* ── Footer ── */}
       <div className="flex justify-end gap-3 pt-2">
-        <button
-          type="button"
-          onClick={handleBack}
-          className="px-5 py-2 text-sm font-semibold rounded-lg border border-red-400 text-red-500 hover:bg-red-50 transition-colors"
-        >
-          Batal
-        </button>
         <button
           type="submit"
           disabled={isPending}

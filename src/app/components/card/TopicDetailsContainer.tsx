@@ -145,7 +145,7 @@ const TopicDetailsContainer = ({ topicId }: TopicDetailsContainerProps) => {
   }
 
   return (
-    <section className=' px-4 py-4 rounded-md bg-[#D1D2D7]/20 flex flex-col gap-8 w-full items-center justify-center h-full ' style={{ maxWidth: "var(--search-lg-width, 800px)" }}>
+    <section className=' px-4 py-4 rounded-md bg-[#D1D2D7]/20 border border-blue-400 flex flex-col gap-8 w-full items-center justify-center h-full ' style={{ maxWidth: "var(--search-lg-width, 800px)" }}>
 
       {/* header */}
       <div className='flex flex-col  w-full '>
@@ -218,7 +218,7 @@ const TopicDetailsContainer = ({ topicId }: TopicDetailsContainerProps) => {
 
       <div className='mt-4 w-full flex flex-col gap-4'>
         <h3 className='text-blue-900 font-bold text-xl text-start uppercase tracking-wide'>KWL QUESTIONS</h3>
-        <div className="flex flex-col mb-8 border border-gray-200 shadow-md w-full rounded-md p-4 gap-2 items-center justify-center min-h-[200px]">
+        <div className="flex flex-col mb-8 border border-gray-200 bg-white shadow-md w-full rounded-md p-4 gap-2 items-center justify-center min-h-[200px]">
           {knowId === 0 && wtkId === 0 && learnedId === 0 && (
             <p className="text-gray-400 text-sm mb-2">Belum ada pertanyaan KWL untuk topik ini.</p>
           )}

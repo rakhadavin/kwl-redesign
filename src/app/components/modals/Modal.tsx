@@ -30,8 +30,7 @@ const Modal: React.FC<ModalProps> = ({ label, content, isOpen, close }) => {
 
   return (
     <div className="flex items-center justify-center fixed inset-0 z-50 bg-black/60">
-      <div className="relative w-[500px] md:w-[80%] lg:w-[500px] mx-auto h-auto max-h-[500px] overflow-y-scroll scrollbar-none">
-        {/*  w-[400px] md:w-[500px] lg:w-[500px] */}
+      <div className="relative w-[500px] md:w-[80%] lg:w-[500px] mx-auto">
         <div
           className={`translate duration-600 h-full ${
             showModal
@@ -39,8 +38,8 @@ const Modal: React.FC<ModalProps> = ({ label, content, isOpen, close }) => {
               : "translate-y-full opacity 10"
           }`}
         >
-          <div className="w-full h-auto rounded-xl relative flex flex-col bg-white">
-            <header className="h-[60px] flex items-center p-6 rounded-t justify-center relative border-b">
+          <div className="w-full rounded-xl relative flex flex-col bg-white max-h-[90vh] overflow-hidden">
+            <header className="h-[60px] flex items-center p-6 rounded-t justify-center relative border-b shrink-0">
               <div
                 onClick={handleClose}
                 className="p-3 absolute left-3 hover:bg-gray-300 rounded-full cursor-pointer"
@@ -63,7 +62,7 @@ const Modal: React.FC<ModalProps> = ({ label, content, isOpen, close }) => {
               <h2 className="text-lg font-bold text-dark-accent">{label}</h2>
             </header>
 
-            <section className="m-10">{content}</section>
+            <section className="overflow-y-auto flex-1 mx-10 my-6 scrollbar-none">{content}</section>
           </div>
         </div>
       </div>

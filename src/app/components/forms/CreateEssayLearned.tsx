@@ -9,7 +9,6 @@ import { usePostAuth } from "@/app/lib/api/useAuth";
 
 import useCreateEssayLearnedForms from "@/app/hooks/useCreateEssayLearnedForms";
 import useSuccessCreateLearned from "@/app/hooks/useSuccessCreateLearned";
-import useChooseLearnedType from "@/app/hooks/useChooseLearnedType";
 
 type FormValues = {
   question: string;
@@ -19,16 +18,11 @@ type FormValues = {
 const CreateEssayLearnedForms = () => {
   const createEssayLearnedForms = useCreateEssayLearnedForms();
   const successCreateLearned = useSuccessCreateLearned();
-  const chooseLearnedType = useChooseLearnedType();
-
-  const handleBack = () => {
-    createEssayLearnedForms.close();
-    chooseLearnedType.open(createEssayLearnedForms.topicId);
-  };
 
   const handleNext = () => {
     successCreateLearned.open();
     createEssayLearnedForms.close();
+    setTimeout(() => window.location.reload(), 1500);
   };
 
   const form = useForm<FormValues>();
@@ -76,10 +70,11 @@ const CreateEssayLearnedForms = () => {
           <p className="error">{errors.question?.message}</p>
         </div>
 
-        <div className="mb-4">
+        <div className="mb-4 p-3 rounded-lg border" style={{ backgroundColor: 'rgba(255, 130, 39, 0.3)', borderColor: '#FF8227' }}>
           <label htmlFor="score" className="text-xs font-bold">
             Poin
           </label>
+          <p className="text-xs text-gray-600 mb-1">Masukkan nilai poin antara 0 - 100</p>
           <input
             id="score"
             {...register("score", {
@@ -87,6 +82,11 @@ const CreateEssayLearnedForms = () => {
               pattern: {
                 value: /^[0-9]*$/,
                 message: "poin harus berupa angka",
+              },
+              validate: (value) => {
+                const num = Number(value);
+                if (isNaN(num) || num < 0 || num > 100) return "Poin harus antara 0 - 100";
+                return true;
               },
             })}
             type="text"
@@ -96,15 +96,6 @@ const CreateEssayLearnedForms = () => {
         </div>
 
         <div className="btn-group flex gap-2">
-          <button
-            type="button"
-            disabled={isPending}
-            className="w-full bg-transparent border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white font-bold text-xs py-2 px-2 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed"
-            onClick={handleSubmit(handleBack)}
-          >
-            Kembali
-          </button>
-
           <button
             type="button"
             disabled={isPending}
