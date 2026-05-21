@@ -18,7 +18,7 @@ export default function PreReadingPage() {
   const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
   const file = `${BASE_URL}${data?.file}`;
 
-  const wtk = topic.data?.wtk[0];
+  const wtk = topic.data?.wtk?.[0];
 
   const getUrl = (wtk: any) => {
     if (wtk?.type === "reflection") {

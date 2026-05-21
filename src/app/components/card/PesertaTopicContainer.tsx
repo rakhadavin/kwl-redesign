@@ -36,7 +36,8 @@ interface PesertaTopicContainerProps {
   data: Topic[];
   isLoading?: boolean;
   courseId: string | string[];
-  generateLink: (topic: Topic) => string;
+  onSelectTopic?: (topic: Topic) => void;
+  selectedTopicId?: number;
   showSearch?: boolean;
 }
 
@@ -44,7 +45,8 @@ const PesertaTopicContainer: React.FC<PesertaTopicContainerProps> = ({
   data,
   isLoading = false,
   courseId,
-  generateLink,
+  onSelectTopic,
+  selectedTopicId,
   showSearch = false,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -53,12 +55,11 @@ const PesertaTopicContainer: React.FC<PesertaTopicContainerProps> = ({
 
   const filteredData = useMemo(() => {
     if (!searchTerm || !data) return data || [];
-    
+
     return data.filter(topic => {
       const name = topic.topic_data.name?.toLowerCase() || "";
       const description = topic.topic_data.description?.toLowerCase() || "";
       const search = searchTerm.toLowerCase();
-      
       return name.includes(search) || description.includes(search);
     });
   }, [data, searchTerm]);
@@ -68,26 +69,16 @@ const PesertaTopicContainer: React.FC<PesertaTopicContainerProps> = ({
   const endIndex = startIndex + itemsPerPage;
   const currentData = filteredData?.slice(startIndex, endIndex) || [];
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [data]);
-
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [searchTerm]);
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
+  useEffect(() => { setCurrentPage(1); }, [data]);
+  useEffect(() => { setCurrentPage(1); }, [searchTerm]);
 
   if (isLoading) {
     return <PesertaTopicSkeleton count={itemsPerPage} />;
   }
 
   return (
-    <div className="flex flex-col min-h-screen gap-4">
+    <div className="flex flex-col h-max gap-4 bg-gray-100 px-6 py-4 rounded-md">
       <div className="flex-1">
-        {/* Search Bar - conditionally rendered */}
         {showSearch && (
           <div className="flex justify-center mb-6">
             <SearchCourse
@@ -98,7 +89,6 @@ const PesertaTopicContainer: React.FC<PesertaTopicContainerProps> = ({
           </div>
         )}
 
-        {/* No data state */}
         {!data || data.length === 0 ? (
           <div className="flex flex-col items-center justify-center min-h-[300px] text-gray-500">
             <div className="text-6xl mb-4">📖</div>
@@ -116,15 +106,15 @@ const PesertaTopicContainer: React.FC<PesertaTopicContainerProps> = ({
             </p>
           </div>
         ) : (
-          <div className="mt-10">
-            {/* Topic Cards */}
+              <div className="mt-10">
             <div className="space-y-2 mb-6">
-              {currentData.map((topic, index) => (
+                  {currentData.map((topic) => (
                 <div key={topic.topic_data.id}>
                   <MediumCard
                     title={topic.topic_data.name}
                     subtitle={topic.topic_data.description}
-                    link={generateLink(topic)}
+                        onClick={() => onSelectTopic?.(topic)}
+                        isSelected={selectedTopicId === topic.topic_data.id}
                   />
                 </div>
               ))}
@@ -133,13 +123,12 @@ const PesertaTopicContainer: React.FC<PesertaTopicContainerProps> = ({
         )}
       </div>
 
-      {/* Pagination - only show if there's data */}
       {filteredData && filteredData.length > itemsPerPage && (
         <div className="mt-auto">
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}
-            onPageChange={handlePageChange}
+            onPageChange={(page) => setCurrentPage(page)}
             showInfo={true}
             totalItems={filteredData.length}
             itemsPerPage={itemsPerPage}
