@@ -36,7 +36,7 @@ const CreatePGLearnedForms = () => {
   const { register, control, handleSubmit, formState: { errors } } = form;
   const { fields, append, remove } = useFieldArray({ control, name: "soal" });
 
-  const { mutate } = usePostAuth("/api/learned/quiz", "lecturer");
+  const { mutate, isPending } = usePostAuth("/api/learned/quiz", "lecturer");
 
   const handleBack = () => {
     createPGLearnedForms.close();
@@ -173,12 +173,29 @@ const CreatePGLearnedForms = () => {
         </button>
         <button
           type="submit"
-          className="flex items-center gap-2 px-5 py-2 text-sm font-bold rounded-lg bg-blue-900 text-white hover:bg-blue-800 transition-colors"
+          disabled={isPending}
+          className={`flex items-center gap-2 px-5 py-2 text-sm font-bold rounded-lg transition-colors ${
+            isPending
+              ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+              : "bg-blue-900 text-white hover:bg-blue-800"
+          }`}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M17 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7l-4-4zm-5 16a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm3-10H5V5h10v4z"/>
-          </svg>
-          SIMPAN
+          {isPending ? (
+            <>
+              <svg className="animate-spin w-4 h-4 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+              </svg>
+              Loading...
+            </>
+          ) : (
+            <>
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7l-4-4zm-5 16a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm3-10H5V5h10v4z"/>
+              </svg>
+              SIMPAN
+            </>
+          )}
         </button>
       </div>
     </form>

@@ -123,7 +123,7 @@ export default function KnowPageQuiz() {
                 currentNum === index + 1 ? "" : "hidden"
               } flex items-center justify-center text-center`}
             >
-              <div className="h-auto w-96 w-[90%] md:w-[80%] lg:w-[800px] relative bg-white rounded-lg shadow p-8 justify-center">
+              <div className="w-[90%] md:w-[80%] lg:w-[800px] relative bg-white rounded-lg shadow flex flex-col max-h-[88vh]">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -143,7 +143,8 @@ export default function KnowPageQuiz() {
                   />
                 </svg>
 
-                <div className="py-4 inline-flex text-left items-center">
+                {/* header — fixed, does not scroll */}
+                <div className="py-4 px-8 inline-flex text-left items-center shrink-0">
                   <img src={"/know.png"} width="64" />
                   <div className="px-4">
                     <h1 className="text-xl font-extrabold">{"Know"}</h1>
@@ -151,27 +152,30 @@ export default function KnowPageQuiz() {
                   </div>
                 </div>
 
-                <div id="question" className="my-2 mb-6">
-                  <span className="text-sm"> {content?.question} </span>
+                {/* scrollable content area */}
+                <div className="flex-1 overflow-y-auto px-8 pb-2">
+                  <div id="question" className="my-2 mb-6">
+                    <span className="text-sm"> {content?.question} </span>
+                  </div>
+
+                  <QuizOptionContainer
+                    contents={content?.options}
+                    onSelect={handleOptionChange}
+                  />
                 </div>
 
-                {/* options */}
-                <QuizOptionContainer
-                  contents={content?.options}
-                  onSelect={handleOptionChange}
-                />
-
-                <div className="inline-flex text-left items-center">
+                {/* navigation buttons — always visible at bottom */}
+                <div className="shrink-0 px-8 py-5 flex gap-4 justify-center border-t border-gray-100">
                   <button
                     onClick={decrement}
-                    className="text-xs text-white font-bold w-[120px] p-1 mt-4 ml-8 shadow text-center bg-yellow-400 rounded"
+                    className="text-xs text-white font-bold w-[120px] py-2 shadow text-center bg-yellow-400 rounded"
                   >
                     kembali
                   </button>
 
                   <button
                     onClick={increment}
-                    className="text-xs text-white font-bold w-[120px] p-1 mt-4 ml-8 shadow text-center bg-green-500 rounded"
+                    className="text-xs text-white font-bold w-[120px] py-2 shadow text-center bg-green-500 rounded"
                   >
                     selanjutnya
                   </button>
