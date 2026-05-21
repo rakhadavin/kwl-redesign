@@ -226,7 +226,7 @@ const EditCheckboxWTKFormsChild = ({ poll }: any) => {
             className="mb-1 w-full bg-transparent border-2 border-dark-accent hover:bg-dark-accent hover:text-white text-dark-accent font-bold text-xs py-2 px-2 rounded-xl"
             onClick={handleSubmit(onSubmit)}
           >
-            simpan
+            Simpan
           </button>
         </div>
       </form>

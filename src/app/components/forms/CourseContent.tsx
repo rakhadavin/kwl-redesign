@@ -281,7 +281,7 @@ const CourseContent = () => {
                 </svg>
                 Loading...
               </>
-            ) : "simpan"}
+            ) : "Simpan"}
           </button>
 
         </div>

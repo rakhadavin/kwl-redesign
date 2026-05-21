@@ -145,7 +145,7 @@ const AddRewardsForms = () => {
           className="mb-1 w-full bg-dark-accent border-2 hover:bg-white hover:text-dark-accent hover:border-dark-accent text-white font-bold text-xs py-2 px-2 rounded-xl"
           onClick={handleSubmit(onSubmit)}
         >
-          simpan reward
+          Simpan Reward
         </button>
       </form>
     </>

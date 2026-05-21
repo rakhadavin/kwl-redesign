@@ -111,7 +111,7 @@ const EditPGKnowFormsChild = ({ quiz }: any) => {
     return pertanyaanValues[index] !== "";
   };
 
-  const { mutate } = usePutAuth("/api/know/quiz", "edit pg know quiz");
+  const { mutate, isPending } = usePutAuth("/api/know/quiz", "edit pg know quiz");
 
   const onSubmit = (data: FormValues) => {
   
@@ -341,19 +341,35 @@ const EditPGKnowFormsChild = ({ quiz }: any) => {
         {Array.from({ length: 10 }, (_, index) => (
           <div key={index}>{questionContent(index)}</div>
         ))}
-        <div className="btn-group flex flex-col">
+        <div className="btn-group flex gap-2">
           <button
-            className="mb-1 w-full bg-dark-accent border-2 hover:bg-white hover:text-dark-accent hover:border-dark-accent text-white font-bold text-xs py-2 px-2 rounded-xl"
+            type="button"
+            disabled={isPending}
+            className="w-full bg-transparent border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white font-bold text-xs py-2 px-2 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={handleSubmit(handleBack)}
           >
             Kembali
           </button>
 
           <button
-            className="mb-1 w-full bg-transparent border-2 border-dark-accent hover:bg-dark-accent hover:text-white text-dark-accent font-bold text-xs py-2 px-2 rounded-xl"
+            type="button"
+            disabled={isPending}
+            className={`w-full border-2 font-bold text-xs py-2 px-2 rounded-xl transition-colors flex items-center justify-center gap-1 ${
+              isPending
+                ? "bg-gray-300 border-gray-300 text-gray-500 cursor-not-allowed"
+                : "bg-[#338750] border-[#338750] hover:bg-[#2a6e40] hover:border-[#2a6e40] text-white"
+            }`}
             onClick={handleSubmit(onSubmit)}
           >
-            simpan
+            {isPending ? (
+              <>
+                <svg className="animate-spin w-3 h-3 shrink-0" viewBox="0 0 24 24" fill="none">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                </svg>
+                Loading...
+              </>
+            ) : "Simpan"}
           </button>
         </div>
       </form>

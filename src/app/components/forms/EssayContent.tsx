@@ -105,20 +105,20 @@ const EssayContent: React.FC<EssayContentProps> = ({
           />
           <p className="error">{errors.score?.message}</p>
         </div>
-        <div className="flex justify-between">
+        <div className="flex gap-2">
           <button
             type="button"
-            className="mb-10 w-32 h-7 h-[30px] rounded rounded-md bg-dark-accent border-2 border-dark-accent hover:bg-transparent hover:text-dark-accent hover:border-dark-accent text-white font-bold text-xs py-2 px-2"
+            className="w-full bg-transparent border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white font-bold text-xs py-2 px-2 rounded-xl"
             onClick={handleSubmit(handleBack)}
           >
             Kembali
           </button>
           <button
             type="submit"
-            className="mb-10 w-32 h-7 h-[30px] rounded rounded-md bg-green-accent border-2 border-green-accent hover:bg-transparent hover:text-green-accent hover:border-green-accent text-white font-bold text-xs py-2 px-2"
+            className="w-full bg-[#338750] border-2 border-[#338750] hover:bg-[#2a6e40] hover:border-[#2a6e40] text-white font-bold text-xs py-2 px-2 rounded-xl"
             onClick={handleSubmit(onSubmit)}
           >
-            simpan
+            Simpan
           </button>
         </div>
         {/* <WidthButton

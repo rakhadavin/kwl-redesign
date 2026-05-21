@@ -226,7 +226,7 @@ const EditStudentForms = ({
                   disabled={mutation.isPending}
                   className="justify-center items-center px-16 py-3 mt-16 mr-7 ml-6 text-sm text-center text-white whitespace-nowrap rounded-lg bg-blue-950 max-md:px-5 max-md:mx-2.5 max-md:mt-10"
                 >
-                  simpan
+                  Simpan
                 </button>
 
                 <button

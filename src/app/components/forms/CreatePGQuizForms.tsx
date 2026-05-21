@@ -380,7 +380,7 @@ const CreatePGQuizForms = () => {
                   </svg>
                   Loading...
                 </>
-              ) : "simpan"}
+              ) : "Simpan"}
             </button>
           </div>
         </form>

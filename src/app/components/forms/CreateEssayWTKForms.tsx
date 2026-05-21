@@ -96,11 +96,11 @@ const CreateEssayWTKForms = () => {
           />
           <p className="error">{errors.score?.message}</p>
         </div>
-        <div className="btn-group flex flex-col">
+        <div className="btn-group flex gap-2">
           <button
             type="button"
             disabled={isPending}
-            className="mb-1 w-full bg-dark-accent border-2 hover:bg-white hover:text-dark-accent hover:border-dark-accent text-white font-bold text-xs py-2 px-2 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-transparent border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white font-bold text-xs py-2 px-2 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={handleSubmit(handleBack)}
           >
             Kembali
@@ -109,10 +109,10 @@ const CreateEssayWTKForms = () => {
           <button
             type="button"
             disabled={isPending}
-            className={`mb-1 w-full border-2 font-bold text-xs py-2 px-2 rounded-xl transition-colors flex items-center justify-center gap-1 ${
+            className={`w-full border-2 font-bold text-xs py-2 px-2 rounded-xl transition-colors flex items-center justify-center gap-1 ${
               isPending
                 ? "bg-gray-300 border-gray-300 text-gray-500 cursor-not-allowed"
-                : "bg-transparent border-dark-accent hover:bg-dark-accent hover:text-white text-dark-accent"
+                : "bg-[#338750] border-[#338750] hover:bg-[#2a6e40] hover:border-[#2a6e40] text-white"
             }`}
             onClick={handleSubmit(onSubmit)}
           >
@@ -124,7 +124,7 @@ const CreateEssayWTKForms = () => {
                 </svg>
                 Loading...
               </>
-            ) : "simpan"}
+            ) : "Simpan"}
           </button>
         </div>
       </form>

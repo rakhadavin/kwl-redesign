@@ -348,7 +348,7 @@ const form = useForm<FormValues>({
                 </svg>
                 Loading...
               </>
-            ) : "simpan"}
+            ) : "Simpan"}
           </button>
         </div>
       </form>
