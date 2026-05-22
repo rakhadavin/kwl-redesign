@@ -17,7 +17,6 @@ const DetailSubmissionKnowQuizPage = () => {
     const { data : session } = useSession();
     const { data: quiz_data } = useGetAuth(`/api/analysis/quiz-accuracy/know/${id_topic}`, "know accuracy");
 
-
     return (        
 
         <div className="flex flex-col items-center bg-white">

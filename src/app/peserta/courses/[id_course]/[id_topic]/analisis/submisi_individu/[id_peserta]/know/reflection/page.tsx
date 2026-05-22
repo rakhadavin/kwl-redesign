@@ -56,12 +56,9 @@ const ReflectionAnswerCard = ({
           <span className="text-sm"> {question} </span>
         </div>
 
-        <textarea
-          id="message"
-          rows={12}
-          className="block p-2.5 w-full text-sm rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 shadow-md"
-          value={reflection}
-        ></textarea>
+        <div className="block p-2.5 w-full text-sm rounded-lg border border-gray-100 bg-gray-50 shadow-sm text-left min-h-[200px] whitespace-pre-wrap">
+          {reflection}
+        </div>
 
         <button
           onClick={handleClick}

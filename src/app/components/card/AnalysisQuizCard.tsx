@@ -1,7 +1,13 @@
+type ChoiceProps = {
+    is_correct: boolean;
+    is_selected: boolean;
+};
+
 type QuizProps = {
     accuracy: string;
     question: string;
     index: number;
+    choices?: ChoiceProps[];
 };
 
 type QuizParentProps = {
@@ -13,15 +19,18 @@ const QuizParent: React.FC<QuizParentProps> = ({ accuracy_data }: any) => {
         <div className="flex flex-col gap-3 mt-12 w-[70%]">
             {
                 accuracy_data?.map((data: any, index: number) => (
-                    <Quiz key={index} accuracy={data.accuracy} question={data.question} index={index+1} />
+                    <Quiz key={index} accuracy={data.accuracy} question={data.question} index={index+1} choices={data.choices} />
                 ))
             }
         </div>
     );
 };
 
-const Quiz: React.FC<QuizProps> = ({ accuracy, question, index }: any) => {
+const Quiz: React.FC<QuizProps> = ({ accuracy, question, index, choices }: any) => {
     const accuracy_color = accuracy >= 70 ? "text-green-400" : "text-red-400";
+    const isCorrect = choices?.some((c: ChoiceProps) => c.is_selected && c.is_correct);
+    const hasAnswer = choices?.some((c: ChoiceProps) => c.is_selected);
+
     return (
         <div className="bg-white rounded shadow-md">
         <div className="flex gap-5 max-md:flex-col max-md:gap-0">
@@ -40,10 +49,15 @@ const Quiz: React.FC<QuizProps> = ({ accuracy, question, index }: any) => {
               Pertanyaan {index}
             </div>
           </div>
-          <div className="flex flex-col ml-5 w-[54%] max-md:ml-0 max-md:w-full text-center">
-            <div className="self-stretch my-auto text-xs text-black max-md:mt-10 max-md:mb-5">
+          <div className="flex flex-col ml-5 w-[54%] max-md:ml-0 max-md:w-full text-center justify-center gap-2 py-4">
+            <div className="text-xs text-black">
              {question}
             </div>
+            {hasAnswer && (
+              <div className={`text-xs font-bold ${isCorrect ? "text-green-500" : "text-red-500"}`}>
+                {isCorrect ? "✓ Jawaban Anda benar" : "✗ Jawaban Anda salah"}
+              </div>
+            )}
           </div>
         </div>
       </div>

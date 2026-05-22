@@ -48,7 +48,7 @@ const CheckBox: React.FC<CheckBoxProps> = ({ content, checked }) => {
       id="answer"
       className="mb-4 h-auto w-96 w-[90%] md:w-[80%] lg:w-[700px] relative bg-white rounded-lg shadow p-3 pl-6 text-left"
     >
-      <input type="checkbox" checked={checked} className="rounded mr-2"></input>
+      <span className={`inline-block w-4 h-4 rounded mr-2 flex-shrink-0 ${checked ? "bg-green-500" : "bg-gray-200"}`} />
       <span className="text-sm"> {content} </span>
     </div>
   );

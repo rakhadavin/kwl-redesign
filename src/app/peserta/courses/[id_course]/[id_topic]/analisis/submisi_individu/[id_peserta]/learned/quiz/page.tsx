@@ -195,29 +195,41 @@ const QuestionParent = ({ data, currentNum, topic, increment, decrement, setBack
 }
 
 const QuestionOptionContainer = ({ question, choices }: QuestionProps) => {
+    const isCorrect = choices?.some((c: ChoiceProps) => c.isSelected && c.isCorrect);
+    const hasAnswer = choices?.some((c: ChoiceProps) => c.isSelected);
+
     return(
         <div>
             <div id="question" className="my-2 mb-6">
-            <span className="text-sm"> {question} </span>
-        </div>
-        {choices?.map((content:any, index:number) => (
-            <div key={index}>
-                <QuizOption
-                    option={content.option}
-                    isSelected={content.isSelected}
-                    isCorrect={content.isCorrect}
-                />
+                <span className="text-sm"> {question} </span>
             </div>
-        ))}  
+            {choices?.map((content:any, index:number) => (
+                <div key={index}>
+                    <QuizOption
+                        option={content.option}
+                        isSelected={content.isSelected}
+                        isCorrect={content.isCorrect}
+                    />
+                </div>
+            ))}
+            {hasAnswer && (
+                <div className={`mt-2 mb-4 text-sm font-bold ${isCorrect ? "text-green-500" : "text-red-500"}`}>
+                    {isCorrect ? "✓ Jawaban Anda benar" : "✗ Jawaban Anda salah"}
+                </div>
+            )}
         </div>
- 
     );
 }
   
 const QuizOption = ({ option, isSelected, isCorrect }: ChoiceProps) => {
     return(
-      <button id="answer" className={`mb-4 h-auto w-96 w-[90%] md:w-[80%] lg:w-[700px] relative rounded-lg shadow p-3 pl-6 text-left ${isCorrect? (isSelected ? 'bg-green-500' : 'border-2 border-solid border-green-300') : (isSelected ? 'bg-red-500':'bg-white') }`}>
-        <span className="text-sm"> {option} </span>
+      <button id="answer" className={`mb-4 h-auto w-96 w-[90%] md:w-[80%] lg:w-[700px] relative rounded-lg shadow p-3 pl-6 text-left flex items-center gap-2 ${isCorrect? (isSelected ? 'bg-green-500' : 'border-2 border-solid border-green-300') : (isSelected ? 'bg-red-500':'bg-white') }`}>
+        {isCorrect && (
+          <svg className={`w-4 h-4 shrink-0 ${isSelected ? 'text-white' : 'text-green-500'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+        )}
+        <span className="text-sm">{option}</span>
       </button>
     );
   }
