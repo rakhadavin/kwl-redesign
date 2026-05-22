@@ -46,8 +46,9 @@ const ReflectionCard: React.FC<ReflectionCardProps> = ({
   const quizProgress = useQuizProgress();
 
   const form = useForm<FormValues>();
-  const { register, control, handleSubmit, formState } = form;
+  const { register, control, handleSubmit, formState, watch } = form;
   const { errors } = formState;
+  const reflection = watch("reflection");
 
   const { mutate, isPending } = usePostAuth(
     `/api/${code}/essay/answer`,
@@ -144,9 +145,9 @@ const ReflectionCard: React.FC<ReflectionCardProps> = ({
           {nextPage && (
             <button
               onClick={handleSubmit(onSubmit)}
-              disabled={isPending}
+              disabled={!reflection || isPending}
               className={`text-sm text-white font-bold w-[120px] py-2 px-6 mt-4 ml-8 shadow text-center rounded flex items-center justify-center gap-1 mx-auto ${
-                isPending ? "bg-green-300 cursor-not-allowed" : "bg-green-500"
+                !reflection || isPending ? "bg-green-300 cursor-not-allowed" : "bg-green-500"
               }`}
             >
               {isPending ? (

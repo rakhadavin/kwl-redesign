@@ -132,9 +132,9 @@ const CheckBoxCard: React.FC<CheckBoxCardProps> = ({
           {nextPage && (
             <button
               onClick={handleSubmit(onSubmit)}
-              disabled={isPending}
+              disabled={checkedItems.length === 0 || isPending}
               className={`text-sm text-white font-bold w-[120px] py-2 px-6 mt-4 ml-8 shadow text-center rounded flex items-center justify-center gap-1 mx-auto ${
-                isPending ? "bg-green-300 cursor-not-allowed" : "bg-green-500"
+                checkedItems.length === 0 || isPending ? "bg-green-300 cursor-not-allowed" : "bg-green-500"
               }`}
             >
               {isPending ? (
