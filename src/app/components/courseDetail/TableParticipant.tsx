@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useGetAuth, usePostAuth, usePutAuth, useDeleteAuth } from "@/app/lib/api/useAuth";
+import { useGetAuth, usePostAuth, usePutAuth, useDeleteAuth, usePatchAuth } from "@/app/lib/api/useAuth";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import SearchBar from "../button/SearchBar";
@@ -32,7 +32,7 @@ function FeedbackModal({ participant, mode, existingFeedback, onClose }: Feedbac
 
   const { data: topics } = useGetAuth(`/api/course/topic/${params.id_course}/all`, "course-topics");
   const { mutate: addFeedback, isPending: isAdding } = usePostAuth("/api/course/feedback", "send-feedback");
-  const { mutate: editFeedback, isPending: isEditing } = usePutAuth("/api/course/feedback/", "edit-feedback");
+  const { mutate: editFeedback, isPending: isEditing } = usePatchAuth("/api/course/feedback/", "edit-feedback");
   const isPending = isAdding || isEditing;
 
   const {
