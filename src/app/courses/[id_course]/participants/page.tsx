@@ -13,7 +13,6 @@ export default function CourseParticipantsPage() {
     `/api/course/${params.id_course}`,
     "course"
   );
-
   return (
     <div className="relative">
       <main className="py-5 bg-cover bg-scroll min-h-screen ">
