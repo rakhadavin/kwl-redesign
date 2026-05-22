@@ -40,6 +40,7 @@ export default function MyCoursesPage() {
   const unenroll_mutate = useUnenroll("/api/course/enroll-student", "unenroll");
   const [selectedTopic, setSelectedTopic] = useState<Topic | null>(null);
 
+
   const handleUnenroll = () => {
     unenroll_mutate.mutate(
       { body: { course_id: id, student_id: session?.userinfo?.role_pk } },
@@ -54,6 +55,8 @@ export default function MyCoursesPage() {
 
   const information = useGetObjects(`/api/course/${id}`, "course");
   const { data } = useGetObjectsWithStudent(`/api/course/kwl-status/${id}/`, "topic");
+  console.log("DATA Course", information?.data);
+  console.log("DATA Topics", data);
 
   useEffect(() => {
     if (data && data.length > 0 && !selectedTopic) {

@@ -34,6 +34,8 @@ export default function KWLLayout({ children }) {
     `/api/know/quiz/${idTopic}`,
     `know-quiz-${idTopic}`
   );
+  console.log("DATA KWL STATUS", data);
+  console.log("DATA QUIZ KNOW", quizKnowData);
   
   const learnedType = currentTopic?.topic_data?.learned?.[0]?.type;
   const { data: quizLearnedData } = useGetObjects(

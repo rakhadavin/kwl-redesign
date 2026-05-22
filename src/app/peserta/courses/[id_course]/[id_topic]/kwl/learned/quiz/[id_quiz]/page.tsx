@@ -64,10 +64,7 @@ export default function LearnedPageQuiz() {
   const [BackConfirmOpen, setBackConfirmOpen] = useState(false);
   const [NextConfirmOpen, setNextConfirmOpen] = useState(false);
 
-  const { mutate, isSuccess } = usePostAuth(
-    `/api/learned/quiz/answer`,
-    "answer"
-  );
+  const { mutate, isPending } = usePostAuth(`/api/learned/quiz/answer`, "answer");
 
   const goBack = () => {
     window.history.back();
@@ -183,16 +180,26 @@ export default function LearnedPageQuiz() {
                 <div className="shrink-0 px-8 py-5 flex gap-4 justify-center border-t border-gray-100">
                   <button
                     onClick={decrement}
-                    className="text-xs text-white font-bold w-[120px] py-2 shadow text-center bg-yellow-400 rounded"
+                    disabled={isPending}
+                    className={`text-xs text-white font-bold w-[120px] py-2 shadow text-center rounded ${isPending ? "bg-yellow-200 cursor-not-allowed" : "bg-yellow-400"}`}
                   >
                     kembali
                   </button>
 
                   <button
                     onClick={increment}
-                    className="text-xs text-white font-bold w-[120px] py-2 shadow text-center bg-green-500 rounded"
+                    disabled={isPending}
+                    className={`text-xs text-white font-bold w-[120px] py-2 shadow text-center rounded flex items-center justify-center gap-1 ${isPending ? "bg-green-300 cursor-not-allowed" : "bg-green-500"}`}
                   >
-                    selanjutnya
+                    {isPending && currentNum === maxNum ? (
+                      <>
+                        <svg className="animate-spin w-3 h-3 shrink-0" viewBox="0 0 24 24" fill="none">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                        </svg>
+                        Mengirim...
+                      </>
+                    ) : "selanjutnya"}
                   </button>
                 </div>
               </div>

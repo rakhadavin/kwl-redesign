@@ -32,9 +32,11 @@ interface KWLButtonProps {
   badgeColor: string;
   accentColor: string;
   href: string | null;
+  isSubmitted: boolean;
+  analisisHref: string;
 }
 
-function KWLButton({ label, badge, badgeColor, accentColor, href }: KWLButtonProps) {
+function KWLButton({ label, badge, badgeColor, accentColor, href, isSubmitted, analisisHref }: KWLButtonProps) {
   return (
     <div className={`flex items-center justify-between px-4 py-3 rounded-lg border-l-4 ${accentColor} bg-white shadow-sm ${href ? "" : "opacity-50"}`}>
       <div className="flex items-center gap-2">
@@ -43,7 +45,13 @@ function KWLButton({ label, badge, badgeColor, accentColor, href }: KWLButtonPro
           {badge}
         </span>
       </div>
-      {href ? (
+      {isSubmitted ? (
+        <Link href={analisisHref}>
+          <button className="text-xs font-bold px-3 py-1 rounded-lg bg-green-500 text-white hover:opacity-80 transition-opacity">
+            Analisis Submisi
+          </button>
+        </Link>
+      ) : href ? (
         <Link href={href}>
           <button className="text-xs font-bold px-3 py-1 rounded-lg bg-main text-white hover:opacity-80 transition-opacity">
             Kerjakan
@@ -91,6 +99,11 @@ const KWLQuestionTopic: React.FC<KWLQuestionTopicProps> = ({ topic }) => {
   const wtk     = topic.topic_data.wtk[0]     ?? null;
   const learned = topic.topic_data.learned[0] ?? null;
 
+  const kwlStatus = topic.kwl_data === "kosong" ? null : topic.kwl_data.kwl_status;
+  const knowSubmitted    = ["know", "wtk", "learned"].includes(kwlStatus ?? "");
+  const wtkSubmitted     = ["wtk", "learned"].includes(kwlStatus ?? "");
+  const learnedSubmitted = kwlStatus === "learned";
+
   const knowHref = know
     ? know.type === "reflection"
       ? `/peserta/courses/${id_course}/${topicId}/kwl/know/reflection/${know.id}`
@@ -129,6 +142,8 @@ const KWLQuestionTopic: React.FC<KWLQuestionTopicProps> = ({ topic }) => {
             badgeColor="bg-blue-100 text-blue-600"
             accentColor="border-orange-400"
             href={knowHref}
+            isSubmitted={knowSubmitted}
+            analisisHref={`/peserta/courses/${id_course}/${topicId}/analisis/detail_submisi/know/${know.type}`}
           />
         )}
         {wtk && (
@@ -138,6 +153,8 @@ const KWLQuestionTopic: React.FC<KWLQuestionTopicProps> = ({ topic }) => {
             badgeColor="bg-indigo-100 text-indigo-600"
             accentColor="border-indigo-400"
             href={wtkHref}
+            isSubmitted={wtkSubmitted}
+            analisisHref={`/peserta/courses/${id_course}/${topicId}/analisis/detail_submisi/wtk/${wtk.type}`}
           />
         )}
         {learned && (
@@ -147,6 +164,8 @@ const KWLQuestionTopic: React.FC<KWLQuestionTopicProps> = ({ topic }) => {
             badgeColor="bg-pink-100 text-pink-600"
             accentColor="border-pink-400"
             href={learnedHref}
+            isSubmitted={learnedSubmitted}
+            analisisHref={`/peserta/courses/${id_course}/${topicId}/analisis/detail_submisi/learned/${learned.type}`}
           />
         )}
         {!know && !wtk && !learned && (
