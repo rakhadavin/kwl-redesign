@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import { useParams, useRouter } from "next/navigation";
 import { useGetAuthByStudentIdAndCourseId } from "@/app/lib/peserta/useCourses";
 import DetailReward from "@/app/components/message/DetailReward";
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 
 export default function RewardPage() {
   // TODO: separate claimed and not
@@ -28,6 +29,11 @@ export default function RewardPage() {
 
   return (
     <main className="p-5">
+      <Breadcrumb variant="light" items={[
+        { label: "Beranda", href: "/peserta" },
+        { label: "Kursus", href: `/peserta/courses/${id}` },
+        { label: "Rewards" },
+      ]} />
       <div className="flex items-start">
         <svg
           xmlns="http://www.w3.org/2000/svg"

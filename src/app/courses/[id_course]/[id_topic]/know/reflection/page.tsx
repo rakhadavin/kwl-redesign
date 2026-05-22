@@ -6,6 +6,7 @@ import MessageModal from "@/app/components/modals/MessageModal";
 import Modal from "@/app/components/modals/peserta/Modal";
 import { useGetObjects } from "@/app/lib/peserta/useCourses";
 import { useParams } from "next/navigation";
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 import { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
@@ -27,6 +28,7 @@ export default function KnowPageReflection() {
 
   return (
     <main className="py-5 text-center bg-[url('/bg1.png')] bg-scroll min-h-screen">
+      <Breadcrumb items={[{ label: "Beranda", href: "/courses" }, { label: course?.data?.short_name ?? "...", href: `/courses/${id_course}` }, { label: topic?.data?.name ?? "..." }, { label: "Know" }, { label: "Refleksi" }]} />
       <KwlTitle course={course?.data?.short_name} topic={topic?.data?.name} />
 
       <ReflectionCard

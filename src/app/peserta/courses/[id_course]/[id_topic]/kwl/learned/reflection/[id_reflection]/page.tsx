@@ -4,6 +4,7 @@ import KwlTitle from "@/app/components/kwl/KwlTitle";
 import ReflectionCard from "@/app/components/kwl/ReflectionCard";
 import { useGetObjects } from "@/app/lib/peserta/useCourses";
 import { useParams } from "next/navigation";
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 
 export default function LearnedPageReflection() {
   const params = useParams();
@@ -31,6 +32,13 @@ export default function LearnedPageReflection() {
 
   return (
     <main className="py-5 text-center bg-[url('/bg1.png')] bg-scroll bg-cover min-h-screen">
+      <Breadcrumb items={[
+        { label: "Beranda", href: "/peserta" },
+        { label: "Kursus", href: `/peserta/courses/${id_course}` },
+        { label: course?.data?.short_name ?? "...", href: `/peserta/courses/${id_course}` },
+        { label: topic?.data?.name ?? "..." },
+        { label: "Learned > Refleksi" },
+      ]} />
       <KwlTitle course={course?.data?.short_name} topic={topic?.data?.name} />
 
       <ReflectionCard

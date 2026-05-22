@@ -14,6 +14,7 @@ import QuizOptionContainer from "@/app/components/kwl/QuizOptionContainer";
 import Modal from "@/app/components/modals/peserta/Modal";
 import ConfirmationModal from "@/app/components/modals/peserta/ConfirmationModal";
 import useQuizProgress from "@/app/hooks/useQuizProgress";
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 
 export default function KnowPageQuiz() {
   const params = useParams();
@@ -120,6 +121,13 @@ export default function KnowPageQuiz() {
 
   return (
     <main className="py-5 text-center bg-[url('/bg1.png')] bg-cover bg-scroll min-h-screen">
+      <Breadcrumb items={[
+        { label: "Beranda", href: "/peserta" },
+        { label: "Kursus", href: `/peserta/courses/${id_course}` },
+        { label: course?.data?.short_name ?? "...", href: `/peserta/courses/${id_course}` },
+        { label: topic?.data?.name ?? "..." },
+        { label: "Know > Quiz" },
+      ]} />
       <div id="numbers-container" className="m-1 inline-flex text-center">
         {numList.map((num, index) => (
           <button onClick={() => setCurrentNum(num)}>

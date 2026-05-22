@@ -1,5 +1,6 @@
 'use client'
 import { useGetObjects } from "@/app/lib/peserta/useCourses";
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 import { useParams, useRouter } from "next/navigation";
 
 export default function FeedbackDetailPage() {
@@ -9,7 +10,12 @@ export default function FeedbackDetailPage() {
     return(
         // duplicable = buttons
         <main>
-      
+            <Breadcrumb variant="light" items={[
+              { label: "Beranda", href: "/peserta" },
+              { label: "Kursus", href: "/peserta/mycourses" },
+              { label: "Feedback", href: `/peserta/courses/${params.id_course}/feedback` },
+              { label: "Detail" },
+            ]} />
             <div className="pt-5 flex flex-col items-center justify-center">
                 <div className="w-[90%] md:w-[70%] lg:w-[400px]">
                     <img src="/kowl-class-1.png"/>

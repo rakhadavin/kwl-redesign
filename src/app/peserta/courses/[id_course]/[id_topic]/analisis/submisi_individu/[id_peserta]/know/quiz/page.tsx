@@ -4,6 +4,7 @@ import NumberCard from "@/app/components/kwl/NumberCard";
 import { useGetAuth } from "@/app/lib/api/useAuth";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 
 
 type QuestionProps = {
@@ -30,7 +31,7 @@ type QuestionParentProps = {
 export default function DetailAnswerKnowQuizPage() {
 
    
-    const { id_topic, id_peserta } = useParams();
+  const { id_topic, id_peserta, id_course } = useParams();
     const { data: answer } = useGetAuth(`/api/analysis/student-answer-detail/know/${id_topic}/${id_peserta}`, "know quiz");
 
     const router = useRouter();
@@ -70,6 +71,13 @@ export default function DetailAnswerKnowQuizPage() {
   
     return (
       <main className="py-5 text-center bg-[url('/bg1.png')] bg-cover min-h-screen">
+        <Breadcrumb items={[
+          { label: "Beranda", href: "/peserta" },
+          { label: "Kursus", href: `/peserta/courses/${id_course}` },
+          { label: answer?.course ?? "..." },
+          { label: answer?.topic ?? "..." },
+          { label: "Know > Quiz" },
+        ]} />
         <div id="numbers-container" className="m-1 inline-flex text-center">
           {numList.map((num, index) => (
             <button onClick={() => setCurrentNum(num)}>

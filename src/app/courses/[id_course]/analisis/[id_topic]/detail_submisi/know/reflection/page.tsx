@@ -8,6 +8,7 @@ import WordCloud from "@/app/components/chart/WordCloud";
 import Reflection from "@/app/components/card/AnalysisReflectionCard";
 import Spinner from "@/app/components/spinner/spinner";
 import KwlUnavailablePage from "@/app/components/message/UnavailableMessage";
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 
 
 const DetailSubmissionKnowEssayPage = () => {
@@ -28,6 +29,7 @@ const DetailSubmissionKnowEssayPage = () => {
 
   return (
     <main className="py-5">
+      <Breadcrumb items={[{ label: "Beranda", href: "/courses" }, { label: data?.["course_data"]?.["full_name"] ?? "...", href: `/courses/${params.id_course}` }, { label: "Analisis", href: `/courses/${params.id_course}/analisis` }, { label: data?.["name"] ?? "...", href: `/courses/${params.id_course}/analisis/${params.id_topic}` }, { label: "Know" }, { label: "Refleksi" }]} variant="light" />
       <div className="flex items-start">
         <svg
           xmlns="http://www.w3.org/2000/svg"

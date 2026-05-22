@@ -5,6 +5,7 @@ import { useRouter, useParams } from "next/navigation";
 import PesertaCourseContainer from "@/app/components/card/PesertaCourseContainer";
 import UnenrolConfirmation from "@/app/components/message/UnenrolConfirmation";
 import SuccessUnenrolCourse from "@/app/components/message/SuccessUnenrolCourse";
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 
 export default function MyCoursesPage() {
   const params = useParams();
@@ -14,6 +15,10 @@ export default function MyCoursesPage() {
 
   return (
     <main className="p-5">
+      <Breadcrumb variant="light" items={[
+        { label: "Beranda", href: "/peserta" },
+        { label: "Kursus Saya" },
+      ]} />
       <div className="flex items-start">
         {/* <svg
           xmlns="http://www.w3.org/2000/svg"

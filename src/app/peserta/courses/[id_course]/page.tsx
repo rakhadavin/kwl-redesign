@@ -15,6 +15,7 @@ import useSuccessUnenrolCourse from "@/app/hooks/useSuccessUnenrolCourse";
 import UnenrolConfirmation from "@/app/components/message/UnenrolConfirmation";
 import SuccessUnenrolCourse from "@/app/components/message/SuccessUnenrolCourse";
 import KWLQuestionTopic from "@/app/components/button/peserta/KWLQuestionTopik";
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 
 interface Topic {
   topic_data: {
@@ -66,6 +67,11 @@ export default function MyCoursesPage() {
 
   return (
     <main className="py-5 text-center bg-[url('/bg1.png')] bg-cover min-h-screen">
+      <Breadcrumb items={[
+        { label: "Beranda", href: "/peserta" },
+        { label: "Kursus", href: "/peserta/mycourses" },
+        { label: information?.data?.short_name ?? "..." },
+      ]} />
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"

@@ -8,6 +8,7 @@ import Link from "next/link";
 import LadderCard from "@/app/components/card/LadderCard";
 import BarChartParent from "@/app/components/chart/BarChart";
 import TableProgressParticipant from "@/app/components/courseDetail/TableProgressParticipant";
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 
 interface ParticipationCardProps {
   title: string;
@@ -81,6 +82,7 @@ const AnalyzeTopicPage: React.FC = () => {
 
   return (
     <main className="px-2 py-5 flex flex-col bg-cover bg-scroll bg-dark-accent min-h-screen">
+      <Breadcrumb items={[{ label: "Beranda", href: "/courses" }, { label: topic?.course_data?.full_name ?? "...", href: `/courses/${params.id_course}` }, { label: "Analisis", href: `/courses/${params.id_course}/analisis` }, { label: topic?.name ?? "..." }]} />
       <div className="flex flex-row mb-5 items-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import KwlTitle from "@/app/components/kwl/KwlTitle";
-
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 import { useParams } from "next/navigation";
 
 import { useGetObjects } from "@/app/lib/peserta/useCourses";
@@ -71,6 +71,7 @@ export default function LearnedPageQuiz() {
 
   return (
     <main className="py-5 text-center bg-[url('/bg1.png')] bg-cover min-h-screen">
+      <Breadcrumb items={[{ label: "Beranda", href: "/courses" }, { label: course?.data?.short_name ?? "...", href: `/courses/${id_course}` }, { label: topic?.data?.name ?? "..." }, { label: "Learned" }, { label: "Quiz" }]} />
       <div id="numbers-container" className="m-1 inline-flex text-center">
         {numList.map((num, index) => (
           <button onClick={() => setCurrentNum(num)}>

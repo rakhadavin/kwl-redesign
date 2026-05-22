@@ -9,6 +9,7 @@ import Reflection from "@/app/components/card/AnalysisReflectionCard";
 import Spinner from "@/app/components/spinner/spinner";
 import KwlUnavailablePage from "@/app/components/message/UnavailableMessage";
 import { useSession } from "next-auth/react";
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 
 
 const DetailSubmissionLearnedEssayPage = () => {
@@ -30,6 +31,13 @@ const DetailSubmissionLearnedEssayPage = () => {
 
   return (
     <main className="py-5">
+      <Breadcrumb variant="light" items={[
+        { label: "Beranda", href: "/peserta" },
+        { label: "Kursus", href: `/peserta/courses/${params.id_course}` },
+        { label: data?.["course_data"]?.["full_name"] ?? "..." },
+        { label: data?.["name"] ?? "..." },
+        { label: "Analisis > Learned > Refleksi" },
+      ]} />
       <div className="flex items-start">
         <svg
           xmlns="http://www.w3.org/2000/svg"

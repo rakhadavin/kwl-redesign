@@ -5,6 +5,7 @@ import { useGetAuth } from "@/app/lib/api/useAuth";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useParams, usePathname, useRouter } from "next/navigation";
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 
 export default function DetailSubmissionWtkCheckboxPage() {
   const params = useParams();
@@ -17,6 +18,13 @@ export default function DetailSubmissionWtkCheckboxPage() {
   return (
     <main className="py-5 text-center bg-[url('/bg1.png')] bg-scroll bg-cover min-h-screen">
       <div className="flex flex-col items-center">
+      <Breadcrumb items={[
+        { label: "Beranda", href: "/peserta" },
+        { label: "Kursus", href: `/peserta/courses/${params.id_course}` },
+        { label: poll?.course?.short_name ?? "..." },
+        { label: poll?.topic ?? "..." },
+        { label: "Analisis > WTK > Checkbox" },
+      ]} />
       <KwlTitle course={poll?.course?.short_name} topic={poll?.topic} />
       <CheckBoxParent
         question={poll?.question}

@@ -6,6 +6,7 @@ import TableParticipant from "@/app/components/courseDetail/TableParticipant";
 import { useRouter, usePathname, useParams } from "next/navigation";
 import Link from "next/link";
 import { useGetAuth } from "@/app/lib/api/useAuth";
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 // import { usePathname } from "next/navigation";
 
 // import css from "../globals.css";
@@ -26,6 +27,7 @@ const AnalyzeSubmissionPage = () => {
   return (
     <div>
       <main className="py-5 bg-cover bg-[url('/bg2.png')] bg-scroll bg-cover min-h-screen">
+        <Breadcrumb items={[{ label: "Beranda", href: "/courses" }, { label: data?.["course_data"]?.["full_name"] ?? "...", href: `/courses/${params.id_course}` }, { label: "Analisis", href: `/courses/${params.id_course}/analisis` }, { label: data?.["name"] ?? "..." }, { label: "Detail Submisi" }]} />
         {/* <main className="py-5 "> */}
         <svg
           xmlns="http://www.w3.org/2000/svg"

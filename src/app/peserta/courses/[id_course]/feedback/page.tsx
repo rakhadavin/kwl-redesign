@@ -5,6 +5,7 @@ import {
   useGetObjects,
 } from "@/app/lib/peserta/useCourses";
 import { useParams, useRouter } from "next/navigation";
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 
 export default function FeedbackPage() {
   const params = useParams();
@@ -20,6 +21,12 @@ export default function FeedbackPage() {
     // note:  cut the message as preview
     // duplicable: feedback box, back button
     <main className="p-5">
+      <Breadcrumb variant="light" items={[
+        { label: "Beranda", href: "/peserta" },
+        { label: "Kursus", href: "/peserta/mycourses" },
+        { label: data?.course_full_name ?? "...", href: `/peserta/courses/${course_id}` },
+        { label: "Feedback" },
+      ]} />
       <div className="flex items-start">
         <svg
           xmlns="http://www.w3.org/2000/svg"

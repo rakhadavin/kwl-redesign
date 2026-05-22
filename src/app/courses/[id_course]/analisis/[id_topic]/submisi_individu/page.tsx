@@ -7,6 +7,7 @@ import PGContent from "@/app/components/forms/PGContent";
 import { useRouter, useParams } from "next/navigation";
 import { useGetAuth } from "@/app/lib/api/useAuth";
 import { useState } from "react";
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 
 export default function KnowSubmissionPage() {
   const params = useParams();
@@ -20,6 +21,7 @@ export default function KnowSubmissionPage() {
   return (
     <div className="relative">
       <main className="py-5 bg-cover bg-scroll bg-[url('/bg2.png')] min-h-screen ">
+        <Breadcrumb items={[{ label: "Beranda", href: "/courses" }, { label: topic?.["course_data"]?.["full_name"] ?? "...", href: `/courses/${params.id_course}` }, { label: "Analisis", href: `/courses/${params.id_course}/analisis` }, { label: topic?.["name"] ?? "...", href: `/courses/${params.id_course}/analisis/${params.id_topic}` }, { label: "Submisi Individu" }]} />
         <div className="flex items-start">
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -6,6 +6,7 @@ import Spinner from "@/app/components/spinner/spinner";
 import { useGetAuth } from "@/app/lib/api/useAuth";
 import { stat } from "fs";
 import { useParams, usePathname, useRouter } from "next/navigation";
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 
 export default function DetailSubmissionWtkCheckboxPage() {
   const params = useParams();
@@ -19,6 +20,7 @@ export default function DetailSubmissionWtkCheckboxPage() {
     <>
     {status === "success" ? (
     <main className="py-5 text-center bg-[url('/bg1.png')] bg-scroll bg-cover min-h-screen">
+      <Breadcrumb items={[{ label: "Beranda", href: "/courses" }, { label: poll?.course?.short_name ?? "...", href: `/courses/${params.id_course}` }, { label: "Analisis", href: `/courses/${params.id_course}/analisis` }, { label: poll?.topic ?? "...", href: `/courses/${params.id_course}/analisis/${params.id_topic}` }, { label: "WTK" }, { label: "Checkbox" }]} />
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"

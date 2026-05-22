@@ -15,6 +15,7 @@ import useEditEssayLearnedForms from "@/app/hooks/useEditEssayLearned";
 import { useGetAuth } from "@/app/lib/api/useAuth";
 import Link from "next/link";
 import ArchiveTopicConfirmation from "@/app/components/message/ArchiveTopicConfirmation";
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 
 interface Topic {
   id: number;
@@ -102,6 +103,7 @@ const ArchivedTopicsPage = () => {
   if (status === "pending") {
     return (
       <div className="min-h-screen bg-gray-50 py-8">
+        <Breadcrumb items={[{ label: "Beranda", href: "/courses" }, { label: "Kursus", href: `/courses/${courseId}` }, { label: "Archive" }]} variant="light" />
         <div className="max-w-4xl mx-auto px-4">
           <div className="mb-8">
             <Link
@@ -146,6 +148,7 @@ const ArchivedTopicsPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
+      <Breadcrumb items={[{ label: "Beranda", href: "/courses" }, { label: "Kursus", href: `/courses/${courseId}` }, { label: "Archive" }]} variant="light" />
       <div className="max-w-4xl mx-auto px-4">
         {/* Header */}
         <div className="mb-8">

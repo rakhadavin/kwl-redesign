@@ -7,6 +7,7 @@ import { useGetAuth } from "@/app/lib/api/useAuth";
 import { AxiosError } from "axios";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 
 
 type QuestionProps = {
@@ -33,7 +34,7 @@ type QuestionParentProps = {
 export default function DetailAnswerLearnedQuizPage() {
 
    
-    const { id_topic, id_peserta } = useParams();
+    const { id_topic, id_peserta, id_course } = useParams();
     const { data: answer, status, error } = useGetAuth(`/api/analysis/student-answer-detail/learned/${id_topic}/${id_peserta}`, "checkbox", true);
     const router = useRouter();
 
@@ -76,9 +77,13 @@ export default function DetailAnswerLearnedQuizPage() {
       {error === null ? ( status === "success" ? (
         
       <main className="py-5 text-center bg-[url('/bg1.png')] bg-cover min-h-screen">
-
-       
-          
+        <Breadcrumb items={[
+          { label: "Beranda", href: "/peserta" },
+          { label: "Kursus", href: `/peserta/courses/${id_course}` },
+          { label: answer?.course ?? "..." },
+          { label: answer?.topic ?? "..." },
+          { label: "Learned > Quiz" },
+        ]} />
         <div id="numbers-container" className="m-1 inline-flex text-center">
         
           {numList.map((num, index) => (

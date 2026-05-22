@@ -5,6 +5,7 @@ import Spinner from "@/app/components/spinner/spinner";
 import { useGetAuth } from "@/app/lib/api/useAuth";
 import Link from "next/link";
 import { useParams, usePathname, useRouter } from "next/navigation";
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 
 
 const DetailSubmissionLearnedQuizPage = () => {
@@ -18,6 +19,8 @@ const DetailSubmissionLearnedQuizPage = () => {
 
 
         
+      <>
+        <Breadcrumb items={[{ label: "Beranda", href: "/courses" }, { label: quiz_data?.course_short_name ?? "...", href: `/courses/${params.id_course}` }, { label: "Analisis", href: `/courses/${params.id_course}/analisis` }, { label: quiz_data?.topic ?? "...", href: `/courses/${params.id_course}/analisis/${id_topic}` }, { label: "Learned" }, { label: "Quiz" }]} variant="light" />
         <div className="flex flex-col items-center bg-white">
 
         <div className="mt-16 text-3xl font-bold text-center text-blue-900 max-md:mt-10">
@@ -63,6 +66,7 @@ const DetailSubmissionLearnedQuizPage = () => {
             )}
    
       </div>
+    </>
     )
 };
 

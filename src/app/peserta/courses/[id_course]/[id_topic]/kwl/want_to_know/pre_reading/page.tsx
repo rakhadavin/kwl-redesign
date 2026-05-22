@@ -4,6 +4,7 @@ import useQuizProgress from "@/app/hooks/useQuizProgress";
 import { useGetObjects } from "@/app/lib/peserta/useCourses";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect } from "react";
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 
 export default function PreReadingPage() {
   const params = useParams();
@@ -42,6 +43,13 @@ export default function PreReadingPage() {
 
   return (
     <main className="py-5 text-center bg-[url('/bg1.png')] bg-scroll bg-cover min-h-screen">
+      <Breadcrumb items={[
+        { label: "Beranda", href: "/peserta" },
+        { label: "Kursus", href: `/peserta/courses/${id_course}` },
+        { label: course.data?.short_name ?? "...", href: `/peserta/courses/${id_course}` },
+        { label: topic.data?.name ?? "..." },
+        { label: "Want to Know > Pre-reading" },
+      ]} />
       <div className="mx-auto m-4 text-center bg-white p-8 h-auto w-96 w-[90%] md:w-[80%] lg:w-[800px] rounded-lg shadow justify-center">
         <h3 className="mt-4 text-sm">
           <span className="font-bold">

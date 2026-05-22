@@ -36,6 +36,7 @@ import EditPreReadingMaterialForms from "@/app/components/forms/EditPreReadingMa
 import HideTopicConfirmation from "@/app/components/message/HideTopicConfirmation";
 import ArchiveTopicConfirmation from "@/app/components/message/ArchiveTopicConfirmation";
 import TopicDetailsContainer from "@/app/components/card/TopicDetailsContainer";
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 
 export default function MyCoursesPage() {
   const params = useParams();
@@ -58,6 +59,7 @@ export default function MyCoursesPage() {
 
   return (
     <main className="py-5">
+      <Breadcrumb items={[{ label: "Beranda", href: "/courses" }, { label: data?.["short_name"] ?? "..." }]} variant="light" />
       <div className="flex  flex-col  w-full align-middle justify-center items-center gap-2 pb-5">
         {/* <svg
           xmlns="http://www.w3.org/2000/svg"

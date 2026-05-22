@@ -2,6 +2,7 @@
 import { useGetAuth } from "@/app/lib/api/useAuth";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import React from "react";
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 
 type buttonProps = {
   disabled?: boolean;
@@ -53,6 +54,7 @@ const ClassPerformace = () => {
   return (
     <>
       <div>
+        <Breadcrumb items={[{ label: "Beranda", href: "/courses" }, { label: data?.course ?? "...", href: `/courses/${params.id_course}` }, { label: "Analisis", href: `/courses/${params.id_course}/analisis` }, { label: data?.topic ?? "...", href: `/courses/${params.id_course}/analisis/${params.id_topic}` }, { label: "Performa Individu" }]} variant="light" />
         <div className="bg-solid bg-darker-accent">
           <h1 className="pt-8 text-main font-bold text-xl text-center text-white">
             Analisis Performa Peserta

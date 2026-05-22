@@ -15,6 +15,7 @@ import EnrolConfirmation from "@/app/components/message/EnrolConfirmation";
 import UnenrolConfirmation from "@/app/components/message/UnenrolConfirmation";
 import EnrolKeyConfirmation from "@/app/components/message/EnrolKeyConfirmation";
 import SuccessEnrolCourse from "@/app/components/message/SuccessEnrolCourse";
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 
 export default function MyCoursesPage() {
   const router = useRouter();
@@ -25,6 +26,10 @@ export default function MyCoursesPage() {
 
   return (
     <main className="p-5">
+      <Breadcrumb variant="light" items={[
+        { label: "Beranda", href: "/peserta" },
+        { label: "Semua Kursus" },
+      ]} />
       <div className="flex items-start">
         <svg
           xmlns="http://www.w3.org/2000/svg"

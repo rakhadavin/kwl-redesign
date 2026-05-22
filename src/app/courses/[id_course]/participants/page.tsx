@@ -3,6 +3,7 @@
 import TableParticipant from "@/app/components/courseDetail/TableParticipant";
 import { useRouter, useParams } from "next/navigation";
 import { useGetAuth } from "@/app/lib/api/useAuth";
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 
 export default function CourseParticipantsPage() {
   const params = useParams();
@@ -16,6 +17,7 @@ export default function CourseParticipantsPage() {
   return (
     <div className="relative">
       <main className="py-5 bg-cover bg-scroll min-h-screen ">
+        <Breadcrumb items={[{ label: "Beranda", href: "/courses" }, { label: course?.["short_name"] ?? "...", href: `/courses/${params.id_course}` }, { label: "Daftar Peserta" }]} variant="light" />
         <div className="flex items-start">
           <svg
             xmlns="http://www.w3.org/2000/svg"

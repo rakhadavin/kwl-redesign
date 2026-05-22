@@ -6,6 +6,7 @@ import { useGetAuth } from "@/app/lib/api/useAuth";
 
 import useEditCourse2Forms from "@/app/hooks/useEditCourse2Form";
 import EditCourse2Forms from "@/app/components/forms/EditCourse2Forms";
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 
 export default function SettingsPage() {
   const editCourse2Form = useEditCourse2Forms();
@@ -18,6 +19,7 @@ export default function SettingsPage() {
   return (
     <div className="relative">
       <main className="py-5 bg-cover bg-dark-accent min-h-screen bottom-0">
+        <Breadcrumb items={[{ label: "Beranda", href: "/courses" }, { label: data?.["short_name"] ?? "...", href: `/courses/${params.id_course}` }, { label: "Pengaturan" }]} />
         <div className="flex items-start">
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -5,7 +5,7 @@ import { useGetAuth } from "@/app/lib/api/useAuth";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useParams, usePathname, useRouter } from "next/navigation";
-
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 
 
 const DetailSubmissionKnowQuizPage = () => {
@@ -20,7 +20,13 @@ const DetailSubmissionKnowQuizPage = () => {
     return (        
 
         <div className="flex flex-col items-center bg-white">
-
+        <Breadcrumb variant="light" items={[
+          { label: "Beranda", href: "/peserta" },
+          { label: "Kursus", href: `/peserta/courses/${params.id_course}` },
+          { label: quiz_data?.course_short_name ?? "..." },
+          { label: quiz_data?.topic ?? "..." },
+          { label: "Analisis > Know > Quiz" },
+        ]} />
         <div className="mt-16 text-3xl font-bold text-center text-blue-900 max-md:mt-10">
         {quiz_data?.course_short_name}
         </div>

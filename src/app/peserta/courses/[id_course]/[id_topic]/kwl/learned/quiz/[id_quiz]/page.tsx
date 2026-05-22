@@ -12,6 +12,7 @@ import { usePostAuth } from "@/app/lib/api/useAuth";
 import Modal from "@/app/components/modals/peserta/Modal";
 import ConfirmationModal from "@/app/components/modals/peserta/ConfirmationModal";
 import useQuizProgress from "@/app/hooks/useQuizProgress";
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 
 export default function LearnedPageQuiz() {
   const params = useParams();
@@ -115,6 +116,13 @@ export default function LearnedPageQuiz() {
 
   return (
     <main className="py-5 text-center bg-[url('/bg1.png')] bg-scroll bg-cover min-h-screen">
+      <Breadcrumb items={[
+        { label: "Beranda", href: "/peserta" },
+        { label: "Kursus", href: `/peserta/courses/${id_course}` },
+        { label: course?.data?.short_name ?? "...", href: `/peserta/courses/${id_course}` },
+        { label: topic?.data?.name ?? "..." },
+        { label: "Learned > Quiz" },
+      ]} />
       <div id="numbers-container" className="m-1 inline-flex text-center">
         {numList.map((num, index) => (
           <button onClick={() => setCurrentNum(num)}>

@@ -5,6 +5,7 @@ import ReflectionCard from "@/app/components/kwl/ReflectionCard";
 import { useGetObjects } from "@/app/lib/peserta/useCourses";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 
 export default function WantToKnowReflection() {
   const params = useParams();
@@ -18,6 +19,7 @@ export default function WantToKnowReflection() {
 
   return (
     <main className="py-5 text-center bg-[url('/bg1.png')] bg-scroll bg-cover min-h-screen">
+      <Breadcrumb items={[{ label: "Beranda", href: "/courses" }, { label: course?.data?.short_name ?? "...", href: `/courses/${id_course}` }, { label: topic?.data?.name ?? "..." }, { label: "WTK" }, { label: "Essay" }]} />
       <KwlTitle course={course?.data?.short_name} topic={topic?.data?.name} />
 
       <ReflectionCard

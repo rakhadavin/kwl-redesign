@@ -11,6 +11,7 @@ import { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import { useQueries } from "@tanstack/react-query";
+import Breadcrumb from "../components/navigation/Breadcrumb";
 
 export default function PesertaHomePage() {
   const { data: session, status } = useSession();
@@ -94,6 +95,7 @@ export default function PesertaHomePage() {
 
   return (
     <main className="bg-dark-accent h-72">
+      <Breadcrumb items={[{ label: "Beranda" }]} />
       <ConsentModal
         isOpen={showModal}
         onConfirm={handleConsentConfirm}

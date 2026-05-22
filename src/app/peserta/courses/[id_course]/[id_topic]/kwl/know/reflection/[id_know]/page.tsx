@@ -9,6 +9,7 @@ import { useParams } from "next/navigation";
 import { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 
 export default function KnowPageReflection() {
   const params = useParams();
@@ -40,6 +41,13 @@ export default function KnowPageReflection() {
 
   return (
     <main className="py-5 text-center bg-[url('/bg1.png')] bg-scroll bg-cover min-h-screen">
+      <Breadcrumb items={[
+        { label: "Beranda", href: "/peserta" },
+        { label: "Kursus", href: `/peserta/courses/${id_course}` },
+        { label: course?.data?.short_name ?? "...", href: `/peserta/courses/${id_course}` },
+        { label: topic?.data?.name ?? "..." },
+        { label: "Know > Refleksi" },
+      ]} />
       <KwlTitle course={course?.data?.short_name} topic={topic?.data?.name} />
       <ReflectionCard
         stage="Know"

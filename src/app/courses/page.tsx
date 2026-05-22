@@ -12,6 +12,7 @@ import ConsentModal from "../components/consent-modal/ConsentModal";
 import useCreateCourseForms from "../hooks/useCreateCourseForms";
 import { useState } from "react";
 import axios from "axios";
+import Breadcrumb from "../components/navigation/Breadcrumb";
 
 export default function MyCoursesPage() {
   const { data, status } = useGetAuth("/api/course/lecturer", "all courses");
@@ -43,6 +44,7 @@ export default function MyCoursesPage() {
   };
   return (
     <main className="p-5">
+      <Breadcrumb items={[{ label: "Beranda" }]} variant="light" />
       <ConsentModal
         isOpen={showModal}
         onConfirm={handleConsentConfirm}

@@ -10,6 +10,7 @@ import EditRewardsForms from "@/app/components/forms/EditRewardsForms";
 import RewardContainer from "@/app/components/card/RewardContainer";
 import { useParams, useRouter } from "next/navigation";
 import { useGetAuth } from "@/app/lib/api/useAuth";
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 
 export default function RewardPage() {
   const params = useParams();
@@ -22,6 +23,7 @@ export default function RewardPage() {
 
   return (
     <main className="py-5">
+      <Breadcrumb items={[{ label: "Beranda", href: "/courses" }, { label: data?.["short_name"] ?? "...", href: `/courses/${params.id_course}` }, { label: "Rewards" }]} variant="light" />
       <div className="flex items-start">
         <svg
           xmlns="http://www.w3.org/2000/svg"

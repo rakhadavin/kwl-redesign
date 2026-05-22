@@ -3,6 +3,7 @@
 import KwlTitle from "@/app/components/kwl/KwlTitle";
 import { useGetAuth } from "@/app/lib/api/useAuth";
 import { useParams, useRouter } from "next/navigation";
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 
 type CheckBoxCardParentProps = {
   stage: string;
@@ -13,7 +14,7 @@ type CheckBoxCardParentProps = {
   handleClick?: () => void;
 };
 export default function DetailAnswerWtkCheckboxPage() {
-  const { id_topic, id_peserta } = useParams();
+  const { id_topic, id_peserta, id_course } = useParams();
   const { data: answer } = useGetAuth(
     `/api/analysis/student-answer-detail/wtk/${id_topic}/${id_peserta}`,
     "checkbox"
@@ -22,6 +23,7 @@ export default function DetailAnswerWtkCheckboxPage() {
 
   return (
     <main className="py-5 text-center bg-[url('/bg1.png')] bg-cover min-h-screen">
+      <Breadcrumb items={[{ label: "Beranda", href: "/courses" }, { label: answer?.course?.short_name ?? "...", href: `/courses/${id_course}` }, { label: "Analisis", href: `/courses/${id_course}/analisis` }, { label: answer?.topic ?? "...", href: `/courses/${id_course}/analisis/${id_topic}` }, { label: "WTK" }, { label: "Checkbox" }]} />
       <KwlTitle course={answer?.course?.short_name} topic={answer?.topic} />
 
       <CheckBoxParent

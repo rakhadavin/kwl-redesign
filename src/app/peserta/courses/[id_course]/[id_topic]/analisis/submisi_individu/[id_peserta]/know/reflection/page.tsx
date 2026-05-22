@@ -2,6 +2,7 @@
 import KwlTitle from "@/app/components/kwl/KwlTitle";
 import { useGetAuth } from "@/app/lib/api/useAuth";
 import { useParams, useRouter } from "next/navigation";
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 
 type ReflectionAnswerCardProps = {
   reflection: string;
@@ -12,7 +13,7 @@ type ReflectionAnswerCardProps = {
   handleClick?: () => void;
 };
 const DetailAnswerKnowReflectionPage = () => {
-  const { id_topic, id_peserta } = useParams();
+  const { id_topic, id_peserta, id_course } = useParams();
   const { data: answer } = useGetAuth(
     `/api/analysis/student-answer-detail/know/${id_topic}/${id_peserta}`,
     "know"
@@ -20,6 +21,13 @@ const DetailAnswerKnowReflectionPage = () => {
   const router = useRouter();
   return (
     <main className="py-5 text-center bg-[url('/bg1.png')] bg-cover min-h-screen">
+      <Breadcrumb items={[
+        { label: "Beranda", href: "/peserta" },
+        { label: "Kursus", href: `/peserta/courses/${id_course}` },
+        { label: answer?.course ?? "..." },
+        { label: answer?.topic ?? "..." },
+        { label: "Know > Refleksi" },
+      ]} />
       <KwlTitle course={answer?.course} topic={answer?.topic} />
       <ReflectionAnswerCard
         reflection={answer?.answer}

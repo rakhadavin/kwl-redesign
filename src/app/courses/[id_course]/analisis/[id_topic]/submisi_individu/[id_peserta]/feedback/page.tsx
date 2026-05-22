@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import { useParams, useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 
 type FeedbackForm = {
   feedback: string;
@@ -12,7 +13,7 @@ type FeedbackForm = {
 const IndividualPerformance = () => {
   const { mutate, isPending} = usePostAuth("/api/course/feedback", "feedback");
   const { data: session } = useSession();
-  const { id_peserta, id_topic } = useParams();
+  const { id_peserta, id_topic, id_course } = useParams();
   const { data: topic } = useGetAuth(`/api/course/topic/${id_topic}`, "topic");
   const router = useRouter();
   
@@ -57,7 +58,9 @@ const IndividualPerformance = () => {
   };
 
   return (
-    <div className="lg:w-[60%] md:w-[50%] w-[600px] mx-auto">
+    <>
+      <Breadcrumb items={[{ label: "Beranda", href: "/courses" }, { label: "Kursus", href: `/courses/${id_course}` }, { label: "Analisis", href: `/courses/${id_course}/analisis` }, { label: topic?.name ?? "..." }, { label: "Feedback" }]} variant="light" />
+      <div className="lg:w-[60%] md:w-[50%] w-[600px] mx-auto">
       {/* // <div className="flex items-center justify-center"> */}
       <img src="/feedback.png" width={400} className="block mx-auto"></img>
       <p className="text-center">
@@ -107,6 +110,7 @@ const IndividualPerformance = () => {
 
     
     </div>
+    </>
   );
 };
 

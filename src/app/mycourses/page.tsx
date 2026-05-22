@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import SearchBar from "../components/button/SearchBar";
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 import CreateCourseForms from "@/app/components/forms/CreateCourseForms";
 import CreateCourse2Forms from "@/app/components/forms/CreateCourse2Forms";
 import { useGetAuth } from "@/app/lib/api/useAuth";
@@ -41,6 +42,7 @@ export default function MyCoursesPage() {
     });
   return (
     <main className="p-5 flex flex-col items-center">
+      <Breadcrumb items={[{ label: "Beranda", href: "/courses" }, { label: "My Courses" }]} variant="light" />
       <div className="flex items-start w-full ">
         <svg
           xmlns="http://www.w3.org/2000/svg"

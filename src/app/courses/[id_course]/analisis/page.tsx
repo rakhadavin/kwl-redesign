@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import Breadcrumb from "@/app/components/navigation/Breadcrumb";
 
 const AnalyzePage = () => {
   const pathname = usePathname();
@@ -25,6 +26,7 @@ const AnalyzePage = () => {
   return (
     <div>
       <main className="py-5 bg-cover bg-[url('/bg2.png')] bg-scroll min-h-screen pb-44">
+        <Breadcrumb items={[{ label: "Beranda", href: "/courses" }, { label: course?.["full_name"] ?? "...", href: `/courses/${params.id_course}` }, { label: "Analisis" }]} />
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
