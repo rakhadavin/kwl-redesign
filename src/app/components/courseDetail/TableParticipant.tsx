@@ -203,10 +203,10 @@ function EmptyParticipantState() {
         className="w-72 h-auto mb-6 object-contain"
       />
       <p className="text-gray-400 font-semibold text-lg mb-1">
-        Belum ada mahasiswa yang terdaftar pada course ini.
+        Belum ada mahasiswa yang terdaftar.
       </p>
       <p className="text-gray-400 text-sm mb-8">
-        Mulai dengan membuat course baru.
+        Bagikan kode course kepada mahasiswa agar mereka dapat mendaftar.
       </p>
       <button
         onClick={() => router.back()}
