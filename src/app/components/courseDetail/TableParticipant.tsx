@@ -240,7 +240,7 @@ const ParticipantRow = ({
   const queryClient = useQueryClient();
 
   const feedbackQueryKey = `feedback-student-${participant["id"]}`;
-  const { data: feedbacks } = useGetAuth(
+  const { data: feedbacks, isFetching: isFetchingFeedback } = useGetAuth(
     `/api/course/feedback/student/${params.id_course}/${participant["id"]}`,
     feedbackQueryKey
   );
@@ -265,7 +265,9 @@ const ParticipantRow = ({
       <td>{participant["user"]["nama_lengkap"]}</td>
       <td>{participant["user"]["email"]}</td>
       <td className="px-3 py-2">
-        {hasFeedback ? (
+        {isFetchingFeedback ? (
+          <span className="text-gray-400 text-xs italic animate-pulse">Memuat feedback...</span>
+        ) : hasFeedback ? (
           <textarea
             disabled
             value={latestFeedback.feedback}
@@ -277,7 +279,7 @@ const ParticipantRow = ({
         )}
       </td>
       <td>
-        {hasFeedback ? (
+        {isFetchingFeedback ? null : hasFeedback ? (
           <div className="flex gap-2 justify-center">
             <button
               onClick={() => onOpenModal({ mode: "edit", participant, existingFeedback: latestFeedback })}

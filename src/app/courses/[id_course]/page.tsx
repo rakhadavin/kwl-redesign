@@ -29,7 +29,7 @@ import EditEssayWTKForms from "@/app/components/forms/EditEssayWTKForms";
 import EditCheckboxWTKForms from "@/app/components/forms/EditCheckboxWTKForms";
 import EditPGKnowForms from "@/app/components/forms/EditPGKnowForms";
 import EditPGLearnedForms from "@/app/components/forms/EditPGLearnedForms";
-import { useGetAuth } from "@/app/lib/api/useAuth";
+import { useGetAuth, useDeleteAuth } from "@/app/lib/api/useAuth";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import EditPreReadingMaterialForms from "@/app/components/forms/EditPreReadingMaterialForms";
@@ -44,6 +44,11 @@ export default function MyCoursesPage() {
   const { data, error } = useGetAuth(`/api/course/${params.id_course}`, "course name");
   const createTopicForms = useCreateTopicForms();
   const [selectedTopicId, setSelectedTopicId] = useState<number | undefined>(undefined);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const { mutate: deleteCourse, isPending: isDeleting } = useDeleteAuth(
+    `/api/course/`,
+    "delete-course"
+  );
 
   useEffect(() => {
     const saved = sessionStorage.getItem(`selectedTopicId_${params.id_course}`);
@@ -60,7 +65,13 @@ export default function MyCoursesPage() {
   return (
     <main className="py-5">
       <Breadcrumb items={[{ label: "Beranda", href: "/courses" }, { label: data?.["short_name"] ?? "..." }]} variant="light" />
-      <div className="flex  flex-col  w-full align-middle justify-center items-center gap-2 pb-5">
+      <div className="relative flex flex-col w-full align-middle justify-center items-center gap-2 pb-5">
+        <button
+          onClick={() => setShowDeleteConfirm(true)}
+          className="absolute top-0 right-4 px-4 py-1.5 border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white text-xs font-bold rounded-lg transition-colors"
+        >
+          Hapus Course
+        </button>
         {/* <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -76,12 +87,46 @@ export default function MyCoursesPage() {
             d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
           />
         </svg> */}
-        <h1 className="flex-1  text-main font-bold text-2xl text-center">
-          {data && data["short_name"]} 
+        <h1 className="flex-1 text-main font-bold text-2xl text-center">
+          {data && data["short_name"]}
         </h1>
 
         <p className="text-gray-300">{data && data["full_name"]}</p>
       </div>
+
+      {showDeleteConfirm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="bg-white rounded-2xl shadow-xl w-full max-w-sm mx-4 p-6 flex flex-col gap-4">
+            <h2 className="text-lg font-bold text-gray-800">Hapus Course?</h2>
+            <p className="text-sm text-gray-500">
+              Course <span className="font-semibold text-gray-700">{data?.["short_name"]}</span> akan dihapus secara permanen. Tindakan ini tidak dapat dibatalkan.
+            </p>
+            <div className="flex gap-3 justify-end mt-2">
+              <button
+                onClick={() => setShowDeleteConfirm(false)}
+                disabled={isDeleting}
+                className="px-4 py-2 text-sm font-semibold rounded-lg border border-gray-300 hover:bg-gray-50 transition-colors"
+              >
+                Batal
+              </button>
+              <button
+                onClick={() =>
+                  deleteCourse(
+                    { key: params.id_course },
+                    {
+                      onSuccess: () => router.push("/courses"),
+                    }
+                  )
+                }
+                disabled={isDeleting}
+                className="px-4 py-2 text-sm font-bold text-white bg-red-500 hover:bg-red-600 rounded-lg transition-colors disabled:opacity-50"
+              >
+                {isDeleting ? "Menghapus..." : "Hapus"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <CourseDetailButton courseId={params.id_course} />
 
