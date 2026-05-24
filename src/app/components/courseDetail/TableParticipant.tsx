@@ -370,12 +370,12 @@ const TableParticipant: React.FC<TableParticipantProps> = ({ isButtonActive }) =
           <table className="table-fixed text-center">
             <thead className="bg-main text-white h-12">
               <tr>
-                <th className="w-12">No</th>
+                  <th className="w-12">No</th>
                   <th className="w-56">Nama</th>
                   <th className="w-56">Email</th>
                   <th className="w-80">Feedback</th>
                   <th className="w-44">Action</th>
-                {isButtonActive && <th className="w-52">Hasil</th>}
+                  {isButtonActive && <th className="w-52">Hasil</th>}
               </tr>
             </thead>
             <tbody className="bg-white">
