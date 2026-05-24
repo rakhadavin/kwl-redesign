@@ -35,10 +35,10 @@ export default function CourseParticipantsPage() {
           </svg>
 
           <div className="flex-1">
-            <h1 className="text-main font-bold text-2xl text-center text-white">
+            <h1 className="text-main font-bold text-2xl text-center">
               Daftar Peserta
             </h1>
-            <h2 className="pb-5 text-main text-center text-white">
+            <h2 className="pb-5 text-main text-center">
               {course && course["full_name"]}
             </h2>
           </div>
