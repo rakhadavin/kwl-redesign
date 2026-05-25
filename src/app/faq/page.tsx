@@ -155,7 +155,8 @@ export default function FAQPage() {
             <div className="flex justify-end mt-2">
               <button
                 onClick={handleSend}
-                className="px-6 py-2.5 bg-blue-900 text-white text-sm font-bold rounded-lg hover:bg-blue-800 transition-colors"
+                disabled={!question.trim()}
+                className="px-6 py-2.5 bg-blue-900 text-white text-sm font-bold rounded-lg hover:bg-blue-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 Kirim
               </button>
